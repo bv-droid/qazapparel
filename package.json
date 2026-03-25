@@ -1,0 +1,11 @@
+{
+  "name": "qazaqstan-apparel",
+  "version": "1.0.0",
+  "description": "Qazaqstan Apparel — Premium Contract Manufacturing Website",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}

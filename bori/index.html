@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BORI — Tactical. Workwear. Outdoor. Sport.</title>
+<meta name="description" content="BORI — quality apparel brand from Kazakhstan. Tactical gear, workwear, outdoor clothing, sportswear. Made in Kazakhstan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   BORI — Brand B2C Website
+   4 Sub-brands: Tactical / Workwear / Outdoor / Sport
+   ═══════════════════════════════════════════════ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy: #1B2B4B;
+  --navy-deep: #0D1520;
+  --gold: #E8A838;
+  --gold-light: #F0C060;
+  --gold-dim: #C48A20;
+  --white: #FFFFFF;
+  --off-white: #F8F9FA;
+  --gray-100: #F3F4F6;
+  --gray-200: #E5E7EB;
+  --gray-300: #D1D5DB;
+  --gray-500: #6B7280;
+  --gray-700: #374151;
+  --gray-900: #111827;
+  --tactical: #3B5249;
+  --tactical-light: #4A6B5D;
+  --workwear: #8B6914;
+  --workwear-light: #A67C1A;
+  --outdoor: #2D5A27;
+  --outdoor-light: #3A7332;
+  --sport: #1E40AF;
+  --sport-light: #2563EB;
+  --transition: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--white);
+  color: var(--gray-900);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--gray-100); }
+::-webkit-scrollbar-thumb { background: var(--navy); border-radius: 3px; }
+
+/* ─── PRELOADER ─── */
+.preloader {
+  position: fixed;
+  inset: 0;
+  background: var(--navy-deep);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+.preloader.done { opacity: 0; visibility: hidden; pointer-events: none; }
+.preloader-text {
+  font-size: clamp(40px, 8vw, 80px);
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+.preloader-text::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  animation: preloaderSweep 1.2s ease-in-out 0.3s forwards;
+}
+@keyframes preloaderSweep {
+  to { left: 100%; }
+}
+
+/* ─── NAV ─── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 0 48px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.4s ease;
+}
+.nav.scrolled {
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+}
+.nav.scrolled .nav-logo-text,
+.nav.scrolled .nav-links a { color: var(--gray-900); }
+.nav.scrolled .nav-links a:hover { color: var(--gold); }
+.nav.scrolled .nav-burger span { background: var(--gray-900); }
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.nav-logo-text {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  color: var(--white);
+  transition: color 0.3s;
+}
+.nav-logo-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+  margin-left: 2px;
+  vertical-align: super;
+}
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+  align-items: center;
+}
+.nav-links a {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.3s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gold);
+  transition: width 0.3s var(--transition);
+}
+.nav-links a:hover::after { width: 100%; }
+.nav-shop {
+  padding: 10px 24px;
+  background: var(--gold);
+  color: var(--navy-deep) !important;
+  font-weight: 600 !important;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+.nav-shop::after { display: none !important; }
+.nav-shop:hover { background: var(--gold-light); transform: translateY(-1px); }
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 8px;
+}
+.nav-burger span {
+  width: 24px;
+  height: 2px;
+  background: var(--white);
+  transition: all 0.3s;
+}
+
+/* ─── HERO ─── */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  background: var(--navy-deep);
+  overflow: hidden;
+}
+.hero-bg-video {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(13,21,32,0.92) 0%, rgba(27,43,75,0.85) 50%, rgba(13,21,32,0.95) 100%);
+}
+.hero-noise {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.5;
+  pointer-events: none;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 48px;
+  width: 100%;
+}
+.hero-overline {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: heroFade 0.8s var(--transition) 1.5s forwards;
+}
+.hero h1 {
+  font-size: clamp(48px, 8vw, 96px);
+  font-weight: 900;
+  color: var(--white);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: heroSlide 1s var(--transition) 1.7s forwards;
+}
+.hero h1 .outline {
+  -webkit-text-stroke: 2px var(--white);
+  color: transparent;
+}
+.hero h1 .gold { color: var(--gold); }
+.hero-desc {
+  font-size: 17px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  max-width: 480px;
+  line-height: 1.7;
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: heroFade 0.8s var(--transition) 2s forwards;
+}
+.hero-btns {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: heroFade 0.8s var(--transition) 2.2s forwards;
+}
+@keyframes heroFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes heroSlide { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-gold {
+  background: var(--gold);
+  color: var(--navy-deep);
+}
+.btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(232,168,56,0.25); }
+.btn-outline {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid rgba(255,255,255,0.25);
+}
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+.btn-dark {
+  background: var(--navy);
+  color: var(--white);
+}
+.btn-dark:hover { background: var(--navy-deep); transform: translateY(-2px); }
+
+/* Hero brand ticker */
+.hero-ticker {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  overflow: hidden;
+  z-index: 2;
+}
+.hero-ticker-inner {
+  display: flex;
+  gap: 60px;
+  animation: ticker 20s linear infinite;
+  width: max-content;
+}
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.hero-ticker-item {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.15);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-ticker-item .dot {
+  width: 4px;
+  height: 4px;
+  background: var(--gold);
+  border-radius: 50%;
+  opacity: 0.4;
+}
+
+/* ─── BRANDS SECTION ─── */
+.brands {
+  padding: 120px 0;
+  background: var(--white);
+}
+.brands-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+.brands-header .tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.brands-header .tag::before,
+.brands-header .tag::after {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--gold);
+}
+.brands-header h2 {
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 800;
+  color: var(--gray-900);
+  letter-spacing: -0.02em;
+}
+.brands-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.brand-card {
+  position: relative;
+  aspect-ratio: 3/4;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  group: true;
+}
+.brand-card-bg {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.8s var(--transition);
+}
+.brand-card:hover .brand-card-bg { transform: scale(1.08); }
+.brand-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%);
+  transition: background 0.4s;
+  z-index: 1;
+}
+.brand-card:hover .brand-card-overlay {
+  background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.85) 100%);
+}
+.brand-card-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 32px 28px;
+  z-index: 2;
+}
+.brand-card-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+.brand-card h3 {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+.brand-card p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.5;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s var(--transition), opacity 0.4s;
+  opacity: 0;
+}
+.brand-card:hover p { max-height: 80px; opacity: 1; }
+.brand-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all 0.4s var(--transition);
+}
+.brand-card:hover .brand-card-cta { opacity: 1; transform: translateY(0); }
+.brand-card-cta svg {
+  width: 14px;
+  height: 14px;
+  stroke: var(--gold);
+  fill: none;
+  stroke-width: 2;
+  transition: transform 0.3s;
+}
+.brand-card:hover .brand-card-cta svg { transform: translateX(4px); }
+
+/* Brand colors */
+.brand-tactical .brand-card-bg { background: linear-gradient(135deg, #1a2e25 0%, #2d4a3d 40%, #1a3329 100%); }
+.brand-tactical .brand-card-badge { background: var(--tactical); }
+.brand-workwear .brand-card-bg { background: linear-gradient(135deg, #2a2318 0%, #4a3c25 40%, #2a2318 100%); }
+.brand-workwear .brand-card-badge { background: var(--workwear); }
+.brand-outdoor .brand-card-bg { background: linear-gradient(135deg, #152e14 0%, #264d23 40%, #1a3318 100%); }
+.brand-outdoor .brand-card-badge { background: var(--outdoor); }
+.brand-sport .brand-card-bg { background: linear-gradient(135deg, #0f1b3d 0%, #1e3a6e 40%, #0f1b3d 100%); }
+.brand-sport .brand-card-badge { background: var(--sport); }
+
+/* ─── FEATURED PRODUCTS ─── */
+.featured {
+  padding: 100px 0;
+  background: var(--off-white);
+}
+.container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+.featured-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 48px;
+}
+.featured-header h2 {
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+.featured-header a {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.product-card {
+  background: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.4s var(--transition);
+  border: 1px solid var(--gray-200);
+}
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+  border-color: transparent;
+}
+.product-img {
+  aspect-ratio: 1;
+  background: var(--gray-100);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.product-img-placeholder {
+  font-size: 48px;
+  opacity: 0.15;
+}
+.product-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+.product-wishlist {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  background: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s;
+  border: none;
+}
+.product-card:hover .product-wishlist { opacity: 1; }
+.product-wishlist svg { width: 16px; height: 16px; stroke: var(--gray-500); fill: none; stroke-width: 2; }
+.product-info {
+  padding: 20px;
+}
+.product-brand {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.product-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.product-price {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--navy);
+}
+.product-price .old {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--gray-500);
+  text-decoration: line-through;
+  margin-left: 6px;
+}
+
+/* ─── BRAND STORY ─── */
+.story {
+  padding: 120px 0;
+  background: var(--navy-deep);
+  position: relative;
+  overflow: hidden;
+}
+.story-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 50%, rgba(232,168,56,0.04), transparent),
+    radial-gradient(ellipse 40% 60% at 10% 80%, rgba(42,63,102,0.15), transparent);
+}
+.story-content {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.story-text .tag {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.story-text .tag::before { content: ''; width: 20px; height: 1px; background: var(--gold); }
+.story-text h2 {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+}
+.story-text h2 em {
+  font-style: italic;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  color: var(--gold);
+}
+.story-text p {
+  font-size: 16px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+.story-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+.story-stat {
+  padding: 24px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+}
+.story-stat-num {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.story-stat-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.story-visual {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.story-visual-card {
+  aspect-ratio: 1;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--white);
+  text-align: center;
+  padding: 20px;
+  transition: transform 0.4s var(--transition);
+}
+.story-visual-card:hover { transform: scale(1.03); }
+.story-visual-card:nth-child(1) { background: linear-gradient(135deg, var(--tactical), var(--tactical-light)); }
+.story-visual-card:nth-child(2) { background: linear-gradient(135deg, var(--workwear), var(--workwear-light)); transform: translateY(24px); }
+.story-visual-card:nth-child(3) { background: linear-gradient(135deg, var(--outdoor), var(--outdoor-light)); }
+.story-visual-card:nth-child(4) { background: linear-gradient(135deg, var(--sport), var(--sport-light)); transform: translateY(24px); }
+.story-visual-card span {
+  font-size: 10px;
+  display: block;
+  margin-top: 4px;
+  opacity: 0.6;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ─── VALUES ─── */
+.values {
+  padding: 100px 0;
+  background: var(--white);
+}
+.values-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.values-header h2 {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.value-card {
+  padding: 40px 32px;
+  border: 1px solid var(--gray-200);
+  border-radius: 16px;
+  text-align: center;
+  transition: all 0.4s var(--transition);
+}
+.value-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(232,168,56,0.06);
+}
+.value-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 20px;
+  background: linear-gradient(135deg, var(--navy), var(--navy-deep));
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s;
+}
+.value-card:hover .value-icon { transform: rotate(-5deg) scale(1.1); }
+.value-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--gold);
+  fill: none;
+  stroke-width: 1.5;
+}
+.value-card h3 {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--gray-900);
+}
+.value-card p {
+  font-size: 14px;
+  color: var(--gray-500);
+  line-height: 1.6;
+}
+
+/* ─── WHERE TO BUY ─── */
+.buy {
+  padding: 100px 0;
+  background: var(--off-white);
+}
+.buy-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.buy-header h2 {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 800;
+}
+.buy-header p {
+  font-size: 16px;
+  color: var(--gray-500);
+  margin-top: 12px;
+}
+.buy-channels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.buy-channel {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 40px 32px;
+  text-align: center;
+  border: 1px solid var(--gray-200);
+  transition: all 0.4s var(--transition);
+}
+.buy-channel:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+  border-color: var(--gold);
+}
+.buy-channel-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 20px;
+  background: rgba(232,168,56,0.08);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.buy-channel-icon svg {
+  width: 28px;
+  height: 28px;
+  stroke: var(--gold);
+  fill: none;
+  stroke-width: 1.5;
+}
+.buy-channel h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.buy-channel p {
+  font-size: 14px;
+  color: var(--gray-500);
+  line-height: 1.6;
+}
+
+/* ─── NEWSLETTER ─── */
+.newsletter {
+  padding: 80px 0;
+  background: var(--navy-deep);
+}
+.newsletter-inner {
+  text-align: center;
+}
+.newsletter-inner h2 {
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+.newsletter-inner p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 32px;
+}
+.newsletter-form {
+  display: flex;
+  max-width: 480px;
+  margin: 0 auto;
+  gap: 8px;
+}
+.newsletter-form input {
+  flex: 1;
+  padding: 14px 20px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: var(--white);
+  outline: none;
+  transition: border-color 0.3s;
+}
+.newsletter-form input::placeholder { color: rgba(255,255,255,0.3); }
+.newsletter-form input:focus { border-color: var(--gold); }
+.newsletter-form button {
+  padding: 14px 28px;
+  background: var(--gold);
+  color: var(--navy-deep);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.newsletter-form button:hover { background: var(--gold-light); }
+
+/* ─── FOOTER ─── */
+.footer {
+  background: var(--gray-900);
+  padding: 64px 0 32px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+.footer-brand-desc {
+  font-size: 14px;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.6;
+  margin-top: 16px;
+  max-width: 280px;
+}
+.footer-col h4 {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.footer-col a {
+  display: block;
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  padding: 3px 0;
+  transition: color 0.3s;
+}
+.footer-col a:hover { color: var(--white); }
+.footer-bottom {
+  padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.25); }
+.footer-socials {
+  display: flex;
+  gap: 12px;
+}
+.footer-socials a {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.footer-socials a:hover { border-color: var(--gold); background: rgba(232,168,56,0.1); }
+.footer-socials svg { width: 16px; height: 16px; fill: rgba(255,255,255,0.4); }
+.footer-socials a:hover svg { fill: var(--gold); }
+
+/* ─── ANIMATIONS ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s var(--transition), transform 0.7s var(--transition);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  .brands-grid { grid-template-columns: repeat(2, 1fr); }
+  .products-grid { grid-template-columns: repeat(2, 1fr); }
+  .story-content { grid-template-columns: 1fr; gap: 48px; }
+  .values-grid { grid-template-columns: repeat(2, 1fr); }
+  .buy-channels { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 768px) {
+  .nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+  .hero-content { padding: 0 20px; }
+  .brands-grid { grid-template-columns: 1fr; }
+  .brand-card { aspect-ratio: 16/9; }
+  .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .story-visual { display: none; }
+  .values-grid { grid-template-columns: 1fr; }
+  .buy-channels { grid-template-columns: 1fr; }
+  .newsletter-form { flex-direction: column; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+}
+
+/* ─── MOBILE MENU ─── */
+.mob-menu {
+  position: fixed;
+  inset: 0;
+  background: rgba(13,21,32,0.98);
+  backdrop-filter: blur(20px);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s;
+}
+.mob-menu.open { opacity: 1; visibility: visible; }
+.mob-menu a {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--white);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.3s;
+}
+.mob-menu a:hover { color: var(--gold); }
+.mob-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50%;
+  color: var(--white);
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
+</head>
+<body>
+
+<!-- PRELOADER -->
+<div class="preloader" id="preloader">
+  <div class="preloader-text">BORI</div>
+</div>
+
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-close" onclick="toggleMob()">&#x2715;</button>
+  <a href="#brands" onclick="toggleMob()">Collections</a>
+  <a href="#products" onclick="toggleMob()">Products</a>
+  <a href="#story" onclick="toggleMob()">Our Story</a>
+  <a href="#buy" onclick="toggleMob()">Where to Buy</a>
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">
+    <span class="nav-logo-text">BORI<span class="nav-logo-dot"></span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#brands">Collections</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#story">Our Story</a></li>
+    <li><a href="#values">Values</a></li>
+    <li><a href="#buy">Where to Buy</a></li>
+    <li><a href="#products" class="nav-shop">Shop Now</a></li>
+  </ul>
+  <button class="nav-burger" onclick="toggleMob()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-video"></div>
+  <div class="hero-noise"></div>
+  <div class="hero-content">
+    <div class="hero-overline">Made in Kazakhstan</div>
+    <h1>GEAR THAT<br><span class="outline">PERFORMS.</span><br><span class="gold">ALWAYS.</span></h1>
+    <p class="hero-desc">Four collections. One standard of excellence. From tactical operations to trail running — BORI delivers quality apparel at honest prices.</p>
+    <div class="hero-btns">
+      <a href="#brands" class="btn btn-gold">
+        Explore Collections
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#story" class="btn btn-outline">Our Story</a>
+    </div>
+  </div>
+  <div class="hero-ticker">
+    <div class="hero-ticker-inner">
+      <div class="hero-ticker-item"><span class="dot"></span>BORI TACTICAL</div>
+      <div class="hero-ticker-item"><span class="dot"></span>BORI WORKWEAR</div>
+      <div class="hero-ticker-item"><span class="dot"></span>BORI OUTDOOR</div>
+      <div class="hero-ticker-item"><span class="dot"></span>BORI SPORT</div>
+      <div class="hero-ticker-item"><span class="dot"></span>MADE IN KAZAKHSTAN</div>
+      <div class="hero-ticker-item"><span class="dot"></span>QUALITY WITHOUT COMPROMISE</div>
+      <!-- Duplicate for seamless loop -->
+      <div class="hero-ticker-item"><span class="dot"></span>BORI TACTICAL</div>
+      <div class="hero-ticker-item"><span class="dot"></span>BORI WORKWEAR</div>
+      <div class="hero-ticker-item"><span class="dot"></span>BORI OUTDOOR</div>
+      <div class="hero-ticker-item"><span class="dot"></span>BORI SPORT</div>
+      <div class="hero-ticker-item"><span class="dot"></span>MADE IN KAZAKHSTAN</div>
+      <div class="hero-ticker-item"><span class="dot"></span>QUALITY WITHOUT COMPROMISE</div>
+    </div>
+  </div>
+</section>
+
+<!-- BRANDS -->
+<section class="brands" id="brands">
+  <div class="brands-header reveal">
+    <div class="tag">Collections</div>
+    <h2>Four Pillars. One Standard.</h2>
+  </div>
+  <div class="brands-grid">
+    <div class="brand-card brand-tactical reveal">
+      <div class="brand-card-bg"></div>
+      <div class="brand-card-overlay"></div>
+      <div class="brand-card-content">
+        <div class="brand-card-badge">Tactical</div>
+        <h3>Bori Tactical</h3>
+        <p>Mission-ready gear. Combat pants, softshells, plate carrier vests, tactical boots. Built for operators.</p>
+        <div class="brand-card-cta">
+          Explore Collection
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="brand-card brand-workwear reveal reveal-delay-1">
+      <div class="brand-card-bg"></div>
+      <div class="brand-card-overlay"></div>
+      <div class="brand-card-content">
+        <div class="brand-card-badge">Workwear</div>
+        <h3>Bori Workwear</h3>
+        <p>Engineered for the job. Hi-vis, flame-resistant, reinforced workwear for industrial professionals.</p>
+        <div class="brand-card-cta">
+          Explore Collection
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="brand-card brand-outdoor reveal reveal-delay-2">
+      <div class="brand-card-bg"></div>
+      <div class="brand-card-overlay"></div>
+      <div class="brand-card-content">
+        <div class="brand-card-badge">Outdoor</div>
+        <h3>Bori Outdoor</h3>
+        <p>From steppe to summit. Hardshell jackets, insulated layers, trekking gear for Central Asian terrain.</p>
+        <div class="brand-card-cta">
+          Explore Collection
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="brand-card brand-sport reveal reveal-delay-3">
+      <div class="brand-card-bg"></div>
+      <div class="brand-card-overlay"></div>
+      <div class="brand-card-content">
+        <div class="brand-card-badge">Sport</div>
+        <h3>Bori Sport</h3>
+        <p>Performance wear for training, running, and competition. Moisture-wicking, lightweight, built to move.</p>
+        <div class="brand-card-cta">
+          Explore Collection
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PRODUCTS -->
+<section class="featured" id="products">
+  <div class="container">
+    <div class="featured-header reveal">
+      <h2>Featured Products</h2>
+      <a href="#">
+        View All
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="products-grid">
+      <div class="product-card reveal">
+        <div class="product-img">
+          <div class="product-img-placeholder">&#9881;</div>
+          <div class="product-tag" style="background:var(--tactical)">Tactical</div>
+          <button class="product-wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Bori Tactical</div>
+          <div class="product-name">Operator Combat Pants Gen III</div>
+          <div class="product-price">$65 <span class="old">$85</span></div>
+        </div>
+      </div>
+      <div class="product-card reveal reveal-delay-1">
+        <div class="product-img">
+          <div class="product-img-placeholder">&#9889;</div>
+          <div class="product-tag" style="background:var(--outdoor)">Outdoor</div>
+          <button class="product-wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Bori Outdoor</div>
+          <div class="product-name">Steppe Hardshell Jacket 3L</div>
+          <div class="product-price">$120</div>
+        </div>
+      </div>
+      <div class="product-card reveal reveal-delay-2">
+        <div class="product-img">
+          <div class="product-img-placeholder">&#9888;</div>
+          <div class="product-tag" style="background:var(--workwear)">Workwear</div>
+          <button class="product-wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Bori Workwear</div>
+          <div class="product-name">Hi-Vis FR Safety Coverall</div>
+          <div class="product-price">$48</div>
+        </div>
+      </div>
+      <div class="product-card reveal reveal-delay-3">
+        <div class="product-img">
+          <div class="product-img-placeholder">&#9917;</div>
+          <div class="product-tag" style="background:var(--sport)">Sport</div>
+          <button class="product-wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Bori Sport</div>
+          <div class="product-name">Performance Training Tee</div>
+          <div class="product-price">$22</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND STORY -->
+<section class="story" id="story">
+  <div class="story-bg"></div>
+  <div class="container">
+    <div class="story-content">
+      <div class="story-text reveal">
+        <div class="tag">Our Story</div>
+        <h2>Born in the <em>Heart</em> of<br>Central Asia</h2>
+        <p>BORI was created with a simple mission: deliver world-class apparel without the world-class markup. From our 5,000+ sqm facility in Kazakhstan's Special Economic Zone, we design, cut, sew, and ship gear that rivals the best — at prices that make sense.</p>
+        <p>Our name means "wolf" in Kazakh — an animal that embodies strength, endurance, and intelligence. Every BORI garment carries that spirit.</p>
+        <div class="story-stats">
+          <div class="story-stat">
+            <div class="story-stat-num">5,000+</div>
+            <div class="story-stat-label">Sqm Factory</div>
+          </div>
+          <div class="story-stat">
+            <div class="story-stat-num">4</div>
+            <div class="story-stat-label">Product Lines</div>
+          </div>
+          <div class="story-stat">
+            <div class="story-stat-num">52+</div>
+            <div class="story-stat-label">Products</div>
+          </div>
+          <div class="story-stat">
+            <div class="story-stat-num">100%</div>
+            <div class="story-stat-label">Made in KZ</div>
+          </div>
+        </div>
+      </div>
+      <div class="story-visual reveal">
+        <div class="story-visual-card">
+          TACTICAL<br><span>Mission Ready</span>
+        </div>
+        <div class="story-visual-card">
+          WORKWEAR<br><span>Built for Work</span>
+        </div>
+        <div class="story-visual-card">
+          OUTDOOR<br><span>Trail Proven</span>
+        </div>
+        <div class="story-visual-card">
+          SPORT<br><span>Always Moving</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values" id="values">
+  <div class="container">
+    <div class="values-header reveal">
+      <div class="brands-header">
+        <div class="tag">Why BORI</div>
+      </div>
+      <h2>Quality. Integrity. Performance.</h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card reveal">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Built to Last</h3>
+        <p>Reinforced stitching, premium fabrics, and hardware rated for thousands of cycles. Our gear is tested in extreme conditions.</p>
+      </div>
+      <div class="value-card reveal reveal-delay-1">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3>Honest Pricing</h3>
+        <p>Direct from our factory to you. No distributors, no markups. Premium quality at fair, transparent prices.</p>
+      </div>
+      <div class="value-card reveal reveal-delay-2">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        </div>
+        <h3>Made in Kazakhstan</h3>
+        <p>Proudly designed and manufactured in our Astana SEZ facility. Supporting local economy and creating skilled jobs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHERE TO BUY -->
+<section class="buy" id="buy">
+  <div class="container">
+    <div class="buy-header reveal">
+      <h2>Where to Buy</h2>
+      <p>Available through multiple channels across Kazakhstan and internationally</p>
+    </div>
+    <div class="buy-channels">
+      <div class="buy-channel reveal">
+        <div class="buy-channel-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
+        </div>
+        <h3>Online Store</h3>
+        <p>Shop directly on bori.kz with free shipping across Kazakhstan. International delivery available.</p>
+      </div>
+      <div class="buy-channel reveal reveal-delay-1">
+        <div class="buy-channel-icon">
+          <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+        </div>
+        <h3>Marketplaces</h3>
+        <p>Find us on Kaspi Magaz, Wildberries KZ, and Ozon. Same quality, same prices, your preferred platform.</p>
+      </div>
+      <div class="buy-channel reveal reveal-delay-2">
+        <div class="buy-channel-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>
+        </div>
+        <h3>Retail & Dealers</h3>
+        <p>Visit our authorized dealers across Kazakhstan. Becoming a dealer? Contact us for partnership opportunities.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <div class="container">
+    <div class="newsletter-inner reveal">
+      <h2>Stay in the Loop</h2>
+      <p>Get notified about new drops, exclusive offers, and behind-the-scenes content.</p>
+      <form class="newsletter-form" onsubmit="event.preventDefault(); this.innerHTML='<p style=color:var(--gold);font-weight:600>Thank you! You are subscribed.</p>'">
+        <input type="email" placeholder="Your email address" required>
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="nav-logo-text" style="color:var(--white);font-size:24px;">BORI<span class="nav-logo-dot"></span></div>
+        <p class="footer-brand-desc">Quality apparel from Kazakhstan. Tactical, workwear, outdoor, and sport gear built to perform. Every day. Everywhere.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Collections</h4>
+        <a href="#">Bori Tactical</a>
+        <a href="#">Bori Workwear</a>
+        <a href="#">Bori Outdoor</a>
+        <a href="#">Bori Sport</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#story">Our Story</a>
+        <a href="#values">Values</a>
+        <a href="#">Careers</a>
+        <a href="#">Press</a>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <a href="#">Size Guide</a>
+        <a href="#">Shipping</a>
+        <a href="#">Returns</a>
+        <a href="#">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="#">info@bori.kz</a>
+        <a href="#">+7 (7172) XXX-XX-XX</a>
+        <a href="#buy">Become a Dealer</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 BORI by Qazaqstan Apparel. All rights reserved.</p>
+      <div class="footer-socials">
+        <a href="#" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+        </a>
+        <a href="#" aria-label="TikTok">
+          <svg viewBox="0 0 24 24"><path d="M9 12a4 4 0 104 4V4a5 5 0 005 5"/></svg>
+        </a>
+        <a href="#" aria-label="Telegram">
+          <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        </a>
+        <a href="#" aria-label="YouTube">
+          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="4"/><path d="M10 9l5 3-5 3V9z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Preloader
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('preloader').classList.add('done'), 1600);
+});
+
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 80);
+});
+
+// Mobile menu
+function toggleMob() {
+  document.getElementById('mobMenu').classList.toggle('open');
+}
+
+// Scroll reveal
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+</body>
+</html>

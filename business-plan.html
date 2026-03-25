@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Бизнес-план — ТОО Qazaqstan Apparel & BORI</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy: #1B2B4B;
+  --navy-deep: #0D1520;
+  --gold: #E8A838;
+  --gold-light: #F0C060;
+  --white: #FFFFFF;
+  --gray-50: #F9FAFB;
+  --gray-100: #F3F4F6;
+  --gray-200: #E5E7EB;
+  --gray-400: #9CA3AF;
+  --gray-500: #6B7280;
+  --gray-700: #374151;
+  --gray-900: #111827;
+  --green: #059669;
+  --red: #DC2626;
+  --blue: #2563EB;
+}
+@media print {
+  body { font-size: 11pt; }
+  .no-print { display: none !important; }
+  .page-break { page-break-before: always; }
+  section { padding: 24pt 0 !important; }
+}
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--gray-50);
+  color: var(--gray-900);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+.doc {
+  max-width: 900px;
+  margin: 0 auto;
+  background: var(--white);
+  box-shadow: 0 0 60px rgba(0,0,0,0.06);
+}
+
+/* ─── COVER ─── */
+.cover {
+  min-height: 100vh;
+  background: var(--navy-deep);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 48px;
+  position: relative;
+  overflow: hidden;
+}
+.cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(232,168,56,0.04), transparent),
+    radial-gradient(ellipse 80% 80% at 50% 100%, rgba(27,43,75,0.3), transparent);
+}
+.cover-logo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 48px;
+}
+.cover-logo-circle {
+  width: 56px;
+  height: 56px;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--gold);
+}
+.cover-logo-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.cover-logo-text span { color: var(--gold); font-weight: 400; }
+.cover h1 {
+  position: relative;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.cover h1 em { color: var(--gold); font-style: italic; }
+.cover-sub {
+  position: relative;
+  font-size: 16px;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 48px;
+  max-width: 500px;
+}
+.cover-meta {
+  position: relative;
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.cover-meta-item {
+  text-align: center;
+}
+.cover-meta-item .label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+.cover-meta-item .value {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+}
+.cover-confidential {
+  position: absolute;
+  bottom: 32px;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.15);
+}
+
+/* ─── TOC ─── */
+.toc {
+  padding: 64px 48px;
+  border-bottom: 1px solid var(--gray-200);
+}
+.toc h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 32px;
+}
+.toc-list {
+  list-style: none;
+  counter-reset: toc;
+}
+.toc-list li {
+  counter-increment: toc;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px dashed var(--gray-200);
+}
+.toc-list li::before {
+  content: counter(toc, decimal-leading-zero);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gold);
+  flex-shrink: 0;
+  width: 28px;
+}
+.toc-list a {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--gray-700);
+  text-decoration: none;
+  flex: 1;
+}
+.toc-list a:hover { color: var(--navy); }
+.toc-list .page {
+  font-size: 12px;
+  color: var(--gray-400);
+}
+
+/* ─── SECTIONS ─── */
+section {
+  padding: 48px;
+  border-bottom: 1px solid var(--gray-200);
+}
+section:last-of-type { border-bottom: none; }
+.section-num {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-num::before { content: ''; width: 20px; height: 2px; background: var(--gold); }
+h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 24px;
+  line-height: 1.2;
+}
+h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin: 32px 0 12px;
+}
+h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--gray-700);
+  margin: 20px 0 8px;
+}
+p { margin-bottom: 12px; font-size: 14px; color: var(--gray-700); }
+ul, ol { padding-left: 20px; margin-bottom: 16px; }
+li { font-size: 14px; color: var(--gray-700); margin-bottom: 6px; }
+
+/* ─── TABLES ─── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 13px;
+}
+th {
+  background: var(--navy);
+  color: var(--white);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 12px 16px;
+  text-align: left;
+}
+td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--gray-200);
+  color: var(--gray-700);
+}
+tr:nth-child(even) td { background: var(--gray-50); }
+.num-col { text-align: right; font-variant-numeric: tabular-nums; }
+.highlight-row td { background: rgba(232,168,56,0.08) !important; font-weight: 600; color: var(--navy); }
+.total-row td { background: var(--navy) !important; color: var(--white) !important; font-weight: 700; }
+
+/* ─── INFO BOXES ─── */
+.info-box {
+  padding: 20px 24px;
+  border-radius: 8px;
+  margin: 20px 0;
+  font-size: 13px;
+}
+.info-box.gold {
+  background: rgba(232,168,56,0.06);
+  border-left: 3px solid var(--gold);
+}
+.info-box.blue {
+  background: rgba(37,99,235,0.04);
+  border-left: 3px solid var(--blue);
+}
+.info-box.green {
+  background: rgba(5,150,105,0.04);
+  border-left: 3px solid var(--green);
+}
+.info-box strong { color: var(--gray-900); }
+
+/* ─── KPI CARDS ─── */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 20px 0;
+}
+.kpi-card {
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+}
+.kpi-card .kpi-num {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--navy);
+}
+.kpi-card .kpi-label {
+  font-size: 10px;
+  color: var(--gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 4px;
+}
+
+/* ─── TIMELINE ─── */
+.timeline { margin: 24px 0; }
+.timeline-item {
+  display: flex;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--gray-100);
+}
+.timeline-marker {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  background: var(--navy);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+}
+.timeline-content h4 { margin: 0 0 4px; font-size: 14px; }
+.timeline-content p { margin: 0; font-size: 13px; color: var(--gray-500); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 768px) {
+  section, .toc { padding: 32px 20px; }
+  .cover { padding: 60px 24px; }
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  table { font-size: 11px; }
+  th, td { padding: 8px 10px; }
+}
+</style>
+</head>
+<body>
+<div class="doc">
+
+<!-- ═══════════════ COVER ═══════════════ -->
+<div class="cover">
+  <div class="cover-logo">
+    <div class="cover-logo-circle">Q</div>
+    <div class="cover-logo-text">Qazaqstan <span>Apparel</span></div>
+  </div>
+  <h1>Бизнес-план<br><em>2026 — 2029</em></h1>
+  <p class="cover-sub">Контрактное производство одежды и развитие собственной торговой марки BORI: Tactical, Workwear, Outdoor, Sport</p>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <div class="label">Компания</div>
+      <div class="value">ТОО "Qazaqstan Apparel"</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="label">Локация</div>
+      <div class="value">СЭЗ Астана, Казахстан</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="label">Дата</div>
+      <div class="value">Март 2026</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="label">Горизонт</div>
+      <div class="value">3 года</div>
+    </div>
+  </div>
+  <div class="cover-confidential">Конфиденциально</div>
+</div>
+
+<!-- ═══════════════ TOC ═══════════════ -->
+<div class="toc">
+  <h2>Содержание</h2>
+  <ol class="toc-list">
+    <li><a href="#exec">Резюме для инвестора (Executive Summary)</a></li>
+    <li><a href="#company">О компании</a></li>
+    <li><a href="#market">Анализ рынка</a></li>
+    <li><a href="#product">Продуктовая стратегия</a></li>
+    <li><a href="#marketing">Маркетинговая стратегия</a></li>
+    <li><a href="#production">Производственный план</a></li>
+    <li><a href="#finance">Финансовый план</a></li>
+    <li><a href="#investment">Инвестиционное предложение</a></li>
+    <li><a href="#risks">Риски и митигация</a></li>
+    <li><a href="#roadmap">Дорожная карта</a></li>
+  </ol>
+</div>
+
+<!-- ═══════════════ 01. EXECUTIVE SUMMARY ═══════════════ -->
+<section id="exec">
+  <div class="section-num">Раздел 01</div>
+  <h2>Резюме для инвестора</h2>
+
+  <div class="info-box gold">
+    <strong>Суть проекта:</strong> ТОО "Qazaqstan Apparel" — производственная компания в СЭЗ Астана, которая сочетает контрактное производство одежды (B2B/B2G) с развитием собственной торговой марки BORI (B2C) по 4 направлениям: тактическая, рабочая, outdoor и спортивная одежда.
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-num">5,000+</div>
+      <div class="kpi-label">м² производства</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-num">4</div>
+      <div class="kpi-label">торговые марки</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-num">$2.5M</div>
+      <div class="kpi-label">выручка (Год 3)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-num">24%</div>
+      <div class="kpi-label">EBITDA маржа (Год 3)</div>
+    </div>
+  </div>
+
+  <h3>Конкурентные преимущества</h3>
+  <ul>
+    <li><strong>СЭЗ Астана:</strong> нулевой КПН, освобождение от НДС, беспошлинный импорт сырья — экономия 20-30% vs. аналоги в Европе/Турции</li>
+    <li><strong>Полный цикл:</strong> от лекал до упаковки — всё на одной площадке. Минимальный заказ от 100 единиц</li>
+    <li><strong>База лекал:</strong> бенчмарк на 5.11 Tactical, Arc'teryx, Propper, Portwest — готовые линейки для быстрого запуска</li>
+    <li><strong>Стратегическая локация:</strong> хаб между Китаем, Россией, Ближним Востоком и Европой</li>
+    <li><strong>Двойная модель:</strong> B2B-контракты генерируют стабильный cash flow, B2C-бренд BORI — маржинальный рост</li>
+  </ul>
+
+  <h3>Финансовые показатели (прогноз)</h3>
+  <table>
+    <tr><th>Показатель</th><th class="num-col">Год 1</th><th class="num-col">Год 2</th><th class="num-col">Год 3</th></tr>
+    <tr><td>Выручка</td><td class="num-col">$400,000</td><td class="num-col">$1,000,000</td><td class="num-col">$2,500,000</td></tr>
+    <tr><td>Валовая прибыль</td><td class="num-col">$220,000</td><td class="num-col">$550,000</td><td class="num-col">$1,375,000</td></tr>
+    <tr><td>EBITDA</td><td class="num-col">$40,000</td><td class="num-col">$190,000</td><td class="num-col">$600,000</td></tr>
+    <tr class="highlight-row"><td>EBITDA маржа</td><td class="num-col">10%</td><td class="num-col">19%</td><td class="num-col">24%</td></tr>
+  </table>
+
+  <h3>Запрос финансирования</h3>
+  <div class="info-box blue">
+    <strong>Общая потребность:</strong> $188,000 (сверх имеющегося оборотного капитала $200,000)<br>
+    <strong>Структура:</strong> Банковский кредит $100-150K под залоговую базу $2M (LTV 5-7.5%) + инвестор $50-100K за долю 8-12%<br>
+    <strong>Целевое использование:</strong> закупка тканей для первых коллекций, маркетинг запуска, оборудование
+  </div>
+</section>
+
+<!-- ═══════════════ 02. О КОМПАНИИ ═══════════════ -->
+<section id="company" class="page-break">
+  <div class="section-num">Раздел 02</div>
+  <h2>О компании</h2>
+
+  <h3>Юридические данные</h3>
+  <table>
+    <tr><td><strong>Наименование</strong></td><td>ТОО "Qazaqstan Apparel"</td></tr>
+    <tr><td><strong>Юрисдикция</strong></td><td>Республика Казахстан</td></tr>
+    <tr><td><strong>Расположение</strong></td><td>Специальная Экономическая Зона «Астана — новый город»</td></tr>
+    <tr><td><strong>Площадь</strong></td><td>5,000+ м² производственных площадей</td></tr>
+    <tr><td><strong>Торговые марки</strong></td><td>Bori Tactical, Bori Workwear, Bori Outdoor, Bori Sport (в процессе регистрации)</td></tr>
+    <tr><td><strong>Оборотный капитал</strong></td><td>$200,000</td></tr>
+    <tr><td><strong>Залоговая база</strong></td><td>до $2,000,000</td></tr>
+  </table>
+
+  <h3>Структура бизнеса</h3>
+  <p>Компания работает по двойной модели:</p>
+  <ol>
+    <li><strong>Qazaqstan Apparel (B2B/B2G):</strong> контрактное производство, OEM/ODM, госзаказы на тактическую и рабочую одежду для силовых ведомств и промышленных предприятий</li>
+    <li><strong>BORI (B2C):</strong> собственная торговая марка с 4 суббрендами, реализация через омниканал (собственный сайт, маркетплейсы, дилеры, розница)</li>
+  </ol>
+
+  <h3>Преимущества СЭЗ Астана</h3>
+  <table>
+    <tr><th>Льгота</th><th>Описание</th><th>Эффект</th></tr>
+    <tr><td>КПН</td><td>0% корпоративный подоходный налог</td><td>Экономия 20% от прибыли</td></tr>
+    <tr><td>НДС</td><td>Освобождение от НДС</td><td>12% экономия на обороте</td></tr>
+    <tr><td>Таможня</td><td>Беспошлинный импорт сырья и оборудования</td><td>Снижение COGS на 5-8%</td></tr>
+    <tr><td>Земля</td><td>Льготная аренда земли</td><td>Минимальные фиксированные затраты</td></tr>
+  </table>
+</section>
+
+<!-- ═══════════════ 03. РЫНОК ═══════════════ -->
+<section id="market" class="page-break">
+  <div class="section-num">Раздел 03</div>
+  <h2>Анализ рынка</h2>
+
+  <h3>Рынок Казахстана</h3>
+  <p>Рынок одежды Казахстана оценивается в $3.5-4 млрд. Доля локального производства — менее 10%. Импорт доминирует: Китай (~55%), Турция (~15%), Россия (~10%), остальные (~20%). Правительственный курс на импортозамещение и программа «Сделано в Казахстане» создают благоприятное окно для местных производителей.</p>
+
+  <h3>Целевые сегменты</h3>
+  <table>
+    <tr><th>Сегмент</th><th>Объём (KZ)</th><th>Рост/год</th><th>Ключевые драйверы</th></tr>
+    <tr><td>Тактическая одежда</td><td>$80-120M</td><td>8-12%</td><td>Госзаказ, модернизация ВС, импортозамещение</td></tr>
+    <tr><td>Рабочая одежда</td><td>$200-300M</td><td>5-7%</td><td>Промышленный рост, нефтегаз, строительство, ужесточение требований ОТиТБ</td></tr>
+    <tr><td>Outdoor одежда</td><td>$50-80M</td><td>10-15%</td><td>Рост внутреннего туризма, outdoor-культура</td></tr>
+    <tr><td>Спортивная одежда</td><td>$150-200M</td><td>8-10%</td><td>Фитнес-бум, ЗОЖ тренд, массовый спорт</td></tr>
+  </table>
+
+  <h3>Конкурентный ландшафт</h3>
+  <h4>Прямые конкуренты (KZ)</h4>
+  <ul>
+    <li>Местные швейные производства — низкое качество, устаревшие лекала, нет брендинга</li>
+    <li>Турецкие/китайские импортёры — ценовая конкуренция, но без сервиса и локализации</li>
+  </ul>
+  <h4>Косвенные конкуренты (глобальные бренды)</h4>
+  <ul>
+    <li>5.11 Tactical, Helikon-Tex, Propper — дорого, сложная логистика для KZ</li>
+    <li>Under Armour, Nike — premium-сегмент, не конкурируем по цене</li>
+  </ul>
+
+  <div class="info-box green">
+    <strong>Рыночная ниша BORI:</strong> Качество на уровне международных брендов при цене на 30-50% ниже за счёт собственного производства в СЭЗ. Локализованный дизайн и размерная сетка для рынка Центральной Азии.
+  </div>
+
+  <h3>Целевые рынки по этапам</h3>
+  <table>
+    <tr><th>Этап</th><th>География</th><th>Фокус</th></tr>
+    <tr><td>Год 1</td><td>Казахстан</td><td>B2B/B2G госзаказы + запуск B2C в KZ</td></tr>
+    <tr><td>Год 2</td><td>KZ + Средняя Азия</td><td>Узбекистан, Кыргызстан, дилерская сеть</td></tr>
+    <tr><td>Год 3</td><td>Глобально</td><td>Ближний Восток (Dubai), Европа, Amazon/Ozon</td></tr>
+  </table>
+</section>
+
+<!-- ═══════════════ 04. ПРОДУКТ ═══════════════ -->
+<section id="product" class="page-break">
+  <div class="section-num">Раздел 04</div>
+  <h2>Продуктовая стратегия</h2>
+
+  <h3>Архитектура брендов</h3>
+  <div class="info-box gold">
+    <strong>Зонтичная структура:</strong> Qazaqstan Apparel (корпоративный бренд, B2B) → BORI (потребительский бренд) → 4 суббренда (Tactical, Workwear, Outdoor, Sport)
+  </div>
+
+  <h3>Ассортиментная матрица — запуск (Год 1)</h3>
+  <table>
+    <tr><th>Бренд</th><th>Категории</th><th>SKU</th><th>Ценовой диапазон</th><th>Бенчмарк</th></tr>
+    <tr><td><strong>Bori Tactical</strong></td><td>Тактические штаны, куртки softshell, флисы, бейсболки, ремни</td><td>15</td><td>$30 — $150</td><td>5.11, Propper, Helikon-Tex</td></tr>
+    <tr><td><strong>Bori Workwear</strong></td><td>Рабочие брюки, куртки, жилеты, комбинезоны, Hi-Vis</td><td>15</td><td>$20 — $80</td><td>Red Kap, Fristads, Portwest</td></tr>
+    <tr><td><strong>Bori Outdoor</strong></td><td>Hardshell куртки, утеплённые парки, треккинговые брюки, базовые слои</td><td>12</td><td>$40 — $200</td><td>Arc'teryx, Patagonia, Mammut</td></tr>
+    <tr><td><strong>Bori Sport</strong></td><td>Тренировочные футболки, шорты, компрессионное бельё, ветровки</td><td>10</td><td>$15 — $60</td><td>Under Armour, Nike, Uniqlo</td></tr>
+    <tr class="total-row"><td>ИТОГО</td><td></td><td>52</td><td>$15 — $200</td><td></td></tr>
+  </table>
+
+  <h3>Масштабирование ассортимента</h3>
+  <table>
+    <tr><th></th><th class="num-col">Год 1</th><th class="num-col">Год 2</th><th class="num-col">Год 3</th></tr>
+    <tr><td>SKU на направление</td><td class="num-col">10-15</td><td class="num-col">40-60</td><td class="num-col">80-120</td></tr>
+    <tr><td>Общее SKU</td><td class="num-col">52</td><td class="num-col">200+</td><td class="num-col">400+</td></tr>
+    <tr><td>Коллекции/год</td><td class="num-col">1 (capsule)</td><td class="num-col">2 (SS/FW)</td><td class="num-col">4 (quarterly drops)</td></tr>
+  </table>
+
+  <h3>Ценовое позиционирование</h3>
+  <p>Принцип «Качество 5.11 по цене в 2 раза ниже»:</p>
+  <table>
+    <tr><th>Продукт</th><th class="num-col">5.11 / Arc'teryx</th><th class="num-col">Bori</th><th class="num-col">Разница</th></tr>
+    <tr><td>Тактические штаны</td><td class="num-col">$75-90</td><td class="num-col">$40-55</td><td class="num-col">-45%</td></tr>
+    <tr><td>Softshell куртка</td><td class="num-col">$120-180</td><td class="num-col">$70-100</td><td class="num-col">-42%</td></tr>
+    <tr><td>Hardshell 3L</td><td class="num-col">$250-400</td><td class="num-col">$120-180</td><td class="num-col">-52%</td></tr>
+    <tr><td>Тренировочная футболка</td><td class="num-col">$30-45</td><td class="num-col">$15-22</td><td class="num-col">-50%</td></tr>
+  </table>
+</section>
+
+<!-- ═══════════════ 05. МАРКЕТИНГ ═══════════════ -->
+<section id="marketing" class="page-break">
+  <div class="section-num">Раздел 05</div>
+  <h2>Маркетинговая стратегия</h2>
+
+  <h3>Стратегия позиционирования</h3>
+  <table>
+    <tr><th></th><th>Qazaqstan Apparel (B2B)</th><th>BORI (B2C)</th></tr>
+    <tr><td><strong>Позиционирование</strong></td><td>Надёжный производственный партнёр в СЭЗ Казахстана</td><td>Качественная одежда по честной цене. Made in Kazakhstan</td></tr>
+    <tr><td><strong>Целевая аудитория</strong></td><td>Силовые ведомства, промпредприятия, бренды-заказчики</td><td>Мужчины 25-45, активный образ жизни, средний доход</td></tr>
+    <tr><td><strong>Тон коммуникации</strong></td><td>Профессиональный, технологичный, надёжный</td><td>Смелый, энергичный, аутентичный</td></tr>
+    <tr><td><strong>Ключевое сообщение</strong></td><td>"Premium Manufacturing, SEZ Advantage"</td><td>"Gear That Performs. Always."</td></tr>
+  </table>
+
+  <h3>Каналы продвижения</h3>
+
+  <h4>Онлайн-каналы</h4>
+  <table>
+    <tr><th>Канал</th><th>QA (B2B)</th><th>BORI (B2C)</th><th>Бюджет/мес</th></tr>
+    <tr><td>Instagram</td><td>Вторичный</td><td>Основной</td><td>$1,500</td></tr>
+    <tr><td>TikTok</td><td>—</td><td>Основной</td><td>$1,000</td></tr>
+    <tr><td>Telegram</td><td>Канал</td><td>Канал + бот</td><td>$300</td></tr>
+    <tr><td>LinkedIn</td><td>Основной</td><td>—</td><td>$500</td></tr>
+    <tr><td>YouTube</td><td>Вторичный</td><td>Контент</td><td>$500</td></tr>
+    <tr><td>Google Ads / SEO</td><td>Основной</td><td>Основной</td><td>$1,200</td></tr>
+    <tr class="highlight-row"><td colspan="3"><strong>Итого онлайн/мес</strong></td><td class="num-col"><strong>$5,000</strong></td></tr>
+  </table>
+
+  <h4>Офлайн-каналы</h4>
+  <ul>
+    <li><strong>Выставки:</strong> Central Asia Fashion (Алматы), KADEX (оборонная, Астана), AITF (туризм) — бюджет $8-15K/год</li>
+    <li><strong>B2G:</strong> Портал госзакупок, прямые контакты с МО, МВД, нацкомпаниями</li>
+    <li><strong>Дилеры:</strong> сеть тактических и outdoor магазинов в KZ</li>
+    <li><strong>PR:</strong> пресс-релизы "Made in Kazakhstan", интервью в бизнес-СМИ</li>
+  </ul>
+
+  <h3>Каналы продаж (омниканал)</h3>
+  <table>
+    <tr><th>Канал</th><th>Запуск</th><th>Доля (Год 3)</th><th>Комиссия</th></tr>
+    <tr><td>Собственный сайт bori.kz</td><td>Q2 2026</td><td>25%</td><td>0% (операционные затраты)</td></tr>
+    <tr><td>Kaspi Магазин</td><td>Q2 2026</td><td>20%</td><td>2-4%</td></tr>
+    <tr><td>Wildberries KZ</td><td>Q3 2026</td><td>15%</td><td>15-20%</td></tr>
+    <tr><td>Ozon</td><td>Q1 2027</td><td>10%</td><td>15-18%</td></tr>
+    <tr><td>B2B / B2G контракты</td><td>Уже работает</td><td>20%</td><td>0%</td></tr>
+    <tr><td>Дилеры и розница</td><td>Q4 2026</td><td>10%</td><td>Оптовая скидка 30-40%</td></tr>
+  </table>
+
+  <h3>KPI маркетинга по годам</h3>
+  <table>
+    <tr><th>Показатель</th><th class="num-col">Год 1</th><th class="num-col">Год 2</th><th class="num-col">Год 3</th></tr>
+    <tr><td>Подписчики (все платформы)</td><td class="num-col">15-25K</td><td class="num-col">50-80K</td><td class="num-col">150K+</td></tr>
+    <tr><td>Посещаемость сайта/мес</td><td class="num-col">5K</td><td class="num-col">20K</td><td class="num-col">60K</td></tr>
+    <tr><td>Конверсия сайта</td><td class="num-col">1.5%</td><td class="num-col">2.5%</td><td class="num-col">3.5%</td></tr>
+    <tr><td>CAC (стоимость привлечения)</td><td class="num-col">$12</td><td class="num-col">$8</td><td class="num-col">$5</td></tr>
+    <tr><td>LTV (пожизненная ценность)</td><td class="num-col">$60</td><td class="num-col">$90</td><td class="num-col">$130</td></tr>
+    <tr class="highlight-row"><td>LTV/CAC</td><td class="num-col">5x</td><td class="num-col">11x</td><td class="num-col">26x</td></tr>
+  </table>
+</section>
+
+<!-- ═══════════════ 06. ПРОИЗВОДСТВО ═══════════════ -->
+<section id="production" class="page-break">
+  <div class="section-num">Раздел 06</div>
+  <h2>Производственный план</h2>
+
+  <h3>Производственные мощности</h3>
+  <table>
+    <tr><th>Параметр</th><th class="num-col">Год 1</th><th class="num-col">Год 2</th><th class="num-col">Год 3</th></tr>
+    <tr><td>Площадь (м²)</td><td class="num-col">5,000</td><td class="num-col">5,000</td><td class="num-col">5,000+</td></tr>
+    <tr><td>Сменность</td><td class="num-col">1 смена</td><td class="num-col">1.5 смены</td><td class="num-col">2 смены</td></tr>
+    <tr><td>Персонал (производство)</td><td class="num-col">30</td><td class="num-col">60</td><td class="num-col">100</td></tr>
+    <tr><td>Персонал (офис/маркетинг)</td><td class="num-col">8</td><td class="num-col">15</td><td class="num-col">25</td></tr>
+    <tr><td>Мощность (ед/мес)</td><td class="num-col">3,000</td><td class="num-col">8,000</td><td class="num-col">15,000</td></tr>
+    <tr class="highlight-row"><td>Загрузка мощностей</td><td class="num-col">40%</td><td class="num-col">65%</td><td class="num-col">85%</td></tr>
+  </table>
+
+  <h3>Цепочка поставок</h3>
+  <table>
+    <tr><th>Компонент</th><th>Поставщик</th><th>Срок поставки</th><th>Условия</th></tr>
+    <tr><td>Ткани (основные)</td><td>Китай (Guangdong, Zhejiang)</td><td>20-30 дней</td><td>FOB, LC/TT</td></tr>
+    <tr><td>Ткани (премиум)</td><td>Турция (Istanbul, Bursa)</td><td>15-20 дней</td><td>CIF, TT</td></tr>
+    <tr><td>Мембраны, GORE-TEX альтернативы</td><td>Корея (Seoul)</td><td>25-35 дней</td><td>FOB</td></tr>
+    <tr><td>Фурнитура (молнии)</td><td>YKK через Китай</td><td>20-25 дней</td><td>Минимальный заказ от $500</td></tr>
+    <tr><td>Фурнитура (пряжки, фастексы)</td><td>Duraflex, ITW Nexus через Китай</td><td>20-25 дней</td><td>MOQ варьируется</td></tr>
+    <tr><td>Нитки, утеплитель</td><td>Китай</td><td>15-20 дней</td><td>По весу</td></tr>
+  </table>
+
+  <h3>Контроль качества (QC)</h3>
+  <p>Тройная система контроля:</p>
+  <ol>
+    <li><strong>Входной контроль:</strong> проверка тканей и фурнитуры при поступлении (цвет, плотность, дефекты)</li>
+    <li><strong>Линейный контроль:</strong> проверка после каждого этапа (раскрой, пошив, обработка)</li>
+    <li><strong>Финальный контроль:</strong> 100% осмотр готовой продукции перед упаковкой. AQL 2.5</li>
+  </ol>
+  <p>Целевой показатель брака: менее 1%</p>
+</section>
+
+<!-- ═══════════════ 07. ФИНАНСЫ ═══════════════ -->
+<section id="finance" class="page-break">
+  <div class="section-num">Раздел 07</div>
+  <h2>Финансовый план</h2>
+
+  <h3>Инвестиционный бюджет</h3>
+  <table>
+    <tr><th>Статья</th><th class="num-col">Сумма ($)</th><th>Комментарий</th></tr>
+    <tr><td>Сайты (2 шт) + дизайн + бренд-гайд</td><td class="num-col">15,000</td><td>QA корпоративный + Bori B2C</td></tr>
+    <tr><td>Брендинг + соцсети (контент, шаблоны)</td><td class="num-col">8,000</td><td>Первоначальный контент-пак</td></tr>
+    <tr><td>Маркетинг (запуск, первые 6 мес)</td><td class="num-col">35,000</td><td>Таргет, блогеры, выставки, SEO</td></tr>
+    <tr><td>Ткани и фурнитура (первые коллекции)</td><td class="num-col">80,000</td><td>Capsule collections x4 направления</td></tr>
+    <tr><td>Дополнительное оборудование</td><td class="num-col">50,000</td><td>Вышивальные машины, раскройный комплекс</td></tr>
+    <tr class="total-row"><td><strong>ИТОГО</strong></td><td class="num-col"><strong>188,000</strong></td><td></td></tr>
+  </table>
+
+  <h3>Структура финансирования</h3>
+  <table>
+    <tr><th>Источник</th><th class="num-col">Сумма ($)</th><th class="num-col">Доля</th><th>Условия</th></tr>
+    <tr><td>Собственные средства</td><td class="num-col">200,000</td><td class="num-col">52%</td><td>Оборотный капитал (имеется)</td></tr>
+    <tr><td>Банковский кредит</td><td class="num-col">120,000</td><td class="num-col">31%</td><td>Под залог $2M, LTV 6%, 14-16% годовых, 3 года</td></tr>
+    <tr><td>Инвестор (equity)</td><td class="num-col">68,000</td><td class="num-col">17%</td><td>За долю 8-10%, оценка pre-money $700K-850K</td></tr>
+    <tr class="total-row"><td><strong>ИТОГО</strong></td><td class="num-col"><strong>388,000</strong></td><td class="num-col"><strong>100%</strong></td><td></td></tr>
+  </table>
+
+  <h3>P&L прогноз (3 года)</h3>
+  <table>
+    <tr><th>Показатель</th><th class="num-col">Год 1</th><th class="num-col">Год 2</th><th class="num-col">Год 3</th></tr>
+    <tr><td><strong>Выручка</strong></td><td class="num-col">$400,000</td><td class="num-col">$1,000,000</td><td class="num-col">$2,500,000</td></tr>
+    <tr><td>&nbsp;&nbsp;B2B/B2G</td><td class="num-col">$280,000</td><td class="num-col">$500,000</td><td class="num-col">$750,000</td></tr>
+    <tr><td>&nbsp;&nbsp;B2C (BORI)</td><td class="num-col">$120,000</td><td class="num-col">$500,000</td><td class="num-col">$1,750,000</td></tr>
+    <tr><td><strong>Себестоимость (COGS)</strong></td><td class="num-col">$180,000</td><td class="num-col">$450,000</td><td class="num-col">$1,125,000</td></tr>
+    <tr><td>&nbsp;&nbsp;% от выручки</td><td class="num-col">45%</td><td class="num-col">45%</td><td class="num-col">45%</td></tr>
+    <tr class="highlight-row"><td><strong>Валовая прибыль</strong></td><td class="num-col"><strong>$220,000</strong></td><td class="num-col"><strong>$550,000</strong></td><td class="num-col"><strong>$1,375,000</strong></td></tr>
+    <tr><td>&nbsp;&nbsp;Валовая маржа</td><td class="num-col">55%</td><td class="num-col">55%</td><td class="num-col">55%</td></tr>
+    <tr><td>Маркетинг</td><td class="num-col">$48,000</td><td class="num-col">$120,000</td><td class="num-col">$300,000</td></tr>
+    <tr><td>&nbsp;&nbsp;% от выручки</td><td class="num-col">12%</td><td class="num-col">12%</td><td class="num-col">12%</td></tr>
+    <tr><td>ФОТ (производство)</td><td class="num-col">$54,000</td><td class="num-col">$108,000</td><td class="num-col">$180,000</td></tr>
+    <tr><td>ФОТ (управление/маркетинг)</td><td class="num-col">$28,800</td><td class="num-col">$54,000</td><td class="num-col">$90,000</td></tr>
+    <tr><td>Аренда и коммунальные</td><td class="num-col">$13,200</td><td class="num-col">$18,000</td><td class="num-col">$24,000</td></tr>
+    <tr><td>Логистика и доставка</td><td class="num-col">$12,000</td><td class="num-col">$30,000</td><td class="num-col">$75,000</td></tr>
+    <tr><td>Прочие (связь, IT, бухгалтерия)</td><td class="num-col">$24,000</td><td class="num-col">$30,000</td><td class="num-col">$50,000</td></tr>
+    <tr><td>Проценты по кредиту</td><td class="num-col">$17,280</td><td class="num-col">$13,440</td><td class="num-col">$8,640</td></tr>
+    <tr><td><strong>Итого расходы</strong></td><td class="num-col">$197,280</td><td class="num-col">$373,440</td><td class="num-col">$727,640</td></tr>
+    <tr class="highlight-row"><td><strong>EBITDA</strong></td><td class="num-col"><strong>$40,000</strong></td><td class="num-col"><strong>$190,000</strong></td><td class="num-col"><strong>$600,000</strong></td></tr>
+    <tr><td>EBITDA маржа</td><td class="num-col">10%</td><td class="num-col">19%</td><td class="num-col">24%</td></tr>
+    <tr class="highlight-row"><td><strong>Чистая прибыль</strong></td><td class="num-col"><strong>$22,720</strong></td><td class="num-col"><strong>$176,560</strong></td><td class="num-col"><strong>$647,360</strong></td></tr>
+    <tr><td>Чистая маржа</td><td class="num-col">5.7%</td><td class="num-col">17.7%</td><td class="num-col">25.9%</td></tr>
+  </table>
+
+  <h3>Cash Flow (ключевые моменты)</h3>
+  <table>
+    <tr><th></th><th class="num-col">Год 1</th><th class="num-col">Год 2</th><th class="num-col">Год 3</th></tr>
+    <tr><td>Операционный CF</td><td class="num-col">$40,000</td><td class="num-col">$190,000</td><td class="num-col">$600,000</td></tr>
+    <tr><td>Инвестиционный CF</td><td class="num-col">-$188,000</td><td class="num-col">-$40,000</td><td class="num-col">-$60,000</td></tr>
+    <tr><td>Финансовый CF</td><td class="num-col">+$188,000</td><td class="num-col">-$40,000</td><td class="num-col">-$40,000</td></tr>
+    <tr class="highlight-row"><td><strong>Чистый CF</strong></td><td class="num-col"><strong>$40,000</strong></td><td class="num-col"><strong>$110,000</strong></td><td class="num-col"><strong>$500,000</strong></td></tr>
+    <tr><td>Кумулятивный CF</td><td class="num-col">$40,000</td><td class="num-col">$150,000</td><td class="num-col">$650,000</td></tr>
+  </table>
+
+  <h3>Окупаемость</h3>
+  <div class="info-box green">
+    <strong>Точка безубыточности:</strong> 8-10 месяцев при выручке ~$22K/мес<br>
+    <strong>Возврат инвестиций:</strong> полный ROI за 18-20 месяцев<br>
+    <strong>IRR (3 года):</strong> ~85%<br>
+    <strong>Payback Period:</strong> 1.5-2 года
+  </div>
+</section>
+
+<!-- ═══════════════ 08. ИНВЕСТПРЕДЛОЖЕНИЕ ═══════════════ -->
+<section id="investment" class="page-break">
+  <div class="section-num">Раздел 08</div>
+  <h2>Инвестиционное предложение</h2>
+
+  <h3>Для банка (кредит)</h3>
+  <table>
+    <tr><td><strong>Сумма кредита</strong></td><td>$120,000</td></tr>
+    <tr><td><strong>Залоговое обеспечение</strong></td><td>До $2,000,000 (LTV = 6%)</td></tr>
+    <tr><td><strong>Срок</strong></td><td>36 месяцев</td></tr>
+    <tr><td><strong>Цель</strong></td><td>Закупка сырья, оборудование, маркетинг</td></tr>
+    <tr><td><strong>Источник погашения</strong></td><td>Операционный денежный поток ($40K Год 1, $190K Год 2)</td></tr>
+    <tr><td><strong>DSCR (Год 2)</strong></td><td>3.5x (целевое погашение $53K/год vs EBITDA $190K)</td></tr>
+  </table>
+
+  <h3>Для инвестора (equity)</h3>
+  <table>
+    <tr><td><strong>Сумма инвестиций</strong></td><td>$68,000 — $100,000</td></tr>
+    <tr><td><strong>Доля</strong></td><td>8-12%</td></tr>
+    <tr><td><strong>Оценка pre-money</strong></td><td>$700,000 — $850,000</td></tr>
+    <tr><td><strong>Выход (3 года)</strong></td><td>Buyback по мультипликатору 3-5x EBITDA или продажа доли стратегу</td></tr>
+    <tr><td><strong>Оценка на выходе (3 года)</strong></td><td>$1.8M — $3.0M (3-5x EBITDA $600K)</td></tr>
+    <tr><td><strong>ROI для инвестора</strong></td><td>2.5-4.5x за 3 года</td></tr>
+  </table>
+
+  <div class="info-box gold">
+    <strong>Почему это интересно инвестору:</strong>
+    <ul style="margin-top:8px;">
+      <li>Минимальный LTV при залоговой базе $2M — высокая защищённость</li>
+      <li>Реальное производство с имеющимися мощностями (не стартап «на бумаге»)</li>
+      <li>Работающий портфель B2B заказов = day-1 revenue</li>
+      <li>Льготы СЭЗ увеличивают маржу на 20-30% vs. конкуренты</li>
+      <li>Рынок Центральной Азии растёт на 8-12% ежегодно в целевых сегментах</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════ 09. РИСКИ ═══════════════ -->
+<section id="risks" class="page-break">
+  <div class="section-num">Раздел 09</div>
+  <h2>Риски и митигация</h2>
+
+  <table>
+    <tr><th>Риск</th><th>Вероятность</th><th>Влияние</th><th>Митигация</th></tr>
+    <tr>
+      <td><strong>Валютный риск</strong><br>Ослабление тенге к доллару</td>
+      <td>Средняя</td>
+      <td>Высокое</td>
+      <td>Часть продаж в USD (экспорт), хеджирование через форвардные контракты, локальные поставщики для части сырья</td>
+    </tr>
+    <tr>
+      <td><strong>Конкурентный риск</strong><br>Китайский демпинг</td>
+      <td>Высокая</td>
+      <td>Среднее</td>
+      <td>Фокус на качество и сервис, B2G контракты с преференцией для местного производства, брендинг</td>
+    </tr>
+    <tr>
+      <td><strong>Кадровый риск</strong><br>Нехватка швей и технологов</td>
+      <td>Средняя</td>
+      <td>Среднее</td>
+      <td>Программа обучения, конкурентная ЗП, партнёрство с профучилищами</td>
+    </tr>
+    <tr>
+      <td><strong>Логистический риск</strong><br>Задержки поставок из Китая</td>
+      <td>Средняя</td>
+      <td>Среднее</td>
+      <td>Буфер запасов на 2 месяца, 2-3 альтернативных поставщика на каждую позицию</td>
+    </tr>
+    <tr>
+      <td><strong>Регуляторный риск</strong><br>Изменение условий СЭЗ</td>
+      <td>Низкая</td>
+      <td>Высокое</td>
+      <td>Контракт с СЭЗ на 10+ лет, льготы зафиксированы законодательно</td>
+    </tr>
+    <tr>
+      <td><strong>Спросовый риск</strong><br>Медленный рост B2C</td>
+      <td>Средняя</td>
+      <td>Среднее</td>
+      <td>B2B обеспечивает базовую загрузку, B2C наращивается постепенно, гибкость ассортимента</td>
+    </tr>
+  </table>
+</section>
+
+<!-- ═══════════════ 10. ДОРОЖНАЯ КАРТА ═══════════════ -->
+<section id="roadmap" class="page-break">
+  <div class="section-num">Раздел 10</div>
+  <h2>Дорожная карта (Roadmap)</h2>
+
+  <h3>Год 1: Запуск и закрепление (2026)</h3>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-marker">Q2</div>
+      <div class="timeline-content">
+        <h4>Запуск цифровой инфраструктуры</h4>
+        <p>Сайты QA + Bori, все соцсети, Kaspi Магазин. Первая capsule-коллекция Bori (52 SKU).</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-marker">Q3</div>
+      <div class="timeline-content">
+        <h4>Маркетинговый запуск</h4>
+        <p>Таргетированная реклама, блогеры, TikTok-контент. Wildberries KZ. Первые B2G тендеры.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-marker">Q4</div>
+      <div class="timeline-content">
+        <h4>Масштабирование продаж</h4>
+        <p>Участие в KADEX и Central Asia Fashion. Первые дилерские контракты. FW26 коллекция.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>Год 2: Масштабирование (2027)</h3>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-marker">Q1</div>
+      <div class="timeline-content">
+        <h4>Расширение ассортимента</h4>
+        <p>200+ SKU. Выход на Ozon. Начало работы с Узбекистаном и Кыргызстаном.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-marker">Q2</div>
+      <div class="timeline-content">
+        <h4>Шоурум + 2-я смена</h4>
+        <p>Открытие фирменного шоурума в Астане. Переход на 1.5 смены. PR-кампания "Made in KZ".</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-marker">Q4</div>
+      <div class="timeline-content">
+        <h4>Дилерская сеть</h4>
+        <p>20-30 дилеров в KZ и Средней Азии. Amazon регистрация (подготовка к Q1 Year 3).</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>Год 3: Глобализация (2028)</h3>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-marker">Q1</div>
+      <div class="timeline-content">
+        <h4>Глобальный выход</h4>
+        <p>Amazon запуск. Dubai — первые B2B контракты (тактика, outdoor). 400+ SKU.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-marker">Q2</div>
+      <div class="timeline-content">
+        <h4>Собственная розница</h4>
+        <p>1-2 фирменных магазина BORI в Астане и Алматы. Программа амбассадоров.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-marker">Q4</div>
+      <div class="timeline-content">
+        <h4>Целевые показатели</h4>
+        <p>Выручка $2.5M, EBITDA $600K, экспорт 30%+, 150K+ подписчиков. Подготовка к раунду B / выкупу доли инвестора.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>Итоговые целевые ориентиры</h3>
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-num" style="color:var(--green)">$2.5M</div>
+      <div class="kpi-label">Выручка (Год 3)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-num" style="color:var(--green)">$600K</div>
+      <div class="kpi-label">EBITDA (Год 3)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-num" style="color:var(--green)">30%+</div>
+      <div class="kpi-label">Экспорт</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-num" style="color:var(--green)">150K+</div>
+      <div class="kpi-label">Подписчики</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CLOSING ═══════════════ -->
+<section style="text-align:center; padding: 80px 48px; background: var(--navy-deep);">
+  <div style="display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:24px;">
+    <div style="width:48px;height:48px;border:2px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:var(--gold);">Q</div>
+    <div style="font-size:14px;font-weight:600;color:white;letter-spacing:0.06em;text-transform:uppercase;">Qazaqstan <span style="color:var(--gold);font-weight:400;">Apparel</span></div>
+  </div>
+  <p style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:white;margin-bottom:12px;">Готовы к сотрудничеству</p>
+  <p style="font-size:14px;color:rgba(255,255,255,0.4);margin-bottom:32px;">info@qazaqstanapparel.com &bull; +7 (7172) XXX-XX-XX</p>
+  <p style="font-size:10px;color:rgba(255,255,255,0.15);letter-spacing:0.1em;text-transform:uppercase;">Конфиденциальный документ &bull; Март 2026</p>
+</section>
+
+</div>
+</body>
+</html>
