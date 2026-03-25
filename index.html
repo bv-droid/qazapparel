@@ -1,2285 +1,886 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kk">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Qazaqstan Apparel — Contract Manufacturing</title>
-<meta name="description" content="Premium contract apparel manufacturing in Astana, Kazakhstan. Tactical, Workwear, Outdoor, Sport — OEM/ODM production.">
+<title>Qazaqstan Apparel — Премиум тігін өндірісі</title>
+<meta name="description" content="Қазақстан, Астана. Тактикалық, жұмыс, аутдор және спорт киімдерін контрактілік өндіру.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <style>
-/* ═══════════════════════════════════════════════
-   QAZAQSTAN APPAREL — Corporate B2B Website
-   Premium Animated Single Page
-   ═══════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════
+   QAZAQSTAN APPAREL — iOS 26+ Premium Glass Morphism
+   Multilingual: KZ (primary) / RU / EN
+   ═══════════════════════════════════════════════════════ */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --navy: #1B2B4B;
-  --navy-deep: #0F1A2E;
-  --navy-light: #2A3F66;
-  --gold: #E8A838;
-  --gold-light: #F0C060;
-  --gold-dim: #C48A20;
+  --navy: #08004F;
+  --navy-deep: #05003A;
+  --navy-mid: #120870;
+  --navy-light: #2A1B8C;
+  --gold: #FF8C00;
+  --gold-light: #FFB347;
+  --gold-glow: rgba(255, 140, 0, 0.35);
+  --gold-dim: #CC7000;
   --white: #FFFFFF;
-  --gray-100: #F5F6F8;
-  --gray-200: #E8EBF0;
-  --gray-300: #CBD0D8;
-  --gray-600: #6B7280;
-  --gray-800: #1F2937;
-  --bg: #FAFBFC;
-  --section-dark: #0D1B2A;
-  --section-alt: #F0F2F5;
-  --radius: 12px;
-  --transition: cubic-bezier(0.16, 1, 0.3, 1);
+  --gray-50: #F8F9FC;
+  --gray-100: #F0F1F6;
+  --gray-200: #E0E2EC;
+  --gray-300: #C8CCDA;
+  --gray-400: #9EA3B5;
+  --gray-600: #5C6078;
+  --gray-800: #1A1D2E;
+  --bg: #FAFAFF;
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.35);
+  --glass-dark: rgba(8, 0, 79, 0.75);
+  --glass-dark-border: rgba(255, 255, 255, 0.08);
+  --radius: 20px;
+  --radius-sm: 12px;
+  --radius-xs: 8px;
+  --spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --blur: 24px;
+  --blur-heavy: 40px;
 }
 
-html {
-  scroll-behavior: smooth;
-  font-size: 16px;
-}
+html { scroll-behavior: smooth; font-size: 16px; }
 
 body {
-  font-family: 'Inter', -apple-system, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--bg);
   color: var(--gray-800);
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* ─── SCROLLBAR ─── */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--navy-deep); }
 ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 3px; }
 
-/* ─── LOADER ─── */
+/* ═══ LOADER ═══ */
 .loader {
-  position: fixed;
-  inset: 0;
-  background: var(--navy-deep);
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 24px;
-  transition: opacity 0.6s ease, visibility 0.6s ease;
+  position: fixed; inset: 0; background: var(--navy-deep); z-index: 9999;
+  display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 32px;
+  transition: opacity 0.8s var(--smooth), visibility 0.8s var(--smooth);
 }
-.loader.hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
+.loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+.loader-logo { width: 200px; height: 192px; }
+.loader-logo .q-ring {
+  stroke-dasharray: 2600; stroke-dashoffset: 2600;
+  animation: drawQ 1.8s var(--smooth) 0.3s forwards;
 }
-.loader-logo {
-  width: 80px;
-  height: 80px;
-  animation: loaderPulse 1.2s ease-in-out infinite;
+.loader-logo .a-tail {
+  stroke-dasharray: 1200; stroke-dashoffset: 1200;
+  animation: drawA 1.2s var(--smooth) 1.4s forwards;
 }
-@keyframes loaderPulse {
-  0%, 100% { opacity: 0.4; transform: scale(0.95); }
-  50% { opacity: 1; transform: scale(1.05); }
+@keyframes drawQ { to { stroke-dashoffset: 0; } }
+@keyframes drawA { to { stroke-dashoffset: 0; } }
+.loader-logo .q-fill { opacity: 0; animation: fillIn 0.6s ease 2s forwards; }
+.loader-logo .a-fill { opacity: 0; animation: fillIn 0.6s ease 2.2s forwards; }
+@keyframes fillIn { to { opacity: 1; } }
+.loader-text {
+  font-size: 14px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase;
+  color: rgba(255,255,255,0.3); opacity: 0; animation: fadeIn 0.5s ease 2.4s forwards;
 }
-.loader-bar {
-  width: 120px;
-  height: 2px;
-  background: rgba(232,168,56,0.2);
-  border-radius: 1px;
-  overflow: hidden;
-}
+.loader-bar { width: 160px; height: 2px; background: rgba(255,140,0,0.15); border-radius: 1px; overflow: hidden; }
 .loader-bar::after {
-  content: '';
-  display: block;
-  width: 40%;
-  height: 100%;
-  background: var(--gold);
-  border-radius: 1px;
-  animation: loaderSlide 1s ease-in-out infinite;
+  content: ''; display: block; width: 30%; height: 100%;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  border-radius: 1px; animation: loaderSlide 1.2s ease-in-out infinite;
 }
-@keyframes loaderSlide {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(350%); }
-}
+@keyframes loaderSlide { 0% { transform: translateX(-200%); } 100% { transform: translateX(500%); } }
 
-/* ─── NAVIGATION ─── */
+/* ═══ NAVIGATION ═══ */
 .nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  padding: 0 48px;
-  height: 72px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  transition: all 0.4s ease;
-  background: transparent;
+  position: fixed; top: 12px; left: 50%; transform: translateX(-50%); z-index: 1000;
+  width: calc(100% - 48px); max-width: 1320px; padding: 0 32px; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-radius: 20px; background: rgba(8, 0, 79, 0.25);
+  backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur));
+  border: 1px solid rgba(255, 255, 255, 0.08); transition: all 0.5s var(--smooth);
 }
 .nav.scrolled {
-  background: rgba(15, 26, 46, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 1px 0 rgba(232,168,56,0.1);
+  background: rgba(8, 0, 79, 0.85); border-color: rgba(255, 140, 0, 0.1);
+  box-shadow: 0 8px 40px rgba(5, 0, 58, 0.3), 0 0 0 1px rgba(255, 140, 0, 0.05); top: 8px;
 }
-.nav-logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
+.nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; flex-shrink: 0; }
+.nav-logo svg { width: 38px; height: 36px; }
+.nav-logo-text { font-size: 13px; font-weight: 600; letter-spacing: 0.1em; color: var(--white); text-transform: uppercase; line-height: 1.2; }
+.nav-logo-text span { color: var(--gold); font-weight: 400; }
+.nav-center { display: flex; gap: 8px; list-style: none; background: rgba(255,255,255,0.06); padding: 4px; border-radius: 12px; }
+.nav-center a {
+  font-size: 12px; font-weight: 500; letter-spacing: 0.03em; color: rgba(255,255,255,0.6);
+  text-decoration: none; text-transform: uppercase; padding: 8px 16px; border-radius: 8px; transition: all 0.3s var(--smooth);
 }
-.nav-logo svg {
-  width: 40px;
-  height: 40px;
+.nav-center a:hover { color: var(--white); background: rgba(255, 255, 255, 0.1); }
+.nav-right { display: flex; align-items: center; gap: 12px; }
+.lang-switch { display: flex; gap: 2px; background: rgba(255,255,255,0.06); padding: 3px; border-radius: 10px; }
+.lang-btn {
+  padding: 5px 10px; font-size: 11px; font-weight: 600; letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.45); background: transparent; border: none; border-radius: 7px;
+  cursor: pointer; transition: all 0.3s; text-transform: uppercase;
 }
-.nav-logo-text {
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  color: var(--white);
-  text-transform: uppercase;
-}
-.nav-logo-text span {
-  color: var(--gold);
-  font-weight: 400;
-}
-.nav-links {
-  display: flex;
-  gap: 32px;
-  list-style: none;
-}
-.nav-links a {
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: 0.04em;
-  color: rgba(255,255,255,0.7);
-  text-decoration: none;
-  text-transform: uppercase;
-  position: relative;
-  padding: 4px 0;
-  transition: color 0.3s;
-}
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--gold);
-  transition: width 0.3s var(--transition);
-}
-.nav-links a:hover { color: var(--white); }
-.nav-links a:hover::after { width: 100%; }
+.lang-btn.active { background: var(--gold); color: var(--navy-deep); }
+.lang-btn:hover:not(.active) { color: var(--white); background: rgba(255,255,255,0.08); }
 .nav-cta {
-  padding: 10px 24px;
-  background: transparent;
-  border: 1px solid var(--gold);
-  color: var(--gold) !important;
-  font-size: 12px !important;
-  font-weight: 500 !important;
-  letter-spacing: 0.08em !important;
-  text-transform: uppercase;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: all 0.3s;
-  cursor: pointer;
+  padding: 9px 22px; background: var(--gold); color: var(--navy-deep) !important;
+  font-size: 11px !important; font-weight: 700 !important; letter-spacing: 0.06em !important;
+  text-transform: uppercase; text-decoration: none; border-radius: 10px;
+  transition: all 0.3s var(--spring); border: none; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 6px;
 }
-.nav-cta:hover {
-  background: var(--gold);
-  color: var(--navy-deep) !important;
-}
-.nav-cta::after { display: none !important; }
+.nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 8px 24px var(--gold-glow); }
+.nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; }
+.nav-burger span { display: block; width: 22px; height: 2px; background: var(--white); border-radius: 2px; transition: all 0.3s; }
 
-/* Mobile menu */
-.nav-burger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
-  padding: 8px;
-  background: none;
-  border: none;
+/* Mobile Menu */
+.mobile-menu {
+  position: fixed; inset: 0; background: rgba(5, 0, 58, 0.97);
+  backdrop-filter: blur(var(--blur-heavy)); -webkit-backdrop-filter: blur(var(--blur-heavy));
+  z-index: 999; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
+  opacity: 0; visibility: hidden; transition: all 0.4s var(--smooth);
 }
-.nav-burger span {
-  display: block;
-  width: 24px;
-  height: 2px;
-  background: var(--white);
-  transition: all 0.3s;
+.mobile-menu.active { opacity: 1; visibility: visible; }
+.mobile-menu a { font-size: 22px; font-weight: 300; color: var(--white); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.6; transition: all 0.3s; }
+.mobile-menu a:hover { opacity: 1; color: var(--gold); }
+.mobile-menu-close {
+  position: absolute; top: 24px; right: 24px; width: 44px; height: 44px;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px; color: var(--white); font-size: 18px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
 }
+.mobile-lang { display: flex; gap: 8px; margin-top: 20px; }
 
-/* ─── HERO ─── */
-.hero {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--navy-deep);
-  overflow: hidden;
-}
-.hero-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
-}
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 80% 60% at 20% 80%, rgba(232,168,56,0.06) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(42,63,102,0.3) 0%, transparent 60%),
-    linear-gradient(180deg, rgba(15,26,46,0.82) 0%, rgba(10,22,40,0.88) 100%);
+/* ═══ HERO ═══ */
+.hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--navy-deep); overflow: hidden; }
+.hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.35; }
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 50% at 50% 50%, rgba(8,0,79,0.4) 0%, rgba(5,0,58,0.85) 70%),
+              radial-gradient(ellipse 40% 40% at 20% 80%, rgba(255,140,0,0.06) 0%, transparent 60%);
   z-index: 1;
 }
-.hero-grid {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  background-image:
-    linear-gradient(rgba(232,168,56,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(232,168,56,0.03) 1px, transparent 1px);
-  background-size: 80px 80px;
-  animation: gridDrift 20s linear infinite;
+.hero-logo-watermark {
+  position: absolute; right: -5%; top: 50%; transform: translateY(-50%);
+  width: 55vw; max-width: 750px; height: auto; opacity: 0.04; z-index: 1;
 }
-@keyframes gridDrift {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(80px, 80px); }
-}
-.hero-particles {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  z-index: 2;
-}
-.particle {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  background: var(--gold);
-  border-radius: 50%;
-  opacity: 0;
-  animation: particleFloat 8s ease-in-out infinite;
-}
-@keyframes particleFloat {
-  0%, 100% { opacity: 0; transform: translateY(0) scale(0); }
-  10% { opacity: 0.6; transform: scale(1); }
-  90% { opacity: 0.2; }
-  100% { transform: translateY(-100vh) scale(0); }
-}
-.hero-content {
-  position: relative;
-  z-index: 3;
-  text-align: center;
-  max-width: 900px;
-  padding: 0 24px;
-}
+.hero-orb { position: absolute; border-radius: 50%; filter: blur(80px); z-index: 1; animation: orbFloat 12s ease-in-out infinite alternate; }
+.hero-orb-1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(255,140,0,0.12), transparent 70%); top: 10%; left: -10%; }
+.hero-orb-2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(42,27,140,0.3), transparent 70%); bottom: 5%; right: -5%; animation-delay: -4s; }
+@keyframes orbFloat { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(30px, -20px) scale(1.1); } }
+
+.particles-container { position: absolute; inset: 0; z-index: 2; overflow: hidden; }
+.particle { position: absolute; width: 3px; height: 3px; background: var(--gold); border-radius: 50%; opacity: 0; animation: particleRise 10s ease-in-out infinite; }
+@keyframes particleRise { 0%, 100% { opacity: 0; transform: translateY(0) scale(0); } 15% { opacity: 0.5; transform: scale(1); } 85% { opacity: 0.1; } 100% { transform: translateY(-100vh) scale(0); } }
+
+.hero-content { position: relative; z-index: 3; text-align: center; max-width: 880px; padding: 0 24px; }
 .hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 20px;
-  background: rgba(232,168,56,0.08);
-  border: 1px solid rgba(232,168,56,0.2);
-  border-radius: 100px;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  color: var(--gold);
-  text-transform: uppercase;
-  margin-bottom: 32px;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.8s var(--transition) 0.8s forwards;
+  display: inline-flex; align-items: center; gap: 10px; padding: 10px 24px;
+  background: rgba(255, 140, 0, 0.08); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 140, 0, 0.15); border-radius: 100px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em; color: var(--gold); text-transform: uppercase;
+  margin-bottom: 36px; opacity: 0; transform: translateY(20px); animation: fadeUp 0.8s var(--smooth) 2.8s forwards;
 }
-.hero-badge::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  background: var(--gold);
-  border-radius: 50%;
-  animation: badgePulse 2s ease-in-out infinite;
-}
-@keyframes badgePulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
-}
+.hero-badge-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; animation: dotPulse 2s ease-in-out infinite; }
+@keyframes dotPulse { 0%, 100% { opacity: 0.4; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
 .hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(36px, 6vw, 72px);
-  font-weight: 600;
-  color: var(--white);
-  line-height: 1.1;
-  margin-bottom: 24px;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 1s var(--transition) 1s forwards;
+  font-family: 'Playfair Display', serif; font-size: clamp(38px, 6.5vw, 78px); font-weight: 700;
+  color: var(--white); line-height: 1.05; margin-bottom: 28px;
+  opacity: 0; transform: translateY(30px); animation: fadeUp 1s var(--smooth) 3s forwards;
 }
-.hero h1 em {
-  font-style: italic;
-  color: var(--gold);
+.hero h1 em { font-style: italic; color: var(--gold); position: relative; }
+.hero h1 em::after {
+  content: ''; position: absolute; bottom: 2px; left: 0; width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--gold), transparent); opacity: 0.4; border-radius: 2px;
 }
 .hero-sub {
-  font-size: clamp(15px, 1.8vw, 18px);
-  font-weight: 300;
-  color: rgba(255,255,255,0.6);
-  max-width: 600px;
-  margin: 0 auto 48px;
-  line-height: 1.7;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.8s var(--transition) 1.3s forwards;
+  font-size: clamp(15px, 1.8vw, 19px); font-weight: 300; color: rgba(255,255,255,0.55);
+  max-width: 580px; margin: 0 auto 48px; line-height: 1.7;
+  opacity: 0; transform: translateY(20px); animation: fadeUp 0.8s var(--smooth) 3.3s forwards;
 }
 .hero-actions {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  flex-wrap: wrap;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.8s var(--transition) 1.5s forwards;
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+  opacity: 0; transform: translateY(20px); animation: fadeUp 0.8s var(--smooth) 3.5s forwards;
 }
 .btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 16px 36px;
-  background: var(--gold);
-  color: var(--navy-deep);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  text-decoration: none;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.3s;
-  position: relative;
-  overflow: hidden;
+  display: inline-flex; align-items: center; gap: 8px; padding: 16px 36px;
+  background: var(--gold); color: var(--navy-deep); font-family: 'Inter', sans-serif;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  text-decoration: none; border: none; border-radius: 14px; cursor: pointer;
+  transition: all 0.4s var(--spring); position: relative; overflow: hidden;
 }
 .btn-primary::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transform: translateX(-100%);
-  transition: transform 0.6s;
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  transform: translateX(-100%); transition: transform 0.6s;
 }
 .btn-primary:hover::before { transform: translateX(100%); }
-.btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(232,168,56,0.3); }
-
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 16px 36px;
-  background: transparent;
-  color: var(--white);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  text-decoration: none;
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.3s;
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-3px); box-shadow: 0 12px 40px var(--gold-glow); }
+.btn-glass {
+  display: inline-flex; align-items: center; gap: 8px; padding: 16px 36px;
+  background: rgba(255, 255, 255, 0.06); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  color: var(--white); font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 14px; cursor: pointer; transition: all 0.3s var(--smooth);
 }
-.btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+.btn-glass:hover { border-color: var(--gold); color: var(--gold); background: rgba(255, 140, 0, 0.06); }
 
 .hero-scroll {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  opacity: 0;
-  animation: fadeInUp 0.6s var(--transition) 2s forwards;
+  position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); z-index: 5;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  opacity: 0; animation: fadeUp 0.6s var(--smooth) 4s forwards;
 }
-.hero-scroll span {
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
+.hero-scroll span { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.25); }
+.scroll-indicator { width: 24px; height: 40px; border: 1.5px solid rgba(255,255,255,0.15); border-radius: 12px; position: relative; }
+.scroll-indicator::after {
+  content: ''; width: 3px; height: 8px; background: var(--gold); border-radius: 2px;
+  position: absolute; top: 8px; left: 50%; transform: translateX(-50%); animation: scrollBob 2s ease-in-out infinite;
 }
-.scroll-line {
-  width: 1px;
-  height: 40px;
-  background: rgba(232,168,56,0.3);
-  position: relative;
-  overflow: hidden;
-}
-.scroll-line::after {
-  content: '';
-  position: absolute;
-  top: -100%;
-  left: 0;
-  width: 100%;
-  height: 50%;
-  background: var(--gold);
-  animation: scrollDown 1.5s ease-in-out infinite;
-}
-@keyframes scrollDown {
-  0% { top: -50%; }
-  100% { top: 100%; }
-}
+@keyframes scrollBob { 0%, 100% { top: 8px; opacity: 1; } 50% { top: 22px; opacity: 0.3; } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(var(--ty, 20px)); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(var(--ty, 20px)); }
-  to { opacity: 1; transform: translateY(0); }
+/* ═══ STATS ═══ */
+.stats-bar { position: relative; z-index: 5; margin-top: -48px; padding: 0 24px; }
+.stats-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.stat-card {
+  background: var(--glass-bg); backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur));
+  border: 1px solid var(--glass-border); border-radius: var(--radius); padding: 32px 24px;
+  text-align: center; transition: all 0.4s var(--smooth); opacity: 0; transform: translateY(20px);
 }
+.stat-card.visible { opacity: 1; transform: translateY(0); }
+.stat-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(8, 0, 79, 0.08); }
+.stat-number { font-family: 'Playfair Display', serif; font-size: clamp(32px, 4vw, 48px); font-weight: 700; color: var(--navy); line-height: 1; margin-bottom: 8px; }
+.stat-number span { color: var(--gold); }
+.stat-label { font-size: 13px; color: var(--gray-600); letter-spacing: 0.02em; }
 
-/* ─── STATS BAR ─── */
-.stats-bar {
-  background: var(--white);
-  padding: 48px 0;
-  border-bottom: 1px solid var(--gray-200);
-  position: relative;
-  z-index: 2;
-}
-.stats-grid {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 40px;
-}
-.stat-item {
-  text-align: center;
-  opacity: 0;
-  transform: translateY(20px);
-}
-.stat-item.visible {
-  animation: fadeInUp 0.6s var(--transition) forwards;
-}
-.stat-number {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(32px, 4vw, 48px);
-  font-weight: 700;
-  color: var(--navy);
-  line-height: 1;
-  margin-bottom: 8px;
-}
-.stat-number span {
-  color: var(--gold);
-}
-.stat-label {
-  font-size: 13px;
-  color: var(--gray-600);
-  letter-spacing: 0.04em;
-}
-
-/* ─── SECTION COMMON ─── */
-section {
-  padding: 100px 0;
-}
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
+/* ═══ SECTIONS COMMON ═══ */
+section { padding: 120px 0; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 .section-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 16px;
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
 }
-.section-tag::before {
-  content: '';
-  width: 24px;
-  height: 1px;
-  background: var(--gold);
-}
-.section-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(28px, 4vw, 44px);
-  font-weight: 600;
-  color: var(--navy);
-  line-height: 1.2;
-  margin-bottom: 20px;
-}
-.section-desc {
-  font-size: 16px;
-  color: var(--gray-600);
-  max-width: 560px;
-  line-height: 1.7;
-}
+.section-tag::before { content: ''; width: 28px; height: 2px; background: linear-gradient(90deg, var(--gold), transparent); border-radius: 1px; }
+.section-title { font-family: 'Playfair Display', serif; font-size: clamp(30px, 4.5vw, 50px); font-weight: 700; color: var(--navy); line-height: 1.15; margin-bottom: 20px; }
+.section-desc { font-size: 16px; color: var(--gray-600); max-width: 540px; line-height: 1.8; }
 
-.anim-item {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.7s var(--transition), transform 0.7s var(--transition);
-}
-.anim-item.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s var(--smooth), transform 0.8s var(--smooth); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s var(--smooth), transform 0.8s var(--smooth); }
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+.reveal-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s var(--smooth), transform 0.8s var(--smooth); }
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+.reveal-scale { opacity: 0; transform: scale(0.92); transition: opacity 0.8s var(--smooth), transform 0.8s var(--smooth); }
+.reveal-scale.visible { opacity: 1; transform: scale(1); }
 
-/* ─── ABOUT ─── */
-.about {
-  background: var(--bg);
-}
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
-  margin-top: 48px;
-}
-.about-visual {
-  position: relative;
-  aspect-ratio: 4/3;
-  background: linear-gradient(135deg, var(--navy-deep), var(--navy));
-  border-radius: var(--radius);
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.about-visual-inner {
-  text-align: center;
-  color: var(--white);
-  padding: 40px;
-}
-.about-visual-icon {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 24px;
-  border: 2px solid var(--gold);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.about-visual-icon svg {
-  width: 36px;
-  height: 36px;
-  fill: var(--gold);
-}
-.about-visual h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 24px;
-  margin-bottom: 8px;
-}
-.about-visual p {
-  font-size: 14px;
-  opacity: 0.6;
-}
-.about-features {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
+/* ═══ ABOUT ═══ */
+.about { background: var(--bg); position: relative; overflow: hidden; }
+.about-watermark { position: absolute; left: -10%; top: 10%; width: 45vw; max-width: 500px; opacity: 0.025; z-index: 0; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 56px; position: relative; z-index: 1; }
+.about-visual { position: relative; aspect-ratio: 4/3; border-radius: var(--radius); overflow: hidden; }
+.about-visual video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.about-visual-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(8,0,79,0.5), rgba(18,8,112,0.6)); z-index: 1; }
+.about-visual-content { position: relative; z-index: 2; padding: 40px; display: flex; flex-direction: column; justify-content: flex-end; height: 100%; }
+.about-visual-logo { width: 80px; height: 76px; margin-bottom: 20px; }
+.about-visual h3 { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--white); margin-bottom: 6px; }
+.about-visual p { font-size: 14px; color: rgba(255,255,255,0.55); }
+.about-features { display: flex; flex-direction: column; gap: 16px; }
 .about-feature {
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-  padding: 20px;
-  background: var(--white);
-  border-radius: var(--radius);
-  border: 1px solid var(--gray-200);
-  transition: all 0.3s;
+  display: flex; gap: 16px; align-items: flex-start; padding: 24px;
+  background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border); border-radius: var(--radius-sm); transition: all 0.4s var(--smooth);
 }
-.about-feature:hover {
-  border-color: var(--gold);
-  box-shadow: 0 4px 20px rgba(232,168,56,0.08);
-  transform: translateX(4px);
-}
+.about-feature:hover { border-color: rgba(255,140,0,0.25); box-shadow: 0 8px 32px rgba(8,0,79,0.06); transform: translateX(6px); }
 .about-feature-icon {
-  flex-shrink: 0;
-  width: 44px;
-  height: 44px;
-  background: rgba(232,168,56,0.08);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-shrink: 0; width: 48px; height: 48px; background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+  border-radius: 14px; display: flex; align-items: center; justify-content: center;
 }
-.about-feature-icon svg {
-  width: 22px;
-  height: 22px;
-  stroke: var(--gold);
-  fill: none;
-  stroke-width: 1.5;
-}
-.about-feature h4 {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--navy);
-  margin-bottom: 4px;
-}
-.about-feature p {
-  font-size: 13px;
-  color: var(--gray-600);
-  line-height: 1.5;
-}
+.about-feature-icon svg { width: 22px; height: 22px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+.about-feature h4 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.about-feature p { font-size: 13px; color: var(--gray-600); line-height: 1.6; }
 
-/* ─── SECTION VIDEO BG ─── */
-.section-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
-  opacity: 0.2;
-}
-
-/* ─── SERVICES ─── */
-.services {
-  background: var(--section-dark);
-  position: relative;
-  overflow: hidden;
-}
+/* ═══ SERVICES ═══ */
+.services { background: var(--navy-deep); position: relative; overflow: hidden; }
 .services .section-title { color: var(--white); }
-.services .section-desc { color: rgba(255,255,255,0.5); }
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-top: 60px;
-}
+.services .section-desc { color: rgba(255,255,255,0.4); }
+.services-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.12; }
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 64px; position: relative; z-index: 2; }
 .service-card {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: var(--radius);
-  padding: 40px 32px;
-  transition: all 0.4s var(--transition);
-  position: relative;
-  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06); border-radius: var(--radius); padding: 40px 28px;
+  transition: all 0.5s var(--smooth); position: relative; overflow: hidden;
 }
 .service-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  opacity: 0;
-  transition: opacity 0.4s;
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,140,0,0.05), transparent 50%); opacity: 0; transition: opacity 0.5s;
 }
-.service-card:hover {
-  background: rgba(255,255,255,0.06);
-  border-color: rgba(232,168,56,0.2);
-  transform: translateY(-4px);
-}
+.service-card:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 140, 0, 0.2); transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
 .service-card:hover::before { opacity: 1; }
 .service-icon {
-  width: 56px;
-  height: 56px;
-  background: rgba(232,168,56,0.1);
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 24px;
+  width: 56px; height: 56px; background: rgba(255, 140, 0, 0.1); border: 1px solid rgba(255, 140, 0, 0.15);
+  border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;
+  transition: all 0.4s var(--spring);
 }
-.service-icon svg {
-  width: 28px;
-  height: 28px;
-  stroke: var(--gold);
-  fill: none;
-  stroke-width: 1.5;
-}
-.service-card h3 {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--white);
-  margin-bottom: 12px;
-}
-.service-card p {
-  font-size: 14px;
-  color: rgba(255,255,255,0.5);
-  line-height: 1.6;
-}
+.service-card:hover .service-icon { transform: scale(1.08) rotate(-2deg); background: rgba(255, 140, 0, 0.15); }
+.service-icon svg { width: 26px; height: 26px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+.service-card h3 { font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 12px; position: relative; }
+.service-card p { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.7; position: relative; }
 
-/* ─── DIRECTIONS ─── */
-.directions {
-  background: var(--bg);
+/* ═══ DIRECTIONS ═══ */
+.directions { background: var(--bg); }
+.directions-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 64px; }
+.direction-card { position: relative; aspect-ratio: 3/4; border-radius: var(--radius); overflow: hidden; cursor: pointer; background: var(--navy-deep); }
+.direction-card-bg { position: absolute; inset: 0; transition: transform 0.7s var(--smooth); }
+.direction-card:hover .direction-card-bg { transform: scale(1.08); }
+.direction-card-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,0,79,0.1) 0%, rgba(5,0,58,0.85) 70%, rgba(5,0,58,0.95) 100%); z-index: 1; }
+.direction-card-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 32px 24px; z-index: 2; }
+.direction-card-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.direction-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; color: var(--white); margin-bottom: 10px; }
+.direction-card p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.6; opacity: 0; transform: translateY(10px); transition: all 0.5s var(--smooth); }
+.direction-card:hover p { opacity: 1; transform: translateY(0); }
+.direction-card-icon {
+  position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; border-radius: 12px;
+  background: rgba(255,255,255,0.06); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;
+  z-index: 2; transition: all 0.4s var(--spring);
 }
-.directions-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  margin-top: 60px;
-}
-.direction-card {
-  position: relative;
-  aspect-ratio: 3/4;
-  border-radius: var(--radius);
-  overflow: hidden;
-  cursor: pointer;
-  background: var(--navy-deep);
-}
-.direction-card-bg {
-  position: absolute;
-  inset: 0;
-  transition: transform 0.6s var(--transition);
-}
-.direction-card:hover .direction-card-bg {
-  transform: scale(1.05);
-}
-.direction-card-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 40%, rgba(13,27,42,0.95) 100%);
-  z-index: 1;
-}
-.direction-card-content {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 32px 24px;
-  z-index: 2;
-}
-.direction-card-tag {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 8px;
-}
-.direction-card h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--white);
-  margin-bottom: 8px;
-}
-.direction-card p {
-  font-size: 13px;
-  color: rgba(255,255,255,0.6);
-  line-height: 1.5;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: all 0.4s var(--transition);
-}
-.direction-card:hover p {
-  opacity: 1;
-  transform: translateY(0);
-}
-.direction-card-arrow {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-  transition: all 0.3s;
-}
-.direction-card:hover .direction-card-arrow {
-  background: var(--gold);
-  border-color: var(--gold);
-}
-.direction-card-arrow svg {
-  width: 16px;
-  height: 16px;
-  stroke: var(--white);
-  fill: none;
-  stroke-width: 2;
-  transition: stroke 0.3s;
-}
-.direction-card:hover .direction-card-arrow svg {
-  stroke: var(--navy-deep);
-}
+.direction-card:hover .direction-card-icon { background: var(--gold); border-color: var(--gold); transform: rotate(-45deg); }
+.direction-card-icon svg { width: 16px; height: 16px; stroke: var(--white); fill: none; stroke-width: 2; transition: stroke 0.3s; }
+.direction-card:hover .direction-card-icon svg { stroke: var(--navy-deep); }
+.dir-tactical .direction-card-bg { background: linear-gradient(135deg, #0a0a2e, #1a2050, #0a0a2e); }
+.dir-workwear .direction-card-bg { background: linear-gradient(135deg, #1a1510, #2d2520, #1a1510); }
+.dir-outdoor .direction-card-bg { background: linear-gradient(135deg, #0a1a10, #1a3020, #0a1a10); }
+.dir-sport .direction-card-bg { background: linear-gradient(135deg, #10081a, #201540, #10081a); }
 
-/* Direction backgrounds */
-.dir-tactical .direction-card-bg {
-  background: linear-gradient(135deg, #1a2332 0%, #2d3b4e 50%, #1a2332 100%);
-}
-.dir-workwear .direction-card-bg {
-  background: linear-gradient(135deg, #2a2520 0%, #3d352e 50%, #2a2520 100%);
-}
-.dir-outdoor .direction-card-bg {
-  background: linear-gradient(135deg, #1a2b1e 0%, #2d4033 50%, #1a2b1e 100%);
-}
-.dir-sport .direction-card-bg {
-  background: linear-gradient(135deg, #1a1a2e 0%, #2d2d4e 50%, #1a1a2e 100%);
-}
-
-/* ─── ADVANTAGES ─── */
-.advantages {
-  background: var(--section-alt);
-}
-.advantages-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  margin-top: 60px;
-}
+/* ═══ ADVANTAGES ═══ */
+.advantages { background: var(--gray-50); position: relative; overflow: hidden; }
+.advantages-watermark { position: absolute; right: -8%; bottom: -10%; width: 40vw; max-width: 450px; opacity: 0.02; }
+.advantages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 64px; position: relative; z-index: 1; }
 .advantage-card {
-  background: var(--white);
-  border-radius: var(--radius);
-  padding: 40px 32px;
-  text-align: center;
-  border: 1px solid var(--gray-200);
-  transition: all 0.4s var(--transition);
+  background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border); border-radius: var(--radius); padding: 40px 28px;
+  text-align: center; transition: all 0.5s var(--smooth);
 }
-.advantage-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 60px rgba(27,43,75,0.08);
-  border-color: rgba(232,168,56,0.3);
-}
+.advantage-card:hover { transform: translateY(-8px); box-shadow: 0 24px 64px rgba(8,0,79,0.08); border-color: rgba(255,140,0,0.2); }
 .advantage-icon {
-  width: 64px;
-  height: 64px;
-  margin: 0 auto 20px;
-  background: linear-gradient(135deg, var(--navy), var(--navy-light));
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.3s;
+  width: 64px; height: 64px; margin: 0 auto 24px;
+  background: linear-gradient(135deg, var(--navy), var(--navy-mid)); border-radius: 18px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.4s var(--spring); box-shadow: 0 8px 24px rgba(8,0,79,0.15);
 }
-.advantage-card:hover .advantage-icon {
-  transform: scale(1.1) rotate(-3deg);
-}
-.advantage-icon svg {
-  width: 28px;
-  height: 28px;
-  stroke: var(--gold);
-  fill: none;
-  stroke-width: 1.5;
-}
-.advantage-card h3 {
-  font-size: 17px;
-  font-weight: 600;
-  color: var(--navy);
-  margin-bottom: 12px;
-}
-.advantage-card p {
-  font-size: 14px;
-  color: var(--gray-600);
-  line-height: 1.6;
-}
+.advantage-card:hover .advantage-icon { transform: scale(1.12) rotate(-4deg); box-shadow: 0 12px 32px rgba(8,0,79,0.2); }
+.advantage-icon svg { width: 28px; height: 28px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+.advantage-card h3 { font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
+.advantage-card p { font-size: 14px; color: var(--gray-600); line-height: 1.7; }
 
-/* ─── PROCESS ─── */
-.process {
-  background: var(--bg);
+/* ═══ PROCESS ═══ */
+.process { background: var(--bg); }
+.process-timeline { display: flex; gap: 0; margin-top: 64px; position: relative; }
+.process-timeline::before {
+  content: ''; position: absolute; top: 44px; left: 44px; right: 44px; height: 2px;
+  background: linear-gradient(90deg, var(--gray-200), var(--gold-dim), var(--gray-200)); z-index: 0;
 }
-.process-steps {
-  display: flex;
-  gap: 0;
-  margin-top: 60px;
-  position: relative;
+.process-step { flex: 1; text-align: center; position: relative; z-index: 1; padding: 0 12px; }
+.process-step-circle {
+  width: 88px; height: 88px; margin: 0 auto 24px;
+  background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 2px solid var(--gray-200); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: var(--navy);
+  transition: all 0.5s var(--spring); box-shadow: 0 4px 20px rgba(8,0,79,0.04);
 }
-.process-steps::before {
-  content: '';
-  position: absolute;
-  top: 40px;
-  left: 40px;
-  right: 40px;
-  height: 2px;
-  background: var(--gray-200);
-  z-index: 0;
-}
-.process-step {
-  flex: 1;
-  text-align: center;
-  position: relative;
+.process-step:hover .process-step-circle { border-color: var(--gold); background: var(--gold); color: var(--white); transform: scale(1.1); box-shadow: 0 12px 40px var(--gold-glow); }
+.process-step h4 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.process-step p { font-size: 13px; color: var(--gray-600); line-height: 1.6; }
+
+/* ═══ CTA ═══ */
+.cta-section { background: var(--navy-deep); position: relative; overflow: hidden; padding: 140px 0; }
+.cta-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.15; }
+.cta-overlay {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(8,0,79,0.6), rgba(5,0,58,0.9)),
+              radial-gradient(ellipse 30% 40% at 70% 50%, rgba(255,140,0,0.06), transparent);
   z-index: 1;
-  padding: 0 16px;
 }
-.process-step-num {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 24px;
-  background: var(--white);
-  border: 2px solid var(--gray-200);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Playfair Display', serif;
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--navy);
-  transition: all 0.4s;
-}
-.process-step:hover .process-step-num {
-  border-color: var(--gold);
-  background: var(--gold);
-  color: var(--white);
-  transform: scale(1.1);
-}
-.process-step h4 {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--navy);
-  margin-bottom: 8px;
-}
-.process-step p {
-  font-size: 13px;
-  color: var(--gray-600);
-  line-height: 1.5;
-}
+.cta-content { position: relative; z-index: 3; text-align: center; }
+.cta-content h2 { font-family: 'Playfair Display', serif; font-size: clamp(30px, 4.5vw, 50px); font-weight: 700; color: var(--white); margin-bottom: 20px; line-height: 1.15; }
+.cta-content p { font-size: 17px; color: rgba(255,255,255,0.45); max-width: 480px; margin: 0 auto 44px; line-height: 1.7; }
 
-/* ─── CTA ─── */
-.cta-section {
-  background: var(--navy-deep);
-  position: relative;
-  overflow: hidden;
-  padding: 120px 0;
-}
-.cta-bg-pattern {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background:
-    linear-gradient(180deg, rgba(13,27,42,0.85) 0%, rgba(13,27,42,0.75) 50%, rgba(13,27,42,0.9) 100%),
-    radial-gradient(ellipse 50% 40% at 30% 50%, rgba(232,168,56,0.06), transparent),
-    radial-gradient(ellipse 40% 60% at 70% 50%, rgba(42,63,102,0.2), transparent);
-}
-.cta-content {
-  position: relative;
-  z-index: 3;
-  text-align: center;
-}
-.cta-content h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(28px, 4vw, 44px);
-  font-weight: 600;
-  color: var(--white);
-  margin-bottom: 16px;
-}
-.cta-content p {
-  font-size: 16px;
-  color: rgba(255,255,255,0.5);
-  max-width: 500px;
-  margin: 0 auto 40px;
-}
-
-/* ─── CONTACT FORM ─── */
-.contact {
-  background: var(--bg);
-}
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  margin-top: 48px;
-}
-.contact-info { display: flex; flex-direction: column; gap: 32px; }
-.contact-item {
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-}
-.contact-item-icon {
-  flex-shrink: 0;
-  width: 44px;
-  height: 44px;
-  background: rgba(232,168,56,0.08);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.contact-item-icon svg {
-  width: 20px;
-  height: 20px;
-  stroke: var(--gold);
-  fill: none;
-  stroke-width: 1.5;
-}
-.contact-item h4 {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--navy);
-  margin-bottom: 4px;
-}
-.contact-item p {
-  font-size: 14px;
-  color: var(--gray-600);
-}
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.form-group label {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--gray-600);
-}
-.form-group input,
-.form-group textarea,
-.form-group select {
-  padding: 14px 16px;
-  border: 1px solid var(--gray-200);
-  border-radius: 8px;
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  color: var(--gray-800);
-  background: var(--white);
-  transition: border-color 0.3s;
-  outline: none;
-}
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus {
-  border-color: var(--gold);
-}
-.form-group textarea {
-  resize: vertical;
-  min-height: 120px;
-}
-
-/* ─── ORDER FORM ─── */
+/* ═══ ORDER FORM ═══ */
+.contact { background: var(--bg); }
 .order-form {
-  background: var(--white);
-  border: 1px solid var(--gray-200);
-  border-radius: 16px;
-  overflow: hidden;
-  margin-top: 40px;
+  background: var(--glass-bg); backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur));
+  border: 1px solid var(--glass-border); border-radius: var(--radius); overflow: hidden;
+  margin-top: 48px; box-shadow: 0 20px 60px rgba(8,0,79,0.05);
 }
-.order-steps {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-  padding: 32px 32px 0;
-}
-.order-step {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  opacity: 0.35;
-  transition: opacity 0.3s;
-}
-.order-step.active { opacity: 1; }
-.order-step.done { opacity: 0.7; }
+.order-steps-bar { display: flex; align-items: center; justify-content: center; gap: 0; padding: 32px 32px 0; }
+.order-step-indicator { display: flex; align-items: center; gap: 10px; opacity: 0.3; transition: opacity 0.4s; }
+.order-step-indicator.active { opacity: 1; }
+.order-step-indicator.done { opacity: 0.6; }
 .order-step-num {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: var(--gray-200);
-  color: var(--gray-600);
-  font-size: 13px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s;
+  width: 36px; height: 36px; border-radius: 50%; background: var(--gray-200); color: var(--gray-600);
+  font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; transition: all 0.4s var(--spring);
 }
-.order-step.active .order-step-num {
-  background: var(--gold);
-  color: var(--navy-deep);
-}
-.order-step.done .order-step-num {
-  background: var(--navy);
-  color: var(--white);
-}
-.order-step-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--gray-600);
-  letter-spacing: 0.02em;
-}
-.order-step.active .order-step-label { color: var(--navy); }
-.order-step-line {
-  width: 60px;
-  height: 2px;
-  background: var(--gray-200);
-  margin: 0 12px;
-}
-.order-panel {
-  display: none;
-  padding: 32px;
-}
+.order-step-indicator.active .order-step-num { background: var(--gold); color: var(--navy-deep); box-shadow: 0 4px 16px var(--gold-glow); }
+.order-step-indicator.done .order-step-num { background: var(--navy); color: var(--white); }
+.order-step-text { font-size: 12px; font-weight: 600; color: var(--gray-600); letter-spacing: 0.02em; }
+.order-step-indicator.active .order-step-text { color: var(--navy); }
+.order-step-line { width: 60px; height: 2px; background: var(--gray-200); margin: 0 16px; }
+.order-panel { display: none; padding: 36px; }
 .order-panel.active { display: block; }
-.order-panel-title {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--navy);
-  margin-bottom: 24px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--gray-100);
+.order-panel-title { display: flex; align-items: center; gap: 12px; font-size: 17px; font-weight: 800; color: var(--navy); margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-100); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px; }
+.form-group label { font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--gray-600); }
+.form-group input, .form-group textarea, .form-group select {
+  padding: 14px 16px; border: 1px solid var(--gray-200); border-radius: var(--radius-sm);
+  font-family: 'Inter', sans-serif; font-size: 14px; color: var(--gray-800);
+  background: rgba(255,255,255,0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  transition: all 0.3s; outline: none;
 }
-.order-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 32px;
-  padding-top: 24px;
-  border-top: 1px solid var(--gray-100);
-}
-.checkbox-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 8px;
-  margin-top: 4px;
-}
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(255,140,0,0.08); }
+.form-group textarea { resize: vertical; min-height: 120px; }
+.checkbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; margin-top: 4px; }
 .check-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: var(--gray-700);
-  padding: 8px 12px;
-  border: 1px solid var(--gray-200);
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s;
+  display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--gray-800);
+  padding: 10px 14px; border: 1px solid var(--gray-200); border-radius: var(--radius-xs); cursor: pointer; transition: all 0.3s;
 }
-.check-item:hover { border-color: var(--gold); background: rgba(232,168,56,0.04); }
+.check-item:hover { border-color: var(--gold); background: rgba(255,140,0,0.03); }
 .check-item input[type="checkbox"] { accent-color: var(--gold); }
-.form-hint {
-  font-size: 11px;
-  color: var(--gray-500);
-  margin-top: 4px;
-  display: block;
-}
+.form-hint { font-size: 11px; color: var(--gray-400); margin-top: 4px; }
 .file-upload-area {
-  border: 2px dashed var(--gray-200);
-  border-radius: 12px;
-  padding: 32px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.3s;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
+  border: 2px dashed var(--gray-200); border-radius: var(--radius-sm); padding: 36px; text-align: center;
+  cursor: pointer; transition: all 0.3s; display: flex; flex-direction: column; align-items: center; gap: 10px;
 }
-.file-upload-area:hover { border-color: var(--gold); background: rgba(232,168,56,0.02); }
+.file-upload-area:hover { border-color: var(--gold); background: rgba(255,140,0,0.02); }
 .file-upload-area span { font-size: 13px; color: var(--gray-600); }
 .file-upload-area .file-hint { font-size: 11px; color: var(--gray-400); }
-.order-summary {
-  background: var(--gray-100);
-  border-radius: 12px;
-  padding: 20px 24px;
-  margin-top: 24px;
-}
-.order-summary-title {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 8px;
-}
-.order-summary-row {
-  font-size: 13px;
-  color: var(--gray-600);
-}
-.btn-submit {
-  padding: 18px 40px;
-  font-size: 14px;
-}
+.order-summary { background: linear-gradient(135deg, rgba(8,0,79,0.03), rgba(255,140,0,0.03)); border: 1px solid var(--gray-100); border-radius: var(--radius-sm); padding: 24px; margin-top: 24px; }
+.order-summary-title { font-size: 12px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+.order-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--gray-100); }
+.btn-submit { padding: 18px 44px; font-size: 14px; }
 .contact-bar {
-  display: flex;
-  justify-content: center;
-  gap: 32px;
-  flex-wrap: wrap;
-  margin-top: 48px;
-  padding: 24px;
-  background: var(--white);
-  border: 1px solid var(--gray-200);
-  border-radius: 12px;
+  display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 56px; padding: 28px 32px;
+  background: var(--glass-bg); backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur));
+  border: 1px solid var(--glass-border); border-radius: var(--radius);
 }
-.contact-bar-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: var(--gray-600);
-}
-@media (max-width: 768px) {
-  .order-steps { flex-wrap: wrap; gap: 8px; }
-  .order-step-line { width: 20px; }
-  .order-step-label { display: none; }
-  .order-panel { padding: 20px; }
-  .checkbox-grid { grid-template-columns: 1fr; }
-  .contact-bar { flex-direction: column; align-items: center; gap: 16px; }
-}
+.contact-bar-item { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--gray-600); }
 
-/* ─── FOOTER ─── */
-.footer {
-  background: var(--navy-deep);
-  padding: 64px 0 32px;
-}
-.footer-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 48px;
-  margin-bottom: 48px;
-}
-.footer-brand p {
-  font-size: 14px;
-  color: rgba(255,255,255,0.4);
-  line-height: 1.6;
-  margin-top: 16px;
-  max-width: 300px;
-}
-.footer-col h4 {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 20px;
-}
-.footer-col a {
-  display: block;
-  font-size: 14px;
-  color: rgba(255,255,255,0.5);
-  text-decoration: none;
-  padding: 4px 0;
-  transition: color 0.3s;
-}
-.footer-col a:hover { color: var(--white); }
-.footer-bottom {
-  padding-top: 32px;
-  border-top: 1px solid rgba(255,255,255,0.06);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.footer-bottom p {
-  font-size: 12px;
-  color: rgba(255,255,255,0.3);
-}
-.footer-socials {
-  display: flex;
-  gap: 16px;
-}
+/* ═══ FOOTER ═══ */
+.footer { background: var(--navy-deep); padding: 80px 0 32px; position: relative; overflow: hidden; }
+.footer-watermark { position: absolute; left: 50%; bottom: -15%; transform: translateX(-50%); width: 60vw; max-width: 600px; opacity: 0.015; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; position: relative; z-index: 1; }
+.footer-brand p { font-size: 14px; color: rgba(255,255,255,0.35); line-height: 1.7; margin-top: 20px; max-width: 300px; }
+.footer-col h4 { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+.footer-col a { display: block; font-size: 14px; color: rgba(255,255,255,0.4); text-decoration: none; padding: 5px 0; transition: all 0.3s; }
+.footer-col a:hover { color: var(--white); transform: translateX(3px); }
+.footer-bottom { padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 1; }
+.footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.25); }
+.footer-socials { display: flex; gap: 12px; }
 .footer-socials a {
-  width: 36px;
-  height: 36px;
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s;
-  text-decoration: none;
+  width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px;
+  display: flex; align-items: center; justify-content: center; transition: all 0.4s var(--spring); text-decoration: none;
 }
-.footer-socials a:hover {
-  border-color: var(--gold);
-  background: rgba(232,168,56,0.1);
-}
-.footer-socials svg {
-  width: 16px;
-  height: 16px;
-  fill: rgba(255,255,255,0.5);
-  transition: fill 0.3s;
-}
+.footer-socials a:hover { border-color: var(--gold); background: rgba(255,140,0,0.1); transform: translateY(-2px); }
+.footer-socials svg { width: 16px; height: 16px; fill: rgba(255,255,255,0.4); transition: fill 0.3s; }
 .footer-socials a:hover svg { fill: var(--gold); }
 
-/* ─── RESPONSIVE ─── */
+/* ═══ RESPONSIVE ═══ */
 @media (max-width: 1024px) {
+  .nav-center { display: none; }
+  .nav-burger { display: flex; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .directions-grid { grid-template-columns: repeat(2, 1fr); }
   .services-grid { grid-template-columns: repeat(2, 1fr); }
   .advantages-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
 }
 @media (max-width: 768px) {
-  .nav { padding: 0 24px; }
-  .nav-links { display: none; }
-  .nav-burger { display: flex; }
-  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .nav { width: calc(100% - 24px); padding: 0 20px; top: 8px; }
+  .stats-bar { margin-top: -32px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .stat-card { padding: 24px 16px; }
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
   .directions-grid { grid-template-columns: 1fr; }
   .direction-card { aspect-ratio: 16/9; }
   .services-grid { grid-template-columns: 1fr; }
   .advantages-grid { grid-template-columns: 1fr; }
-  .process-steps { flex-direction: column; gap: 24px; }
-  .process-steps::before { display: none; }
-  .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+  .process-timeline { flex-direction: column; gap: 24px; }
+  .process-timeline::before { display: none; }
+  .contact-bar { flex-direction: column; align-items: center; gap: 16px; }
   .form-row { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+  section { padding: 80px 0; }
+  .order-steps-bar { flex-wrap: wrap; gap: 8px; }
+  .order-step-line { width: 20px; margin: 0 8px; }
+  .order-step-text { display: none; }
+  .order-panel { padding: 24px 20px; }
+  .checkbox-grid { grid-template-columns: 1fr; }
+  .hero-logo-watermark { width: 80vw; right: -20%; opacity: 0.03; }
 }
-
-/* ─── MOBILE MENU ─── */
-.mobile-menu {
-  position: fixed;
-  inset: 0;
-  background: rgba(15,26,46,0.98);
-  backdrop-filter: blur(20px);
-  z-index: 999;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.4s;
-}
-.mobile-menu.active {
-  opacity: 1;
-  visibility: visible;
-}
-.mobile-menu a {
-  font-size: 20px;
-  font-weight: 300;
-  color: var(--white);
-  text-decoration: none;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  opacity: 0.7;
-  transition: all 0.3s;
-}
-.mobile-menu a:hover { opacity: 1; color: var(--gold); }
-.mobile-menu-close {
-  position: absolute;
-  top: 24px;
-  right: 24px;
-  width: 40px;
-  height: 40px;
-  background: none;
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 50%;
-  color: var(--white);
-  font-size: 18px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+@media (max-width: 480px) {
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .lang-switch { display: none; }
+  .mobile-lang { display: flex; }
 }
 </style>
 </head>
 <body>
 
-<!-- LOADER -->
+<!-- ═══ LOADER ═══ -->
 <div class="loader" id="loader">
-  <svg class="loader-logo" viewBox="0 0 120 120" fill="none">
-    <!-- Navy ring (Q body) — draws in -->
-    <circle cx="52" cy="48" r="34" stroke="#1B2B4B" stroke-width="14" fill="none"
-      stroke-dasharray="214" stroke-dashoffset="214" stroke-linecap="round">
-      <animate attributeName="stroke-dashoffset" from="214" to="30" dur="1s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
-    </circle>
-    <!-- Gold arrow tail — slides in -->
-    <path d="M58 56 L48 68 L84 112 L100 112 Z" fill="#E8A838" opacity="0" transform="translate(0,0)">
-      <animate attributeName="opacity" from="0" to="1" dur="0.35s" begin="0.7s" fill="freeze"/>
-      <animateTransform attributeName="transform" type="translate" from="-8 -8" to="0 0" dur="0.4s" begin="0.7s" fill="freeze" calcMode="spline" keySplines="0.16 1 0.3 1"/>
-    </path>
+  <svg class="loader-logo" viewBox="0 0 1054 1010" fill="none">
+    <path class="q-ring" d="M 670 891.5 L 537 746 A 285 285 0 1 1 723 595.5 L 852.5 733 A 465 465 0 1 0 670 891.5 Z" stroke="#08004F" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="q-fill" d="M 670 891.5 L 537 746 A 285 285 0 1 1 723 595.5 L 852.5 733 A 465 465 0 1 0 670 891.5 Z" fill="#08004F" stroke="none"/>
+    <path class="a-tail" d="M463 704L516 662L815.5 1005H1042L516 440.5L429 510C 380 555, 325 610, 336.5 645.5C 348 681, 400 700, 463 704Z" stroke="#FF8C00" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="a-fill" d="M463 704L516 662L815.5 1005H1042L516 440.5L429 510C 380 555, 325 610, 336.5 645.5C 348 681, 400 700, 463 704Z" fill="#FF8C00" stroke="none"/>
   </svg>
+  <div class="loader-text">QAZAQSTAN APPAREL</div>
   <div class="loader-bar"></div>
 </div>
 
-<!-- MOBILE MENU -->
+<!-- ═══ MOBILE MENU ═══ -->
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-menu-close" onclick="toggleMenu()">&#x2715;</button>
-  <a href="#about" onclick="toggleMenu()">About</a>
-  <a href="#services" onclick="toggleMenu()">Services</a>
-  <a href="#directions" onclick="toggleMenu()">Directions</a>
-  <a href="#advantages" onclick="toggleMenu()">Advantages</a>
-  <a href="#process" onclick="toggleMenu()">Process</a>
-  <a href="#contact" onclick="toggleMenu()">Contact</a>
+  <a href="#about" onclick="toggleMenu()" data-i18n="nav_about">Компания туралы</a>
+  <a href="#services" onclick="toggleMenu()" data-i18n="nav_services">Қызметтер</a>
+  <a href="#directions" onclick="toggleMenu()" data-i18n="nav_directions">Бағыттар</a>
+  <a href="#advantages" onclick="toggleMenu()" data-i18n="nav_why">Артықшылықтар</a>
+  <a href="#process" onclick="toggleMenu()" data-i18n="nav_process">Жұмыс процесі</a>
+  <a href="#contact" onclick="toggleMenu()" data-i18n="nav_contact">Байланыс</a>
+  <div class="mobile-lang">
+    <button class="lang-btn active" onclick="setLang('kk')">QZ</button>
+    <button class="lang-btn" onclick="setLang('ru')">RU</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
 </div>
 
-<!-- NAVIGATION -->
+<!-- ═══ NAVIGATION ═══ -->
 <nav class="nav" id="nav">
   <a href="#" class="nav-logo">
-    <svg class="qa-logo" viewBox="0 0 120 120" fill="none">
-      <circle cx="52" cy="48" r="34" stroke="#1B2B4B" stroke-width="14" fill="none" stroke-dasharray="214" stroke-dashoffset="30" stroke-linecap="round"/>
-      <path d="M58 56 L48 68 L84 112 L100 112 Z" fill="#E8A838"/>
+    <svg viewBox="0 0 1054 1010" fill="none">
+      <path d="M 670 891.5 L 537 746 A 285 285 0 1 1 723 595.5 L 852.5 733 A 465 465 0 1 0 670 891.5 Z" fill="#08004F"/>
+      <path d="M463 704L516 662L815.5 1005H1042L516 440.5L429 510C 380 555, 325 610, 336.5 645.5C 348 681, 400 700, 463 704Z" fill="#FF8C00"/>
     </svg>
     <div class="nav-logo-text">Qazaqstan <span>Apparel</span></div>
   </a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#directions">Directions</a></li>
-    <li><a href="#advantages">Why Us</a></li>
-    <li><a href="#process">Process</a></li>
-    <li><a href="#contact" class="nav-cta">Get Quote</a></li>
+  <ul class="nav-center">
+    <li><a href="#about" data-i18n="nav_about">Компания туралы</a></li>
+    <li><a href="#services" data-i18n="nav_services">Қызметтер</a></li>
+    <li><a href="#directions" data-i18n="nav_directions">Бағыттар</a></li>
+    <li><a href="#advantages" data-i18n="nav_why">Артықшылықтар</a></li>
+    <li><a href="#process" data-i18n="nav_process">Жұмыс процесі</a></li>
   </ul>
-  <button class="nav-burger" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </button>
+  <div class="nav-right">
+    <div class="lang-switch">
+      <button class="lang-btn active" onclick="setLang('kk')">QZ</button>
+      <button class="lang-btn" onclick="setLang('ru')">RU</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+    <a href="#contact" class="nav-cta" data-i18n="nav_cta">Тапсырыс беру</a>
+  </div>
+  <button class="nav-burger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- HERO -->
+<!-- ═══ HERO ═══ -->
 <section class="hero">
-  <video class="hero-video" autoplay muted loop playsinline>
-    <source src="hero-video.mp4" type="video/mp4">
-  </video>
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-particles" id="particles"></div>
+  <video class="hero-video" autoplay muted loop playsinline><source src="hero-video.mp4" type="video/mp4"></video>
+  <div class="hero-overlay"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <svg class="hero-logo-watermark" viewBox="0 0 1054 1010" fill="none">
+    <path d="M 670 891.5 L 537 746 A 285 285 0 1 1 723 595.5 L 852.5 733 A 465 465 0 1 0 670 891.5 Z" fill="white"/>
+    <path d="M463 704L516 662L815.5 1005H1042L516 440.5L429 510C 380 555, 325 610, 336.5 645.5C 348 681, 400 700, 463 704Z" fill="#FF8C00"/>
+  </svg>
+  <div class="particles-container" id="particles"></div>
   <div class="hero-content">
-    <div class="hero-badge">Made in Kazakhstan</div>
-    <h1>Premium Apparel<br><em>Manufacturing</em></h1>
-    <p class="hero-sub">Contract production of tactical, workwear, outdoor and sport apparel. 5,000+ sqm facility in the heart of Central Asia.</p>
+    <div class="hero-badge"><span class="hero-badge-dot"></span><span data-i18n="hero_badge">Қазақстанда жасалған</span></div>
+    <h1 data-i18n="hero_title">Премиум киім<br><em>өндірісі</em></h1>
+    <p class="hero-sub" data-i18n="hero_sub">Тактикалық, жұмыс, аутдор және спорттық киімдердің контрактілік өндірісі. Астана қаласында 5,000+ м² заманауи өндіріс.</p>
     <div class="hero-actions">
-      <a href="#contact" class="btn-primary">
-        Request Quote
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-      <a href="#directions" class="btn-secondary">
-        Explore Directions
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-      </a>
+      <a href="#contact" class="btn-primary"><span data-i18n="hero_cta">Тапсырыс беру</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="#directions" class="btn-glass"><span data-i18n="hero_explore">Бағыттарды қарау</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
     </div>
   </div>
-  <div class="hero-scroll">
-    <span>Scroll</span>
-    <div class="scroll-line"></div>
-  </div>
+  <div class="hero-scroll"><span data-i18n="scroll">Төмен</span><div class="scroll-indicator"></div></div>
 </section>
 
-<!-- STATS BAR -->
-<div class="stats-bar">
-  <div class="stats-grid">
-    <div class="stat-item anim-item">
-      <div class="stat-number" data-count="5000">0<span>+</span></div>
-      <div class="stat-label">Square meters production</div>
-    </div>
-    <div class="stat-item anim-item">
-      <div class="stat-number" data-count="4">0</div>
-      <div class="stat-label">Product directions</div>
-    </div>
-    <div class="stat-item anim-item">
-      <div class="stat-number" data-count="52">0<span>+</span></div>
-      <div class="stat-label">SKU in catalog</div>
-    </div>
-    <div class="stat-item anim-item">
-      <div class="stat-number">24/7</div>
-      <div class="stat-label">Production capacity</div>
-    </div>
-  </div>
-</div>
+<!-- ═══ STATS ═══ -->
+<div class="stats-bar"><div class="stats-grid">
+  <div class="stat-card reveal"><div class="stat-number" data-count="5000">0<span>+</span></div><div class="stat-label" data-i18n="stat_sqm">м² өндіріс алаңы</div></div>
+  <div class="stat-card reveal"><div class="stat-number" data-count="4">0</div><div class="stat-label" data-i18n="stat_dirs">өнім бағыттары</div></div>
+  <div class="stat-card reveal"><div class="stat-number" data-count="52">0<span>+</span></div><div class="stat-label" data-i18n="stat_sku">SKU каталогта</div></div>
+  <div class="stat-card reveal"><div class="stat-number">24/7</div><div class="stat-label" data-i18n="stat_capacity">өндіріс қуаттылығы</div></div>
+</div></div>
 
-<!-- ABOUT -->
+<!-- ═══ ABOUT ═══ -->
 <section class="about" id="about">
+  <svg class="about-watermark" viewBox="0 0 1054 1010" fill="none"><path d="M 670 891.5 L 537 746 A 285 285 0 1 1 723 595.5 L 852.5 733 A 465 465 0 1 0 670 891.5 Z" fill="#08004F"/><path d="M463 704L516 662L815.5 1005H1042L516 440.5L429 510C 380 555, 325 610, 336.5 645.5C 348 681, 400 700, 463 704Z" fill="#FF8C00"/></svg>
   <div class="container">
-    <div class="anim-item">
-      <div class="section-tag">About Company</div>
-      <h2 class="section-title">Built for Scale.<br>Designed for Quality.</h2>
-      <p class="section-desc">Qazaqstan Apparel combines modern manufacturing capabilities with strategic positioning at the crossroads of Europe and Asia.</p>
+    <div class="reveal">
+      <div class="section-tag" data-i18n="about_tag">Компания туралы</div>
+      <h2 class="section-title" data-i18n="about_title">Масштабқа құрылған.<br>Сапаға бағытталған.</h2>
+      <p class="section-desc" data-i18n="about_desc">Qazaqstan Apparel заманауи өндірістік мүмкіндіктерді Еуропа мен Азия арасындағы стратегиялық орналасумен біріктіреді.</p>
     </div>
     <div class="about-grid">
-      <div class="about-visual anim-item">
-        <video autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
-          <source src="video-spools.mp4" type="video/mp4">
-        </video>
-        <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(15,26,46,0.6),rgba(27,43,75,0.7));z-index:1;"></div>
-        <div class="about-visual-inner" style="position:relative;z-index:2;">
-          <div class="about-visual-icon">
-            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-          </div>
-          <h3>Astana, Kazakhstan</h3>
-          <p>5,000+ sqm &bull; Strategic location &bull; Modern infrastructure</p>
+      <div class="about-visual reveal-left">
+        <video autoplay muted loop playsinline><source src="video-spools.mp4" type="video/mp4"></video>
+        <div class="about-visual-overlay"></div>
+        <div class="about-visual-content">
+          <svg class="about-visual-logo" viewBox="0 0 1054 1010" fill="none"><path d="M 670 891.5 L 537 746 A 285 285 0 1 1 723 595.5 L 852.5 733 A 465 465 0 1 0 670 891.5 Z" fill="white" opacity="0.9"/><path d="M463 704L516 662L815.5 1005H1042L516 440.5L429 510C 380 555, 325 610, 336.5 645.5C 348 681, 400 700, 463 704Z" fill="#FF8C00"/></svg>
+          <h3 data-i18n="about_visual_city">Астана, Қазақстан</h3>
+          <p data-i18n="about_visual_info">5,000+ м² • Стратегиялық орналасу • Заманауи инфрақұрылым</p>
         </div>
       </div>
       <div class="about-features">
-        <div class="about-feature anim-item">
-          <div class="about-feature-icon">
-            <!-- Sewing machine icon -->
-            <svg viewBox="0 0 24 24"><path d="M3 19h4l3-8h4l1.5 4H21M7 19a2 2 0 11-4 0M3 11V6a2 2 0 012-2h2l2 3h4"/><circle cx="17" cy="8" r="3"/><path d="M14 8h-3"/></svg>
-          </div>
-          <div>
-            <h4>Full-Cycle Production</h4>
-            <p>From pattern design to finished product. Cut, sew, pack — all in-house with rigorous quality control at every stage.</p>
-          </div>
-        </div>
-        <div class="about-feature anim-item">
-          <div class="about-feature-icon">
-            <!-- Fabric roll / textile icon -->
-            <svg viewBox="0 0 24 24"><path d="M2 20h20M4 20V8l4-4h8l4 4v12"/><path d="M8 4v4h8V4"/><path d="M8 12h8M8 16h6"/></svg>
-          </div>
-          <div>
-            <h4>Global Supply Chain</h4>
-            <p>Premium fabrics from China, Turkey, and Korea. YKK zippers, Duraflex buckles, and ITW Nexus hardware as standard.</p>
-          </div>
-        </div>
-        <div class="about-feature anim-item">
-          <div class="about-feature-icon">
-            <!-- Quality check / badge icon -->
-            <svg viewBox="0 0 24 24"><path d="M12 2l2.4 4.8 5.3.8-3.8 3.7.9 5.3L12 14.3l-4.8 2.3.9-5.3L4.3 7.6l5.3-.8z"/><path d="M12 17v5M8 22h8"/></svg>
-          </div>
-          <div>
-            <h4>Quality Standards</h4>
-            <p>Patterns benchmarked against 5.11 Tactical, Arc'teryx, Propper, and Portwest. International quality, local production.</p>
-          </div>
-        </div>
-        <div class="about-feature anim-item">
-          <div class="about-feature-icon">
-            <!-- Scissors / cutting icon -->
-            <svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"/></svg>
-          </div>
-          <div>
-            <h4>Competitive Advantage</h4>
-            <p>Own production enables premium quality at mid-range pricing. Optimal logistics to CIS, Middle East, and Europe.</p>
-          </div>
-        </div>
+        <div class="about-feature reveal-right"><div class="about-feature-icon"><svg viewBox="0 0 24 24"><path d="M3 19h4l3-8h4l1.5 4H21M7 19a2 2 0 11-4 0M3 11V6a2 2 0 012-2h2l2 3h4"/><circle cx="17" cy="8" r="3"/></svg></div><div><h4 data-i18n="about_f1_title">Толық циклді өндіріс</h4><p data-i18n="about_f1_desc">Лекалдан дайын өнімге дейін. Пішу, тігу, орау — барлығы бір шатыр астында, әрбір кезеңде қатаң сапа бақылауымен.</p></div></div>
+        <div class="about-feature reveal-right" style="transition-delay:0.1s"><div class="about-feature-icon"><svg viewBox="0 0 24 24"><path d="M2 20h20M4 20V8l4-4h8l4 4v12"/><path d="M8 4v4h8V4"/><path d="M8 12h8M8 16h6"/></svg></div><div><h4 data-i18n="about_f2_title">Жаһандық жеткізу тізбегі</h4><p data-i18n="about_f2_desc">Қытай, Түркия және Кореядан премиум маталар. YKK ілмектер, Duraflex тоқалар және ITW Nexus фурнитурасы стандарт ретінде.</p></div></div>
+        <div class="about-feature reveal-right" style="transition-delay:0.2s"><div class="about-feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 4.8 5.3.8-3.8 3.7.9 5.3L12 14.3l-4.8 2.3.9-5.3L4.3 7.6l5.3-.8z"/><path d="M12 17v5M8 22h8"/></svg></div><div><h4 data-i18n="about_f3_title">Сапа стандарттары</h4><p data-i18n="about_f3_desc">Лекалдар 5.11 Tactical, Arc'teryx, Propper және Portwest стандарттарына сәйкес. Халықаралық сапа, жергілікті өндіріс.</p></div></div>
+        <div class="about-feature reveal-right" style="transition-delay:0.3s"><div class="about-feature-icon"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"/></svg></div><div><h4 data-i18n="about_f4_title">Бәсекелестік артықшылық</h4><p data-i18n="about_f4_desc">Меншікті өндіріс орташа бағамен премиум сапаны қамтамасыз етеді. ТМД, Таяу Шығыс және Еуропаға тиімді логистика.</p></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SERVICES -->
+<!-- ═══ SERVICES ═══ -->
 <section class="services" id="services">
-  <video class="section-video" autoplay muted loop playsinline>
-    <source src="video-sewing.mp4" type="video/mp4">
-  </video>
+  <video class="services-video" autoplay muted loop playsinline><source src="video-sewing.mp4" type="video/mp4"></video>
   <div class="container" style="position:relative;z-index:2;">
-    <div class="anim-item">
-      <div class="section-tag">Services</div>
-      <h2 class="section-title">What We Offer</h2>
-      <p class="section-desc">End-to-end manufacturing solutions tailored to your brand's requirements.</p>
-    </div>
+    <div class="reveal"><div class="section-tag" data-i18n="services_tag">Қызметтер</div><h2 class="section-title" data-i18n="services_title">Біздің ұсыныстар</h2><p class="section-desc" data-i18n="services_desc">Брендіңіздің талаптарына бейімделген толық циклді өндіріс шешімдері.</p></div>
     <div class="services-grid">
-      <div class="service-card anim-item">
-        <div class="service-icon">
-          <!-- Factory / production line icon -->
-          <svg viewBox="0 0 24 24"><path d="M2 20h20M4 20V10l4-3v3l4-3v3l4-3v3l4-3v10"/><path d="M8 16h2v4H8zM14 16h2v4h-2z"/></svg>
-        </div>
-        <h3>OEM Production</h3>
-        <p>Manufacture your designs at scale. We handle everything from sourcing materials to packaging finished products under your brand.</p>
-      </div>
-      <div class="service-card anim-item">
-        <div class="service-icon">
-          <!-- Pattern / ruler + pencil icon -->
-          <svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke-dasharray="4 2"/><path d="M7 3v4M11 3v2M15 3v4M19 3v2M3 7h4M3 11h2M3 15h4M3 19h2"/><path d="M14 10l-4 4M10 10l4 4"/></svg>
-        </div>
-        <h3>ODM / Pattern Design</h3>
-        <p>Leverage our extensive pattern library across tactical, workwear, outdoor, and sport categories. Customize existing designs or create from scratch.</p>
-      </div>
-      <div class="service-card anim-item">
-        <div class="service-icon">
-          <!-- Military / tactical order icon -->
-          <svg viewBox="0 0 24 24"><path d="M12 2l3 6h6l-5 4 2 6-6-4-6 4 2-6-5-4h6z"/><path d="M5 20h14"/><path d="M8 22h8"/></svg>
-        </div>
-        <h3>Custom Orders</h3>
-        <p>Government contracts, corporate uniforms, special forces gear. We produce to your exact specifications with full compliance documentation.</p>
-      </div>
-      <div class="service-card anim-item">
-        <div class="service-icon">
-          <!-- Tag / label + hanger icon -->
-          <svg viewBox="0 0 24 24"><path d="M12 2l-1 3h2l-1-3z"/><path d="M8 5h8a2 2 0 012 2v13a2 2 0 01-2 2H8a2 2 0 01-2-2V7a2 2 0 012-2z"/><circle cx="12" cy="10" r="2"/><path d="M9 15h6M9 18h4"/></svg>
-        </div>
-        <h3>Private Label</h3>
-        <p>Launch your own apparel brand with our manufacturing backbone. From concept to market-ready product with full branding support.</p>
-      </div>
-      <div class="service-card anim-item">
-        <div class="service-icon">
-          <!-- Thread spool / bobbin icon -->
-          <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/><path d="M12 8v7"/></svg>
-        </div>
-        <h3>Small Batch / Sampling</h3>
-        <p>Prototype and test your designs with small production runs. Perfect for market validation before scaling to full production.</p>
-      </div>
-      <div class="service-card anim-item">
-        <div class="service-icon">
-          <!-- Cargo / shipping box icon -->
-          <svg viewBox="0 0 24 24"><path d="M1 6l11-4 11 4-11 4z"/><path d="M12 10v12M1 6v12l11 4 11-4V6"/><path d="M6.5 8v6M17.5 8v6"/></svg>
-        </div>
-        <h3>Export & Logistics</h3>
-        <p>Global logistics network. Direct shipping to CIS, Middle East, Europe, and beyond with full customs support.</p>
-      </div>
+      <div class="service-card reveal"><div class="service-icon"><svg viewBox="0 0 24 24"><path d="M2 20h20M4 20V10l4-3v3l4-3v3l4-3v3l4-3v10"/><path d="M8 16h2v4H8zM14 16h2v4h-2z"/></svg></div><h3 data-i18n="svc1_title">OEM өндіріс</h3><p data-i18n="svc1_desc">Сіздің дизайныңызды масштабта өндіреміз. Материалдарды іздеуден бастап дайын өнімді брендіңізбен орауға дейін.</p></div>
+      <div class="service-card reveal" style="transition-delay:0.08s"><div class="service-icon"><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke-dasharray="4 2"/><path d="M7 3v4M11 3v2M15 3v4M19 3v2M3 7h4M3 11h2M3 15h4M3 19h2"/><path d="M14 10l-4 4M10 10l4 4"/></svg></div><h3 data-i18n="svc2_title">ODM / Лекал дизайны</h3><p data-i18n="svc2_desc">Тактикалық, жұмыс, аутдор және спорт категориялары бойынша кең лекал кітапханасын пайдаланыңыз.</p></div>
+      <div class="service-card reveal" style="transition-delay:0.16s"><div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3 6h6l-5 4 2 6-6-4-6 4 2-6-5-4h6z"/><path d="M5 20h14M8 22h8"/></svg></div><h3 data-i18n="svc3_title">Арнайы тапсырыстар</h3><p data-i18n="svc3_desc">Мемлекеттік тапсырыстар, корпоративтік униформа, арнайы жасақ киімдері. Сіздің сипаттамаларыңызға толық сәйкес.</p></div>
+      <div class="service-card reveal" style="transition-delay:0.24s"><div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 2l-1 3h2l-1-3z"/><path d="M8 5h8a2 2 0 012 2v13a2 2 0 01-2 2H8a2 2 0 01-2-2V7a2 2 0 012-2z"/><circle cx="12" cy="10" r="2"/><path d="M9 15h6M9 18h4"/></svg></div><h3 data-i18n="svc4_title">Private Label</h3><p data-i18n="svc4_desc">Біздің өндірістік базамен өз брендіңізді іске қосыңыз. Концепциядан нарыққа дайын өнімге дейін.</p></div>
+      <div class="service-card reveal" style="transition-delay:0.32s"><div class="service-icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/><path d="M12 8v7"/></svg></div><h3 data-i18n="svc5_title">Шағын партия / Үлгілер</h3><p data-i18n="svc5_desc">Шағын серияларда прототиптеу және тестілеу. Толық масштабты өндіріске дейінгі нарықты тексеру үшін тамаша.</p></div>
+      <div class="service-card reveal" style="transition-delay:0.4s"><div class="service-icon"><svg viewBox="0 0 24 24"><path d="M1 6l11-4 11 4-11 4z"/><path d="M12 10v12M1 6v12l11 4 11-4V6"/><path d="M6.5 8v6M17.5 8v6"/></svg></div><h3 data-i18n="svc6_title">Экспорт және логистика</h3><p data-i18n="svc6_desc">Жаһандық логистика желісі. ТМД, Таяу Шығыс, Еуропа және одан тыс жерлерге тікелей жеткізу.</p></div>
     </div>
   </div>
 </section>
 
-<!-- DIRECTIONS -->
+<!-- ═══ DIRECTIONS ═══ -->
 <section class="directions" id="directions">
   <div class="container">
-    <div class="anim-item">
-      <div class="section-tag">Product Directions</div>
-      <h2 class="section-title">Four Pillars of Apparel</h2>
-      <p class="section-desc">Comprehensive manufacturing across four key market segments, each backed by world-class pattern engineering.</p>
-    </div>
+    <div class="reveal"><div class="section-tag" data-i18n="dir_tag">Өнім бағыттары</div><h2 class="section-title" data-i18n="dir_title">Киімнің төрт тірегі</h2><p class="section-desc" data-i18n="dir_desc">Әлемдік деңгейдегі лекал инженериясымен қамтылған төрт негізгі нарық сегменті бойынша кешенді өндіріс.</p></div>
     <div class="directions-grid">
-      <div class="direction-card dir-tactical anim-item">
-        <div class="direction-card-bg"></div>
-        <div class="direction-card-overlay"></div>
-        <div class="direction-card-arrow">
-          <svg viewBox="0 0 24 24"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
-        </div>
-        <div class="direction-card-content">
-          <div class="direction-card-tag">Bori Tactical</div>
-          <h3>Tactical &amp; Military</h3>
-          <p>Combat uniforms, tactical pants, plate carriers, softshell jackets. Benchmarked against 5.11, Propper, Helikon-Tex.</p>
-        </div>
-      </div>
-      <div class="direction-card dir-workwear anim-item">
-        <div class="direction-card-bg"></div>
-        <div class="direction-card-overlay"></div>
-        <div class="direction-card-arrow">
-          <svg viewBox="0 0 24 24"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
-        </div>
-        <div class="direction-card-content">
-          <div class="direction-card-tag">Bori Workwear</div>
-          <h3>Industrial &amp; Workwear</h3>
-          <p>Hi-vis clothing, coveralls, work pants, flame-resistant gear. Standards of Red Kap, Fristads, Portwest.</p>
-        </div>
-      </div>
-      <div class="direction-card dir-outdoor anim-item">
-        <div class="direction-card-bg"></div>
-        <div class="direction-card-overlay"></div>
-        <div class="direction-card-arrow">
-          <svg viewBox="0 0 24 24"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
-        </div>
-        <div class="direction-card-content">
-          <div class="direction-card-tag">Bori Outdoor</div>
-          <h3>Outdoor &amp; Adventure</h3>
-          <p>Insulated jackets, hardshell layers, trekking pants, base layers. Inspired by Arc'teryx, Patagonia, Mammut.</p>
-        </div>
-      </div>
-      <div class="direction-card dir-sport anim-item">
-        <div class="direction-card-bg"></div>
-        <div class="direction-card-overlay"></div>
-        <div class="direction-card-arrow">
-          <svg viewBox="0 0 24 24"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
-        </div>
-        <div class="direction-card-content">
-          <div class="direction-card-tag">Bori Sport</div>
-          <h3>Sport &amp; Active</h3>
-          <p>Performance tees, training shorts, compression wear, running gear. Rivaling Under Armour, Nike, Uniqlo Sport.</p>
-        </div>
-      </div>
+      <div class="direction-card dir-tactical reveal"><div class="direction-card-bg"></div><div class="direction-card-overlay"></div><div class="direction-card-icon"><svg viewBox="0 0 24 24"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div><div class="direction-card-content"><div class="direction-card-tag">Bori Tactical</div><h3 data-i18n="dir1_title">Тактикалық &amp; Әскери</h3><p data-i18n="dir1_desc">Жауынгерлік форма, тактикалық шалбарлар, бронежилет тасымалдағыштары, софтшелл курткалар. 5.11, Propper, Helikon-Tex деңгейінде.</p></div></div>
+      <div class="direction-card dir-workwear reveal" style="transition-delay:0.1s"><div class="direction-card-bg"></div><div class="direction-card-overlay"></div><div class="direction-card-icon"><svg viewBox="0 0 24 24"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div><div class="direction-card-content"><div class="direction-card-tag">Bori Workwear</div><h3 data-i18n="dir2_title">Жұмыс &amp; Өндірістік</h3><p data-i18n="dir2_desc">Жоғары көрінетін киім, комбинезондар, жұмыс шалбарлары, отқа төзімді киім. Red Kap, Fristads, Portwest стандарты.</p></div></div>
+      <div class="direction-card dir-outdoor reveal" style="transition-delay:0.2s"><div class="direction-card-bg"></div><div class="direction-card-overlay"></div><div class="direction-card-icon"><svg viewBox="0 0 24 24"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div><div class="direction-card-content"><div class="direction-card-tag">Bori Outdoor</div><h3 data-i18n="dir3_title">Аутдор &amp; Приключения</h3><p data-i18n="dir3_desc">Жылытылған курткалар, хардшелл қабаттары, трекинг шалбарлары, базалық қабаттар. Arc'teryx, Patagonia, Mammut деңгейінде.</p></div></div>
+      <div class="direction-card dir-sport reveal" style="transition-delay:0.3s"><div class="direction-card-bg"></div><div class="direction-card-overlay"></div><div class="direction-card-icon"><svg viewBox="0 0 24 24"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div><div class="direction-card-content"><div class="direction-card-tag">Bori Sport</div><h3 data-i18n="dir4_title">Спорт &amp; Актив</h3><p data-i18n="dir4_desc">Жаттығу футболкалары, шорттар, компрессиялық киім, жүгіру киімдері. Under Armour, Nike, Uniqlo Sport деңгейінде.</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- ADVANTAGES -->
+<!-- ═══ ADVANTAGES ═══ -->
 <section class="advantages" id="advantages">
+  <svg class="advantages-watermark" viewBox="0 0 1054 1010" fill="none"><path d="M 670 891.5 L 537 746 A 285 285 0 1 1 723 595.5 L 852.5 733 A 465 465 0 1 0 670 891.5 Z" fill="#08004F"/><path d="M463 704L516 662L815.5 1005H1042L516 440.5L429 510C 380 555, 325 610, 336.5 645.5C 348 681, 400 700, 463 704Z" fill="#FF8C00"/></svg>
   <div class="container">
-    <div class="anim-item">
-      <div class="section-tag">Why Choose Us</div>
-      <h2 class="section-title">The Qazaqstan Apparel Advantage</h2>
-      <p class="section-desc">Strategic positioning, modern facilities, and relentless focus on quality make us your ideal manufacturing partner.</p>
-    </div>
+    <div class="reveal"><div class="section-tag" data-i18n="adv_tag">Неге бізді таңдайды</div><h2 class="section-title" data-i18n="adv_title">Qazaqstan Apparel артықшылығы</h2><p class="section-desc" data-i18n="adv_desc">Стратегиялық орналасу, заманауи нысандар және сапаға бірыңғай назар аудару — тамаша өндіріс серіктесі.</p></div>
     <div class="advantages-grid">
-      <div class="advantage-card anim-item">
-        <div class="advantage-icon">
-          <!-- Coin / savings icon -->
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v2m0 6v2M9 10.5C9 9.12 10.34 8 12 8s3 1.12 3 2.5-1.34 2.5-3 2.5-3 1.12-3 2.5 1.34 2.5 3 2.5"/></svg>
-        </div>
-        <h3>Cost Efficiency</h3>
-        <p>Own production facility and direct supply chains deliver 20-30% savings vs. comparable manufacturers.</p>
-      </div>
-      <div class="advantage-card anim-item">
-        <div class="advantage-icon">
-          <!-- Speedometer / fast icon -->
-          <svg viewBox="0 0 24 24"><path d="M12 22c5.52 0 10-4.48 10-10S17.52 2 12 2 2 6.48 2 12s4.48 10 10 10z"/><path d="M14.31 8l-4.24 4.24M12 6v2"/><circle cx="12" cy="12" r="1"/></svg>
-        </div>
-        <h3>Speed to Market</h3>
-        <p>From design approval to finished goods in 3-4 weeks. Small batches from 500 units, scale to 10,000+ per month.</p>
-      </div>
-      <div class="advantage-card anim-item">
-        <div class="advantage-icon">
-          <!-- Map pin / crossroads icon -->
-          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/><path d="M2 20h6M16 20h6M12 15v7"/></svg>
-        </div>
-        <h3>Strategic Location</h3>
-        <p>Central Asia crossroads with direct logistics to Russia, China, Middle East, and Europe via rail and air.</p>
-      </div>
-      <div class="advantage-card anim-item">
-        <div class="advantage-icon">
-          <!-- Magnifying glass + check icon -->
-          <svg viewBox="0 0 24 24"><circle cx="10" cy="10" r="7"/><path d="M21 21l-4.35-4.35"/><path d="M7 10l2 2 4-4"/></svg>
-        </div>
-        <h3>Quality Assurance</h3>
-        <p>Triple-check QC system. Every garment inspected at cutting, assembly, and final stages. Defect rate below 1%.</p>
-      </div>
-      <div class="advantage-card anim-item">
-        <div class="advantage-icon">
-          <!-- Tailor / mannequin icon -->
-          <svg viewBox="0 0 24 24"><path d="M12 2a3 3 0 100 6 3 3 0 000-6z"/><path d="M8 10h8l2 12H6l2-12z"/><path d="M10 14h4M10 18h4"/></svg>
-        </div>
-        <h3>Experienced Team</h3>
-        <p>Skilled workforce with deep expertise in technical garment construction, pattern engineering, and material science.</p>
-      </div>
-      <div class="advantage-card anim-item">
-        <div class="advantage-icon">
-          <!-- Handshake / partnership icon -->
-          <svg viewBox="0 0 24 24"><path d="M2 12h4l3-3 3 3 3-3 3 3h4"/><path d="M2 16h4l3-3 3 3 3-3 3 3h4"/><path d="M6 8V4h4M18 8V4h-4"/></svg>
-        </div>
-        <h3>Competitive Pricing</h3>
-        <p>Own production and optimized supply chain deliver 20-30% cost savings vs. comparable European manufacturers.</p>
-      </div>
+      <div class="advantage-card reveal"><div class="advantage-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v2m0 6v2M9 10.5C9 9.12 10.34 8 12 8s3 1.12 3 2.5-1.34 2.5-3 2.5-3 1.12-3 2.5 1.34 2.5 3 2.5"/></svg></div><h3 data-i18n="adv1_title">Шығын тиімділігі</h3><p data-i18n="adv1_desc">Меншікті өндіріс базасы мен тікелей жеткізу тізбектері ұқсас өндірушілермен салыстырғанда 20-30% үнемдеуді қамтамасыз етеді.</p></div>
+      <div class="advantage-card reveal" style="transition-delay:0.08s"><div class="advantage-icon"><svg viewBox="0 0 24 24"><path d="M12 22c5.52 0 10-4.48 10-10S17.52 2 12 2 2 6.48 2 12s4.48 10 10 10z"/><path d="M14.31 8l-4.24 4.24M12 6v2"/><circle cx="12" cy="12" r="1"/></svg></div><h3 data-i18n="adv2_title">Нарыққа жылдам шығу</h3><p data-i18n="adv2_desc">Дизайнды бекітуден дайын тауарларға дейін 3-4 аптада. 500 данадан бастап шағын партиялар, айына 10,000+ дейін масштабтау.</p></div>
+      <div class="advantage-card reveal" style="transition-delay:0.16s"><div class="advantage-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></div><h3 data-i18n="adv3_title">Стратегиялық орналасу</h3><p data-i18n="adv3_desc">Орталық Азия тоғысы — Ресей, Қытай, Таяу Шығыс және Еуропаға теміржол мен әуе арқылы тікелей логистика.</p></div>
+      <div class="advantage-card reveal" style="transition-delay:0.24s"><div class="advantage-icon"><svg viewBox="0 0 24 24"><circle cx="10" cy="10" r="7"/><path d="M21 21l-4.35-4.35"/><path d="M7 10l2 2 4-4"/></svg></div><h3 data-i18n="adv4_title">Сапа кепілдігі</h3><p data-i18n="adv4_desc">Үш сатылы сапа бақылау жүйесі. Әрбір бұйым пішу, құрастыру және соңғы кезеңдерде тексеріледі. Ақау деңгейі 1%-дан төмен.</p></div>
+      <div class="advantage-card reveal" style="transition-delay:0.32s"><div class="advantage-icon"><svg viewBox="0 0 24 24"><path d="M12 2a3 3 0 100 6 3 3 0 000-6z"/><path d="M8 10h8l2 12H6l2-12z"/><path d="M10 14h4M10 18h4"/></svg></div><h3 data-i18n="adv5_title">Тәжірибелі команда</h3><p data-i18n="adv5_desc">Техникалық киім тігу, лекал инженериясы және материалтану саласында терең тәжірибесі бар білікті жұмысшылар.</p></div>
+      <div class="advantage-card reveal" style="transition-delay:0.4s"><div class="advantage-icon"><svg viewBox="0 0 24 24"><path d="M2 12h4l3-3 3 3 3-3 3 3h4"/><path d="M2 16h4l3-3 3 3 3-3 3 3h4"/><path d="M6 8V4h4M18 8V4h-4"/></svg></div><h3 data-i18n="adv6_title">Бәсекеге қабілетті баға</h3><p data-i18n="adv6_desc">Меншікті өндіріс және оңтайландырылған жеткізу тізбегі еуропалық өндірушілермен салыстырғанда 20-30% үнемдеу.</p></div>
     </div>
   </div>
 </section>
 
-<!-- PROCESS -->
+<!-- ═══ PROCESS ═══ -->
 <section class="process" id="process">
   <div class="container">
-    <div class="anim-item">
-      <div class="section-tag">How We Work</div>
-      <h2 class="section-title">From Concept to Delivery</h2>
-      <p class="section-desc">A streamlined 5-step process ensures transparency and quality at every stage.</p>
-    </div>
-    <div class="process-steps">
-      <div class="process-step anim-item">
-        <div class="process-step-num">01</div>
-        <h4>Brief & Consultation</h4>
-        <p>We discuss your requirements, volumes, timelines, and specifications.</p>
-      </div>
-      <div class="process-step anim-item">
-        <div class="process-step-num">02</div>
-        <h4>Design & Patterns</h4>
-        <p>Technical drawings, pattern engineering, material selection and approval.</p>
-      </div>
-      <div class="process-step anim-item">
-        <div class="process-step-num">03</div>
-        <h4>Sampling</h4>
-        <p>Production of samples for your review. Iterations until perfect fit and finish.</p>
-      </div>
-      <div class="process-step anim-item">
-        <div class="process-step-num">04</div>
-        <h4>Production</h4>
-        <p>Full-scale manufacturing with in-line quality inspections at every stage.</p>
-      </div>
-      <div class="process-step anim-item">
-        <div class="process-step-num">05</div>
-        <h4>QC & Delivery</h4>
-        <p>Final inspection, packing per spec, and logistics to your destination worldwide.</p>
-      </div>
+    <div class="reveal"><div class="section-tag" data-i18n="proc_tag">Жұмыс тәртібі</div><h2 class="section-title" data-i18n="proc_title">Концепциядан жеткізуге дейін</h2><p class="section-desc" data-i18n="proc_desc">Оңтайландырылған 5 қадамдық процесс әрбір кезеңде ашықтық пен сапаны қамтамасыз етеді.</p></div>
+    <div class="process-timeline">
+      <div class="process-step reveal"><div class="process-step-circle">01</div><h4 data-i18n="step1_title">Бриф және консультация</h4><p data-i18n="step1_desc">Талаптарыңызды, көлемдерді, мерзімдерді және сипаттамаларды талқылаймыз.</p></div>
+      <div class="process-step reveal" style="transition-delay:0.1s"><div class="process-step-circle">02</div><h4 data-i18n="step2_title">Дизайн және лекалдар</h4><p data-i18n="step2_desc">Техникалық сызбалар, лекал инженериясы, материалдарды таңдау және бекіту.</p></div>
+      <div class="process-step reveal" style="transition-delay:0.2s"><div class="process-step-circle">03</div><h4 data-i18n="step3_title">Үлгілер</h4><p data-i18n="step3_desc">Сіздің қарауыңыз үшін үлгілер дайындау. Мінсіз қалыпқа дейін итерация.</p></div>
+      <div class="process-step reveal" style="transition-delay:0.3s"><div class="process-step-circle">04</div><h4 data-i18n="step4_title">Өндіріс</h4><p data-i18n="step4_desc">Әрбір кезеңде сапа бақылауымен толық масштабты өндіріс.</p></div>
+      <div class="process-step reveal" style="transition-delay:0.4s"><div class="process-step-circle">05</div><h4 data-i18n="step5_title">ТС және жеткізу</h4><p data-i18n="step5_desc">Соңғы тексеру, сипаттама бойынша орау және дүниежүзілік тағайындау орнына логистика.</p></div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
+<!-- ═══ CTA ═══ -->
 <section class="cta-section">
-  <video class="section-video" autoplay muted loop playsinline>
-    <source src="video-fabric.mp4" type="video/mp4">
-  </video>
-  <div class="cta-bg-pattern"></div>
-  <div class="container">
-    <div class="cta-content anim-item">
-      <h2>Ready to Manufacture<br>Your Next Collection?</h2>
-      <p>Get a detailed quote for your project within 48 hours. No minimum order for sampling.</p>
-      <a href="#contact" class="btn-primary">
-        Start Your Project
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-    </div>
-  </div>
+  <video class="cta-video" autoplay muted loop playsinline><source src="video-fabric.mp4" type="video/mp4"></video>
+  <div class="cta-overlay"></div>
+  <div class="container"><div class="cta-content reveal">
+    <h2 data-i18n="cta_title">Келесі коллекцияңызды<br>өндіруге дайынсыз ба?</h2>
+    <p data-i18n="cta_desc">48 сағат ішінде жобаңыз бойынша толық коммерциялық ұсыныс алыңыз. Үлгілерге ең аз тапсырыс жоқ.</p>
+    <a href="#contact" class="btn-primary"><span data-i18n="cta_btn">Жобаңызды бастаңыз</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div></div>
 </section>
 
-<!-- ORDER FORM -->
+<!-- ═══ ORDER FORM ═══ -->
 <section class="contact" id="contact">
   <div class="container">
-    <div class="anim-item">
-      <div class="section-tag">Place an Order</div>
-      <h2 class="section-title">Production Order Request</h2>
-      <p class="section-desc">Fill out the form below and our team will prepare a detailed commercial proposal within 48 hours. Minimum order: 500 units.</p>
-    </div>
-
-    <form class="order-form anim-item" id="orderForm" onsubmit="event.preventDefault(); submitOrder();">
-      <!-- Step indicators -->
-      <div class="order-steps">
-        <div class="order-step active" data-step="1">
-          <div class="order-step-num">1</div>
-          <div class="order-step-label">Company Info</div>
-        </div>
+    <div class="reveal"><div class="section-tag" data-i18n="order_tag">Тапсырыс беру</div><h2 class="section-title" data-i18n="order_title">Өндіріске тапсырыс</h2><p class="section-desc" data-i18n="order_desc">Төмендегі нысанды толтырыңыз, біздің команда 48 сағат ішінде толық коммерциялық ұсыныс дайындайды. Ең аз тапсырыс: 500 дана.</p></div>
+    <form class="order-form reveal-scale" id="orderForm" onsubmit="event.preventDefault(); submitOrder();">
+      <div class="order-steps-bar">
+        <div class="order-step-indicator active" data-step="1"><div class="order-step-num">1</div><div class="order-step-text" data-i18n="form_step1">Компания</div></div>
         <div class="order-step-line"></div>
-        <div class="order-step" data-step="2">
-          <div class="order-step-num">2</div>
-          <div class="order-step-label">Product Details</div>
-        </div>
+        <div class="order-step-indicator" data-step="2"><div class="order-step-num">2</div><div class="order-step-text" data-i18n="form_step2">Өнім</div></div>
         <div class="order-step-line"></div>
-        <div class="order-step" data-step="3">
-          <div class="order-step-num">3</div>
-          <div class="order-step-label">Specifications</div>
-        </div>
+        <div class="order-step-indicator" data-step="3"><div class="order-step-num">3</div><div class="order-step-text" data-i18n="form_step3">Сипаттамалар</div></div>
       </div>
-
-      <!-- Step 1: Company Info -->
-      <div class="order-panel active" id="step1">
-        <div class="order-panel-title">
-          <svg viewBox="0 0 24 24" width="20" height="20" stroke="var(--gold)" fill="none" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>
-          Company Information
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Company Name *</label>
-            <input type="text" id="companyName" placeholder="Your company name" required>
-          </div>
-          <div class="form-group">
-            <label>Country</label>
-            <select id="country">
-              <option value="">Select country...</option>
-              <option>Kazakhstan</option>
-              <option>Uzbekistan</option>
-              <option>Kyrgyzstan</option>
-              <option>Russia</option>
-              <option>UAE</option>
-              <option>Turkey</option>
-              <option>Germany</option>
-              <option>United Kingdom</option>
-              <option>United States</option>
-              <option>Other</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Contact Person *</label>
-            <input type="text" id="contactPerson" placeholder="Full name" required>
-          </div>
-          <div class="form-group">
-            <label>Position</label>
-            <input type="text" id="position" placeholder="e.g. Procurement Manager">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Email *</label>
-            <input type="email" id="email" placeholder="email@company.com" required>
-          </div>
-          <div class="form-group">
-            <label>Phone *</label>
-            <input type="tel" id="phone" placeholder="+7 (___) ___-__-__" required>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>How did you find us?</label>
-          <select id="source">
-            <option value="">Select...</option>
-            <option>Search engine (Google)</option>
-            <option>Social media</option>
-            <option>Industry exhibition</option>
-            <option>Recommendation / referral</option>
-            <option>Government procurement portal</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="order-nav">
-          <div></div>
-          <button type="button" class="btn-primary" onclick="goStep(2)">
-            Next: Product Details
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </button>
-        </div>
+      <!-- Step 1 -->
+      <div class="order-panel active" id="formStep1">
+        <div class="order-panel-title"><svg viewBox="0 0 24 24" width="20" height="20" stroke="var(--gold)" fill="none" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg><span data-i18n="form_s1_title">Компания ақпараты</span></div>
+        <div class="form-row"><div class="form-group"><label data-i18n="form_company">Компания атауы *</label><input type="text" id="companyName" required></div><div class="form-group"><label data-i18n="form_country">Ел</label><select id="country"><option value="">—</option><option>Қазақстан</option><option>Өзбекстан</option><option>Қырғызстан</option><option>Ресей</option><option>БАӘ</option><option>Түркия</option><option>Германия</option><option>АҚШ</option><option data-i18n="form_other">Басқа</option></select></div></div>
+        <div class="form-row"><div class="form-group"><label data-i18n="form_person">Байланыс тұлғасы *</label><input type="text" id="contactPerson" required></div><div class="form-group"><label data-i18n="form_position">Лауазымы</label><input type="text" id="position"></div></div>
+        <div class="form-row"><div class="form-group"><label>Email *</label><input type="email" id="email" required></div><div class="form-group"><label data-i18n="form_phone">Телефон *</label><input type="tel" id="phone" required></div></div>
+        <div class="form-group"><label data-i18n="form_source">Бізді қалай таптыңыз?</label><select id="source"><option value="">—</option><option data-i18n="src_google">Google іздеу жүйесі</option><option data-i18n="src_social">Әлеуметтік желілер</option><option data-i18n="src_expo">Салалық көрме</option><option data-i18n="src_ref">Ұсыныс / кеңес</option><option data-i18n="src_gov">Мемлекеттік сатып алу порталы</option><option data-i18n="form_other">Басқа</option></select></div>
+        <div class="order-nav"><div></div><button type="button" class="btn-primary" onclick="goStep(2)"><span data-i18n="form_next_product">Келесі: Өнім</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>
       </div>
-
-      <!-- Step 2: Product Details -->
-      <div class="order-panel" id="step2">
-        <div class="order-panel-title">
-          <svg viewBox="0 0 24 24" width="20" height="20" stroke="var(--gold)" fill="none" stroke-width="1.5"><path d="M12 2l3 6h6l-5 4 2 6-6-4-6 4 2-6-5-4h6z"/></svg>
-          Product Details
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Product Direction *</label>
-            <select id="direction" required>
-              <option value="">Select direction...</option>
-              <option>Tactical & Military Apparel</option>
-              <option>Industrial Workwear & PPE</option>
-              <option>Outdoor & Adventure Clothing</option>
-              <option>Sport & Activewear</option>
-              <option>Corporate Uniforms</option>
-              <option>Multiple Directions</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Order Type</label>
-            <select id="orderType">
-              <option value="">Select type...</option>
-              <option>OEM — Production by our patterns</option>
-              <option>ODM — Your design, our production</option>
-              <option>Custom — Full custom development</option>
-              <option>Private Label — Your brand, our product</option>
-              <option>Sampling — Prototype only</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Product Types (select all that apply)</label>
-          <div class="checkbox-grid">
-            <label class="check-item"><input type="checkbox" value="pants"> Pants / Trousers</label>
-            <label class="check-item"><input type="checkbox" value="jackets"> Jackets / Outerwear</label>
-            <label class="check-item"><input type="checkbox" value="shirts"> Shirts / Tops</label>
-            <label class="check-item"><input type="checkbox" value="vests"> Vests / Gilets</label>
-            <label class="check-item"><input type="checkbox" value="coveralls"> Coveralls / Overalls</label>
-            <label class="check-item"><input type="checkbox" value="softshell"> Softshell / Fleece</label>
-            <label class="check-item"><input type="checkbox" value="base"> Base Layers</label>
-            <label class="check-item"><input type="checkbox" value="accessories"> Accessories (belts, caps)</label>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Total Quantity (min. 500 units) *</label>
-            <input type="number" id="quantity" min="500" step="100" placeholder="500" required>
-            <span class="form-hint">Minimum order: 500 units per style</span>
-          </div>
-          <div class="form-group">
-            <label>Target Price per Unit ($)</label>
-            <input type="text" id="targetPrice" placeholder="e.g. $25 — $40">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Desired Delivery Date</label>
-            <input type="date" id="deliveryDate">
-          </div>
-          <div class="form-group">
-            <label>Delivery Location</label>
-            <input type="text" id="deliveryLocation" placeholder="City, Country">
-          </div>
-        </div>
-        <div class="order-nav">
-          <button type="button" class="btn-secondary" onclick="goStep(1)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-            Back
-          </button>
-          <button type="button" class="btn-primary" onclick="goStep(3)">
-            Next: Specifications
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </button>
-        </div>
+      <!-- Step 2 -->
+      <div class="order-panel" id="formStep2">
+        <div class="order-panel-title"><svg viewBox="0 0 24 24" width="20" height="20" stroke="var(--gold)" fill="none" stroke-width="1.5"><path d="M12 2l3 6h6l-5 4 2 6-6-4-6 4 2-6-5-4h6z"/></svg><span data-i18n="form_s2_title">Өнім мәліметтері</span></div>
+        <div class="form-row"><div class="form-group"><label data-i18n="form_direction">Өнім бағыты *</label><select id="direction" required><option value="">—</option><option data-i18n="opt_tactical">Тактикалық және әскери киім</option><option data-i18n="opt_workwear">Жұмыс киімі және ЖҚҚ</option><option data-i18n="opt_outdoor">Аутдор және сапар киімі</option><option data-i18n="opt_sport">Спорт және актив киім</option><option data-i18n="opt_corporate">Корпоративтік униформа</option><option data-i18n="opt_multi">Бірнеше бағыт</option></select></div><div class="form-group"><label data-i18n="form_type">Тапсырыс түрі</label><select id="orderType"><option value="">—</option><option>OEM</option><option>ODM</option><option data-i18n="opt_custom">Custom</option><option>Private Label</option><option data-i18n="opt_sampling">Үлгі</option></select></div></div>
+        <div class="form-group"><label data-i18n="form_products">Өнім түрлері</label><div class="checkbox-grid">
+          <label class="check-item"><input type="checkbox" value="pants"> <span data-i18n="prod_pants">Шалбарлар</span></label>
+          <label class="check-item"><input type="checkbox" value="jackets"> <span data-i18n="prod_jackets">Курткалар</span></label>
+          <label class="check-item"><input type="checkbox" value="shirts"> <span data-i18n="prod_shirts">Жейделер</span></label>
+          <label class="check-item"><input type="checkbox" value="vests"> <span data-i18n="prod_vests">Жилеттер</span></label>
+          <label class="check-item"><input type="checkbox" value="coveralls"> <span data-i18n="prod_coveralls">Комбинезондар</span></label>
+          <label class="check-item"><input type="checkbox" value="softshell"> <span data-i18n="prod_softshell">Софтшелл / Флис</span></label>
+          <label class="check-item"><input type="checkbox" value="base"> <span data-i18n="prod_base">Базалық қабаттар</span></label>
+          <label class="check-item"><input type="checkbox" value="acc"> <span data-i18n="prod_acc">Аксессуарлар</span></label>
+        </div></div>
+        <div class="form-row"><div class="form-group"><label data-i18n="form_qty">Саны (мин. 500) *</label><input type="number" id="quantity" min="500" step="100" placeholder="500" required><span class="form-hint" data-i18n="form_qty_hint">Ең аз: стиль бойынша 500 дана</span></div><div class="form-group"><label data-i18n="form_price">Мақсатты баға ($)</label><input type="text" id="targetPrice" placeholder="$25 — $40"></div></div>
+        <div class="form-row"><div class="form-group"><label data-i18n="form_date">Жеткізу мерзімі</label><input type="date" id="deliveryDate"></div><div class="form-group"><label data-i18n="form_location">Жеткізу орны</label><input type="text" id="deliveryLocation"></div></div>
+        <div class="order-nav"><button type="button" class="btn-glass" onclick="goStep(1)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg><span data-i18n="form_back">Артқа</span></button><button type="button" class="btn-primary" onclick="goStep(3)"><span data-i18n="form_next_specs">Келесі: Сипаттамалар</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>
       </div>
-
-      <!-- Step 3: Specifications -->
-      <div class="order-panel" id="step3">
-        <div class="order-panel-title">
-          <svg viewBox="0 0 24 24" width="20" height="20" stroke="var(--gold)" fill="none" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
-          Technical Specifications
-        </div>
-        <div class="form-group">
-          <label>Fabric Preferences</label>
-          <div class="checkbox-grid">
-            <label class="check-item"><input type="checkbox" value="cotton"> Cotton / Cotton blend</label>
-            <label class="check-item"><input type="checkbox" value="polyester"> Polyester / Nylon</label>
-            <label class="check-item"><input type="checkbox" value="ripstop"> Ripstop</label>
-            <label class="check-item"><input type="checkbox" value="fleece"> Fleece / Softshell</label>
-            <label class="check-item"><input type="checkbox" value="membrane"> Membrane / Waterproof</label>
-            <label class="check-item"><input type="checkbox" value="fr"> Flame Resistant</label>
-            <label class="check-item"><input type="checkbox" value="hivis"> Hi-Vis reflective</label>
-            <label class="check-item"><input type="checkbox" value="other-fabric"> Other / Not sure</label>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Size Range</label>
-            <select id="sizeRange">
-              <option value="">Select range...</option>
-              <option>XS — 3XL (European)</option>
-              <option>S — 5XL (Extended)</option>
-              <option>Custom size chart</option>
-              <option>Not decided yet</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Branding / Labels</label>
-            <select id="branding">
-              <option value="">Select...</option>
-              <option>We provide our labels & branding</option>
-              <option>Need help developing labels</option>
-              <option>White label (no branding)</option>
-              <option>Bori brand (Private Label)</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Additional Requirements</label>
-          <textarea id="requirements" placeholder="Describe any special requirements: specific hardware (YKK, Duraflex), certifications needed, color specifications, reference products or brands, packaging requirements..."></textarea>
-        </div>
-        <div class="form-group">
-          <label>Attach Reference Files (optional)</label>
-          <div class="file-upload-area" onclick="document.getElementById('fileInput').click()">
-            <svg viewBox="0 0 24 24" width="24" height="24" stroke="var(--gold)" fill="none" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg>
-            <span>Drop files here or click to upload</span>
-            <span class="file-hint">Tech packs, sketches, reference images (PDF, JPG, PNG — max 10MB)</span>
-            <input type="file" id="fileInput" multiple accept=".pdf,.jpg,.jpeg,.png,.ai,.eps" style="display:none">
-          </div>
-        </div>
-
-        <div class="order-summary">
-          <div class="order-summary-title">Order Summary</div>
-          <div class="order-summary-row" id="summaryContent">Fill in the form to see your order summary</div>
-        </div>
-
-        <div class="order-nav">
-          <button type="button" class="btn-secondary" onclick="goStep(2)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-            Back
-          </button>
-          <button type="submit" class="btn-primary btn-submit">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-            Submit Order Request
-          </button>
-        </div>
+      <!-- Step 3 -->
+      <div class="order-panel" id="formStep3">
+        <div class="order-panel-title"><svg viewBox="0 0 24 24" width="20" height="20" stroke="var(--gold)" fill="none" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg><span data-i18n="form_s3_title">Техникалық сипаттамалар</span></div>
+        <div class="form-group"><label data-i18n="form_fabric">Мата қалаулары</label><div class="checkbox-grid">
+          <label class="check-item"><input type="checkbox" value="cotton"> <span data-i18n="fab_cotton">Мақта</span></label>
+          <label class="check-item"><input type="checkbox" value="poly"> <span data-i18n="fab_poly">Полиэстер / Нейлон</span></label>
+          <label class="check-item"><input type="checkbox" value="ripstop"> Ripstop</label>
+          <label class="check-item"><input type="checkbox" value="fleece"> <span data-i18n="fab_fleece">Флис / Софтшелл</span></label>
+          <label class="check-item"><input type="checkbox" value="membrane"> <span data-i18n="fab_membrane">Мембрана</span></label>
+          <label class="check-item"><input type="checkbox" value="fr"> <span data-i18n="fab_fr">Отқа төзімді</span></label>
+          <label class="check-item"><input type="checkbox" value="hivis"> <span data-i18n="fab_hivis">Жоғары көрінетін</span></label>
+          <label class="check-item"><input type="checkbox" value="other"> <span data-i18n="fab_other">Басқа</span></label>
+        </div></div>
+        <div class="form-row"><div class="form-group"><label data-i18n="form_sizes">Өлшем диапазоны</label><select id="sizeRange"><option value="">—</option><option>XS — 3XL</option><option>S — 5XL</option><option data-i18n="size_custom">Жеке өлшем кестесі</option><option data-i18n="size_tbd">Әлі шешілмеді</option></select></div><div class="form-group"><label data-i18n="form_branding">Брендинг</label><select id="branding"><option value="">—</option><option data-i18n="brand_own">Өз белгілерімізбен</option><option data-i18n="brand_help">Белгілерді әзірлеуге көмек</option><option data-i18n="brand_white">White label</option><option>Bori brand</option></select></div></div>
+        <div class="form-group"><label data-i18n="form_reqs">Қосымша талаптар</label><textarea id="requirements" data-i18n-placeholder="form_reqs_ph"></textarea></div>
+        <div class="form-group"><label data-i18n="form_files">Файлдар (міндетті емес)</label><div class="file-upload-area" onclick="document.getElementById('fileInput').click()"><svg viewBox="0 0 24 24" width="28" height="28" stroke="var(--gold)" fill="none" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg><span data-i18n="form_upload">Файлдарды осында тастаңыз</span><span class="file-hint" data-i18n="form_upload_hint">PDF, JPG, PNG — макс 10MB</span><input type="file" id="fileInput" multiple accept=".pdf,.jpg,.jpeg,.png,.ai,.eps" style="display:none"></div></div>
+        <div class="order-summary"><div class="order-summary-title" data-i18n="form_summary">Тапсырыс қорытындысы</div><div id="summaryContent" data-i18n="form_summary_fill">Нысанды толтырыңыз</div></div>
+        <div class="order-nav"><button type="button" class="btn-glass" onclick="goStep(2)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg><span data-i18n="form_back">Артқа</span></button><button type="submit" class="btn-primary btn-submit"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg><span data-i18n="form_submit">Тапсырыс жіберу</span></button></div>
       </div>
-
       <!-- Success -->
-      <div class="order-panel" id="stepSuccess" style="text-align:center;padding:60px 32px;">
-        <svg viewBox="0 0 24 24" width="64" height="64" fill="none" stroke="var(--gold)" stroke-width="1.5" style="margin-bottom:24px;"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
-        <h3 style="font-size:24px;font-weight:700;color:var(--navy);margin-bottom:12px;">Order Request Submitted!</h3>
-        <p style="color:var(--gray-600);max-width:400px;margin:0 auto;">Thank you! Our production team will review your request and send a detailed commercial proposal to your email within 48 hours.</p>
+      <div class="order-panel" id="formStepSuccess" style="text-align:center;padding:80px 32px;">
+        <svg viewBox="0 0 24 24" width="72" height="72" fill="none" stroke="var(--gold)" stroke-width="1.5" style="margin-bottom:28px;"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+        <h3 style="font-size:26px;font-weight:800;color:var(--navy);margin-bottom:14px;" data-i18n="form_success_title">Тапсырыс жіберілді!</h3>
+        <p style="color:var(--gray-600);max-width:420px;margin:0 auto;line-height:1.7;" data-i18n="form_success_desc">Рахмет! Біздің өндіріс тобы 48 сағат ішінде толық коммерциялық ұсыныс жібереді.</p>
       </div>
     </form>
-
-    <!-- Contact info bar -->
-    <div class="contact-bar anim-item">
-      <div class="contact-bar-item">
-        <svg viewBox="0 0 24 24" width="18" height="18" stroke="var(--gold)" fill="none" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        <span>Astana, Kazakhstan</span>
-      </div>
-      <div class="contact-bar-item">
-        <svg viewBox="0 0 24 24" width="18" height="18" stroke="var(--gold)" fill="none" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
-        <span>info@qazaqstanapparel.com</span>
-      </div>
-      <div class="contact-bar-item">
-        <svg viewBox="0 0 24 24" width="18" height="18" stroke="var(--gold)" fill="none" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.44 2.52 1.27 4.93 2.45 7.14"/></svg>
-        <span>+7 (7172) XXX-XX-XX</span>
-      </div>
-      <div class="contact-bar-item">
-        <svg viewBox="0 0 24 24" width="18" height="18" stroke="var(--gold)" fill="none" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-        <span>Mon-Fri 09:00-18:00</span>
-      </div>
+    <div class="contact-bar reveal">
+      <div class="contact-bar-item"><svg viewBox="0 0 24 24" width="18" height="18" stroke="var(--gold)" fill="none" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="contact_city">Астана, Қазақстан</span></div>
+      <div class="contact-bar-item"><svg viewBox="0 0 24 24" width="18" height="18" stroke="var(--gold)" fill="none" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg><span>info@qazaqstanapparel.com</span></div>
+      <div class="contact-bar-item"><svg viewBox="0 0 24 24" width="18" height="18" stroke="var(--gold)" fill="none" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.44 2.52 1.27 4.93 2.45 7.14"/></svg><span>+7 (7172) XXX-XX-XX</span></div>
+      <div class="contact-bar-item"><svg viewBox="0 0 24 24" width="18" height="18" stroke="var(--gold)" fill="none" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span data-i18n="contact_hours">Дс-Жм 09:00-18:00</span></div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ═══ FOOTER ═══ -->
 <footer class="footer">
+  <svg class="footer-watermark" viewBox="0 0 1054 1010" fill="none"><path d="M 670 891.5 L 537 746 A 285 285 0 1 1 723 595.5 L 852.5 733 A 465 465 0 1 0 670 891.5 Z" fill="white"/><path d="M463 704L516 662L815.5 1005H1042L516 440.5L429 510C 380 555, 325 610, 336.5 645.5C 348 681, 400 700, 463 704Z" fill="#FF8C00"/></svg>
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="#" class="nav-logo" style="margin-bottom: 8px;">
-          <svg width="36" height="36" viewBox="0 0 120 120" fill="none">
-            <circle cx="52" cy="48" r="34" stroke="#1B2B4B" stroke-width="14" fill="none" stroke-dasharray="214" stroke-dashoffset="30" stroke-linecap="round"/>
-            <path d="M58 56 L48 68 L84 112 L100 112 Z" fill="#E8A838"/>
-          </svg>
-          <div class="nav-logo-text">Qazaqstan <span>Apparel</span></div>
-        </a>
-        <p>Premium contract apparel manufacturing in Kazakhstan. Tactical, workwear, outdoor, and sport — built to the highest standards.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Services</h4>
-        <a href="#services">OEM Production</a>
-        <a href="#services">ODM Design</a>
-        <a href="#services">Private Label</a>
-        <a href="#services">Custom Orders</a>
-        <a href="#services">Sampling</a>
-      </div>
-      <div class="footer-col">
-        <h4>Directions</h4>
-        <a href="#directions">Bori Tactical</a>
-        <a href="#directions">Bori Workwear</a>
-        <a href="#directions">Bori Outdoor</a>
-        <a href="#directions">Bori Sport</a>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <a href="#about">About Us</a>
-        <a href="#advantages">Why Choose Us</a>
-        <a href="#process">Our Process</a>
-        <a href="#contact">Contact</a>
-      </div>
+      <div class="footer-brand"><a href="#" class="nav-logo" style="margin-bottom:8px;"><svg width="36" height="34" viewBox="0 0 1054 1010" fill="none"><path d="M 670 891.5 L 537 746 A 285 285 0 1 1 723 595.5 L 852.5 733 A 465 465 0 1 0 670 891.5 Z" fill="#08004F"/><path d="M463 704L516 662L815.5 1005H1042L516 440.5L429 510C 380 555, 325 610, 336.5 645.5C 348 681, 400 700, 463 704Z" fill="#FF8C00"/></svg><div class="nav-logo-text">Qazaqstan <span>Apparel</span></div></a><p data-i18n="footer_desc">Қазақстанда премиум контрактілік киім өндірісі. Тактикалық, жұмыс, аутдор және спорт — ең жоғары стандарттар бойынша.</p></div>
+      <div class="footer-col"><h4 data-i18n="footer_services">Қызметтер</h4><a href="#services" data-i18n="svc1_title">OEM өндіріс</a><a href="#services" data-i18n="svc2_title">ODM / Лекал дизайны</a><a href="#services">Private Label</a><a href="#services" data-i18n="svc3_title">Арнайы тапсырыстар</a></div>
+      <div class="footer-col"><h4 data-i18n="footer_directions">Бағыттар</h4><a href="#directions">Bori Tactical</a><a href="#directions">Bori Workwear</a><a href="#directions">Bori Outdoor</a><a href="#directions">Bori Sport</a></div>
+      <div class="footer-col"><h4 data-i18n="footer_company">Компания</h4><a href="#about" data-i18n="nav_about">Компания туралы</a><a href="#advantages" data-i18n="nav_why">Артықшылықтар</a><a href="#process" data-i18n="nav_process">Жұмыс процесі</a><a href="#contact" data-i18n="nav_contact">Байланыс</a></div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 TOO "Qazaqstan Apparel". All rights reserved. Astana, Kazakhstan.</p>
+      <p>&copy; 2026 ТОО «Qazaqstan Apparel». <span data-i18n="footer_rights">Барлық құқықтар қорғалған.</span> Астана, Қазақстан.</p>
       <div class="footer-socials">
-        <a href="#" aria-label="LinkedIn">
-          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg>
-        </a>
-        <a href="#" aria-label="Instagram">
-          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
-        </a>
-        <a href="#" aria-label="Telegram">
-          <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-        </a>
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg></a>
+        <a href="#" aria-label="Telegram"><svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></a>
       </div>
     </div>
   </div>
 </footer>
 
 <script>
-// ─── LOADER ───
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    document.getElementById('loader').classList.add('hidden');
-  }, 1800);
-});
+/* ═══════════════════════════════════════
+   i18n SYSTEM — KZ / RU / EN
+   ═══════════════════════════════════════ */
+const T={kk:{loader_text:"QAZAQSTAN APPAREL",nav_about:"Компания туралы",nav_services:"Қызметтер",nav_directions:"Бағыттар",nav_why:"Артықшылықтар",nav_process:"Жұмыс процесі",nav_contact:"Байланыс",nav_cta:"Тапсырыс беру",hero_badge:"Қазақстанда жасалған",hero_title:'Премиум киім<br><em>өндірісі</em>',hero_sub:"Тактикалық, жұмыс, аутдор және спорттық киімдердің контрактілік өндірісі. Астана қаласында 5,000+ м² заманауи өндіріс.",hero_cta:"Тапсырыс беру",hero_explore:"Бағыттарды қарау",scroll:"Төмен",stat_sqm:"м² өндіріс алаңы",stat_dirs:"өнім бағыттары",stat_sku:"SKU каталогта",stat_capacity:"өндіріс қуаттылығы",about_tag:"Компания туралы",about_title:"Масштабқа құрылған.<br>Сапаға бағытталған.",about_desc:"Qazaqstan Apparel заманауи өндірістік мүмкіндіктерді Еуропа мен Азия арасындағы стратегиялық орналасумен біріктіреді.",about_visual_city:"Астана, Қазақстан",about_visual_info:"5,000+ м² • Стратегиялық орналасу • Заманауи инфрақұрылым",about_f1_title:"Толық циклді өндіріс",about_f1_desc:"Лекалдан дайын өнімге дейін. Пішу, тігу, орау — барлығы бір шатыр астында.",about_f2_title:"Жаһандық жеткізу тізбегі",about_f2_desc:"Қытай, Түркия және Кореядан премиум маталар. YKK, Duraflex, ITW Nexus.",about_f3_title:"Сапа стандарттары",about_f3_desc:"5.11 Tactical, Arc'teryx, Propper, Portwest стандарттарына сәйкес.",about_f4_title:"Бәсекелестік артықшылық",about_f4_desc:"Меншікті өндіріс орташа бағамен премиум сапаны қамтамасыз етеді.",services_tag:"Қызметтер",services_title:"Біздің ұсыныстар",services_desc:"Брендіңіздің талаптарына бейімделген толық циклді өндіріс шешімдері.",svc1_title:"OEM өндіріс",svc1_desc:"Сіздің дизайныңызды масштабта өндіреміз. Материалдарды іздеуден дайын өнімді орауға дейін.",svc2_title:"ODM / Лекал дизайны",svc2_desc:"Тактикалық, жұмыс, аутдор және спорт бойынша кең лекал кітапханасы.",svc3_title:"Арнайы тапсырыстар",svc3_desc:"Мемлекеттік тапсырыстар, корпоративтік униформа, арнайы жасақ киімдері.",svc4_title:"Private Label",svc4_desc:"Біздің өндірістік базамен өз брендіңізді іске қосыңыз.",svc5_title:"Шағын партия / Үлгілер",svc5_desc:"Шағын серияларда прототиптеу және тестілеу.",svc6_title:"Экспорт және логистика",svc6_desc:"ТМД, Таяу Шығыс, Еуропаға тікелей жеткізу.",dir_tag:"Өнім бағыттары",dir_title:"Киімнің төрт тірегі",dir_desc:"Төрт негізгі нарық сегменті бойынша кешенді өндіріс.",dir1_title:"Тактикалық & Әскери",dir1_desc:"Жауынгерлік форма, тактикалық шалбарлар, софтшелл курткалар. 5.11, Propper, Helikon-Tex деңгейінде.",dir2_title:"Жұмыс & Өндірістік",dir2_desc:"Жоғары көрінетін киім, комбинезондар, отқа төзімді киім. Red Kap, Fristads, Portwest.",dir3_title:"Аутдор & Приключения",dir3_desc:"Жылытылған курткалар, трекинг шалбарлары. Arc'teryx, Patagonia, Mammut.",dir4_title:"Спорт & Актив",dir4_desc:"Жаттығу футболкалары, компрессиялық киім. Under Armour, Nike, Uniqlo Sport.",adv_tag:"Неге бізді таңдайды",adv_title:"Qazaqstan Apparel артықшылығы",adv_desc:"Стратегиялық орналасу, заманауи нысандар, сапаға назар — тамаша серіктес.",adv1_title:"Шығын тиімділігі",adv1_desc:"20-30% үнемдеу ұқсас өндірушілермен салыстырғанда.",adv2_title:"Нарыққа жылдам шығу",adv2_desc:"3-4 аптада дайын тауар. 500 данадан бастап.",adv3_title:"Стратегиялық орналасу",adv3_desc:"Ресей, Қытай, Таяу Шығыс, Еуропаға тікелей логистика.",adv4_title:"Сапа кепілдігі",adv4_desc:"Үш сатылы ТС жүйесі. Ақау 1%-дан төмен.",adv5_title:"Тәжірибелі команда",adv5_desc:"Техникалық киім тігу және лекал инженериясы бойынша тәжірибе.",adv6_title:"Бәсекеге қабілетті баға",adv6_desc:"Еуропалық өндірушілермен салыстырғанда 20-30% үнемдеу.",proc_tag:"Жұмыс тәртібі",proc_title:"Концепциядан жеткізуге дейін",proc_desc:"5 қадамдық процесс ашықтық пен сапаны қамтамасыз етеді.",step1_title:"Бриф және консультация",step1_desc:"Талаптарды, көлемдерді, мерзімдерді талқылаймыз.",step2_title:"Дизайн және лекалдар",step2_desc:"Техникалық сызбалар, материалдарды таңдау.",step3_title:"Үлгілер",step3_desc:"Мінсіз қалыпқа дейін итерация.",step4_title:"Өндіріс",step4_desc:"Толық масштабты өндіріс, сапа бақылау.",step5_title:"ТС және жеткізу",step5_desc:"Соңғы тексеру, орау, логистика.",cta_title:'Келесі коллекцияңызды<br>өндіруге дайынсыз ба?',cta_desc:"48 сағат ішінде коммерциялық ұсыныс алыңыз.",cta_btn:"Жобаңызды бастаңыз",order_tag:"Тапсырыс беру",order_title:"Өндіріске тапсырыс",order_desc:"Нысанды толтырыңыз, 48 сағат ішінде ұсыныс дайындаймыз. Мин: 500 дана.",form_step1:"Компания",form_step2:"Өнім",form_step3:"Сипаттамалар",form_s1_title:"Компания ақпараты",form_company:"Компания атауы *",form_country:"Ел",form_select:"Таңдаңыз...",form_other:"Басқа",form_person:"Байланыс тұлғасы *",form_position:"Лауазымы",form_phone:"Телефон *",form_source:"Бізді қалай таптыңыз?",src_google:"Google іздеу",src_social:"Әлеуметтік желілер",src_expo:"Салалық көрме",src_ref:"Ұсыныс",src_gov:"Мемлекеттік портал",form_next_product:"Келесі: Өнім",form_s2_title:"Өнім мәліметтері",form_direction:"Өнім бағыты *",form_type:"Тапсырыс түрі",opt_tactical:"Тактикалық киім",opt_workwear:"Жұмыс киімі",opt_outdoor:"Аутдор киімі",opt_sport:"Спорт киімі",opt_corporate:"Корпоративтік униформа",opt_multi:"Бірнеше бағыт",opt_custom:"Custom",opt_sampling:"Үлгі",form_products:"Өнім түрлері",prod_pants:"Шалбарлар",prod_jackets:"Курткалар",prod_shirts:"Жейделер",prod_vests:"Жилеттер",prod_coveralls:"Комбинезондар",prod_softshell:"Софтшелл / Флис",prod_base:"Базалық қабаттар",prod_acc:"Аксессуарлар",form_qty:"Саны (мин. 500) *",form_qty_hint:"Ең аз: 500 дана",form_price:"Мақсатты баға ($)",form_date:"Жеткізу мерзімі",form_location:"Жеткізу орны",form_back:"Артқа",form_next_specs:"Келесі: Сипаттамалар",form_s3_title:"Техникалық сипаттамалар",form_fabric:"Мата қалаулары",fab_cotton:"Мақта",fab_poly:"Полиэстер / Нейлон",fab_fleece:"Флис / Софтшелл",fab_membrane:"Мембрана",fab_fr:"Отқа төзімді",fab_hivis:"Жоғары көрінетін",fab_other:"Басқа",form_sizes:"Өлшем диапазоны",size_custom:"Жеке кесте",size_tbd:"Шешілмеді",form_branding:"Брендинг",brand_own:"Өз белгілерімізбен",brand_help:"Көмек керек",brand_white:"White label",form_reqs:"Қосымша талаптар",form_reqs_ph:"Ерекше талаптар: фурнитура, сертификаттар, түстер, анықтама...",form_files:"Файлдар",form_upload:"Файлдарды тастаңыз",form_upload_hint:"PDF, JPG, PNG — макс 10MB",form_summary:"Тапсырыс қорытындысы",form_summary_fill:"Нысанды толтырыңыз",form_submit:"Тапсырыс жіберу",form_success_title:"Тапсырыс жіберілді!",form_success_desc:"Рахмет! 48 сағат ішінде коммерциялық ұсыныс жібереміз.",contact_city:"Астана, Қазақстан",contact_hours:"Дс-Жм 09:00-18:00",footer_desc:"Қазақстанда премиум контрактілік киім өндірісі.",footer_services:"Қызметтер",footer_directions:"Бағыттар",footer_company:"Компания",footer_rights:"Барлық құқықтар қорғалған.",sum_company:"Компания",sum_direction:"Бағыт",sum_qty:"Саны",sum_price:"Баға",sum_delivery:"Жеткізу",sum_units:"дана",sum_tbd:"Келісім бойынша",sum_quote:"Сұралады"},
+ru:{loader_text:"QAZAQSTAN APPAREL",nav_about:"О компании",nav_services:"Услуги",nav_directions:"Направления",nav_why:"Преимущества",nav_process:"Процесс",nav_contact:"Контакты",nav_cta:"Оставить заявку",hero_badge:"Сделано в Казахстане",hero_title:'Премиум пошив<br><em>одежды</em>',hero_sub:"Контрактное производство тактической, рабочей, аутдор и спортивной одежды. 5,000+ м² в Астане.",hero_cta:"Оставить заявку",hero_explore:"Направления",scroll:"Вниз",stat_sqm:"м² производство",stat_dirs:"направления",stat_sku:"SKU в каталоге",stat_capacity:"мощность",about_tag:"О компании",about_title:"Создано для масштаба.<br>Нацелено на качество.",about_desc:"Qazaqstan Apparel сочетает современные мощности со стратегическим расположением между Европой и Азией.",about_visual_city:"Астана, Казахстан",about_visual_info:"5,000+ м² • Стратегия • Инфраструктура",about_f1_title:"Полный цикл производства",about_f1_desc:"От лекал до готовой продукции. Раскрой, пошив, упаковка — всё под одной крышей.",about_f2_title:"Глобальная цепочка поставок",about_f2_desc:"Премиальные ткани из Китая, Турции и Кореи. YKK, Duraflex, ITW Nexus.",about_f3_title:"Стандарты качества",about_f3_desc:"Лекала уровня 5.11 Tactical, Arc'teryx, Propper, Portwest.",about_f4_title:"Конкурентное преимущество",about_f4_desc:"Собственное производство — премиум качество по средним ценам.",services_tag:"Услуги",services_title:"Наши услуги",services_desc:"Комплексные решения под требования вашего бренда.",svc1_title:"OEM производство",svc1_desc:"Производим ваши дизайны в масштабе. От подбора материалов до упаковки.",svc2_title:"ODM / Дизайн лекал",svc2_desc:"Обширная библиотека лекал: тактика, рабочая, аутдор, спорт.",svc3_title:"Спецзаказы",svc3_desc:"Госзаказы, корпоративная форма, спецподразделения.",svc4_title:"Private Label",svc4_desc:"Запустите свой бренд на базе нашего производства.",svc5_title:"Малые партии / Образцы",svc5_desc:"Прототипирование и тестирование малыми сериями.",svc6_title:"Экспорт и логистика",svc6_desc:"Прямые поставки в СНГ, Ближний Восток, Европу.",dir_tag:"Направления",dir_title:"Четыре столпа одежды",dir_desc:"Комплексное производство по четырём рыночным сегментам.",dir1_title:"Тактика и военное",dir1_desc:"Боевая форма, тактические брюки, софтшелл. Уровень 5.11, Propper, Helikon-Tex.",dir2_title:"Рабочая одежда",dir2_desc:"Сигнальная одежда, комбинезоны, огнестойкая одежда. Red Kap, Fristads, Portwest.",dir3_title:"Аутдор и приключения",dir3_desc:"Утеплённые куртки, треккинг. Arc'teryx, Patagonia, Mammut.",dir4_title:"Спорт и актив",dir4_desc:"Тренировочная одежда, компрессия. Under Armour, Nike, Uniqlo Sport.",adv_tag:"Почему мы",adv_title:"Преимущество Qazaqstan Apparel",adv_desc:"Стратегия, объекты и фокус на качество — идеальный партнёр.",adv1_title:"Экономия затрат",adv1_desc:"20-30% экономии по сравнению с аналогами.",adv2_title:"Быстрый выход на рынок",adv2_desc:"3-4 недели до готовой продукции. От 500 шт.",adv3_title:"Стратегическое расположение",adv3_desc:"Прямая логистика в Россию, Китай, Ближний Восток, Европу.",adv4_title:"Гарантия качества",adv4_desc:"Трёхступенчатый контроль. Брак ниже 1%.",adv5_title:"Опытная команда",adv5_desc:"Глубокий опыт в техническом пошиве и лекальном деле.",adv6_title:"Конкурентные цены",adv6_desc:"20-30% экономии vs. европейские производители.",proc_tag:"Как мы работаем",proc_title:"От концепции до доставки",proc_desc:"5-этапный процесс, прозрачность на каждом шаге.",step1_title:"Бриф и консультация",step1_desc:"Обсуждаем требования, объёмы, сроки.",step2_title:"Дизайн и лекала",step2_desc:"Чертежи, подбор материалов.",step3_title:"Образцы",step3_desc:"Итерации до идеальной посадки.",step4_title:"Производство",step4_desc:"Полномасштабное производство с контролем.",step5_title:"ОТК и доставка",step5_desc:"Финальная проверка, упаковка, логистика.",cta_title:'Готовы произвести<br>следующую коллекцию?',cta_desc:"Коммерческое предложение за 48 часов.",cta_btn:"Начать проект",order_tag:"Оставить заявку",order_title:"Заявка на производство",order_desc:"Заполните форму, мы подготовим предложение за 48 часов. Мин: 500 шт.",form_step1:"Компания",form_step2:"Продукт",form_step3:"Спецификации",form_s1_title:"Информация о компании",form_company:"Название компании *",form_country:"Страна",form_select:"Выберите...",form_other:"Другое",form_person:"Контактное лицо *",form_position:"Должность",form_phone:"Телефон *",form_source:"Как вы нас нашли?",src_google:"Google",src_social:"Соцсети",src_expo:"Выставка",src_ref:"Рекомендация",src_gov:"Портал госзакупок",form_next_product:"Далее: Продукт",form_s2_title:"Детали продукта",form_direction:"Направление *",form_type:"Тип заказа",opt_tactical:"Тактическая одежда",opt_workwear:"Рабочая одежда",opt_outdoor:"Аутдор одежда",opt_sport:"Спортивная одежда",opt_corporate:"Корпоративная форма",opt_multi:"Несколько направлений",opt_custom:"Custom",opt_sampling:"Образцы",form_products:"Типы продукции",prod_pants:"Брюки",prod_jackets:"Куртки",prod_shirts:"Рубашки",prod_vests:"Жилеты",prod_coveralls:"Комбинезоны",prod_softshell:"Софтшелл / Флис",prod_base:"Базовые слои",prod_acc:"Аксессуары",form_qty:"Кол-во (мин. 500) *",form_qty_hint:"Мин: 500 шт.",form_price:"Целевая цена ($)",form_date:"Дата доставки",form_location:"Место доставки",form_back:"Назад",form_next_specs:"Далее: Спецификации",form_s3_title:"Тех. спецификации",form_fabric:"Предпочтения по ткани",fab_cotton:"Хлопок",fab_poly:"Полиэстер / Нейлон",fab_fleece:"Флис / Софтшелл",fab_membrane:"Мембрана",fab_fr:"Огнестойкий",fab_hivis:"Сигнальный",fab_other:"Другое",form_sizes:"Размерный ряд",size_custom:"Своя сетка",size_tbd:"Не решили",form_branding:"Брендинг",brand_own:"Свои этикетки",brand_help:"Нужна помощь",brand_white:"White label",form_reqs:"Дополнительные требования",form_reqs_ph:"Особые требования: фурнитура, сертификация, цвета, референсы...",form_files:"Файлы",form_upload:"Перетащите файлы или нажмите",form_upload_hint:"PDF, JPG, PNG — макс 10МБ",form_summary:"Итого по заявке",form_summary_fill:"Заполните форму",form_submit:"Отправить заявку",form_success_title:"Заявка отправлена!",form_success_desc:"Спасибо! Коммерческое предложение за 48 часов.",contact_city:"Астана, Казахстан",contact_hours:"Пн-Пт 09:00-18:00",footer_desc:"Премиальное контрактное производство одежды в Казахстане.",footer_services:"Услуги",footer_directions:"Направления",footer_company:"Компания",footer_rights:"Все права защищены.",sum_company:"Компания",sum_direction:"Направление",sum_qty:"Количество",sum_price:"Цена",sum_delivery:"Доставка",sum_units:"шт.",sum_tbd:"По согласованию",sum_quote:"Запрос цены"},
+en:{loader_text:"QAZAQSTAN APPAREL",nav_about:"About",nav_services:"Services",nav_directions:"Directions",nav_why:"Why Us",nav_process:"Process",nav_contact:"Contact",nav_cta:"Get Quote",hero_badge:"Made in Kazakhstan",hero_title:'Premium Apparel<br><em>Manufacturing</em>',hero_sub:"Contract production of tactical, workwear, outdoor and sport apparel. 5,000+ sqm in Astana.",hero_cta:"Request Quote",hero_explore:"Explore Directions",scroll:"Scroll",stat_sqm:"sqm production",stat_dirs:"product directions",stat_sku:"SKUs in catalog",stat_capacity:"production capacity",about_tag:"About Company",about_title:"Built for Scale.<br>Designed for Quality.",about_desc:"Modern manufacturing at the crossroads of Europe and Asia.",about_visual_city:"Astana, Kazakhstan",about_visual_info:"5,000+ sqm • Strategic location • Modern infrastructure",about_f1_title:"Full-Cycle Production",about_f1_desc:"From patterns to finished product. Cut, sew, pack — all in-house.",about_f2_title:"Global Supply Chain",about_f2_desc:"Premium fabrics from China, Turkey, Korea. YKK, Duraflex, ITW Nexus.",about_f3_title:"Quality Standards",about_f3_desc:"Benchmarked against 5.11 Tactical, Arc'teryx, Propper, Portwest.",about_f4_title:"Competitive Advantage",about_f4_desc:"Own production = premium quality at mid-range pricing.",services_tag:"Services",services_title:"What We Offer",services_desc:"End-to-end manufacturing solutions for your brand.",svc1_title:"OEM Production",svc1_desc:"Manufacture your designs at scale. From sourcing to packaging.",svc2_title:"ODM / Pattern Design",svc2_desc:"Extensive pattern library: tactical, workwear, outdoor, sport.",svc3_title:"Custom Orders",svc3_desc:"Government contracts, corporate uniforms, special forces gear.",svc4_title:"Private Label",svc4_desc:"Launch your brand with our manufacturing backbone.",svc5_title:"Small Batch / Sampling",svc5_desc:"Prototype and test with small runs.",svc6_title:"Export & Logistics",svc6_desc:"Direct shipping to CIS, Middle East, Europe.",dir_tag:"Product Directions",dir_title:"Four Pillars of Apparel",dir_desc:"Four key market segments with world-class engineering.",dir1_title:"Tactical & Military",dir1_desc:"Combat uniforms, tactical pants, softshell. 5.11, Propper, Helikon-Tex level.",dir2_title:"Industrial & Workwear",dir2_desc:"Hi-vis, coveralls, FR gear. Red Kap, Fristads, Portwest standards.",dir3_title:"Outdoor & Adventure",dir3_desc:"Insulated jackets, trekking pants. Arc'teryx, Patagonia, Mammut.",dir4_title:"Sport & Active",dir4_desc:"Performance tees, compression wear. Under Armour, Nike, Uniqlo Sport.",adv_tag:"Why Choose Us",adv_title:"The QA Advantage",adv_desc:"Strategic location, modern facilities, quality focus.",adv1_title:"Cost Efficiency",adv1_desc:"20-30% savings vs. comparable manufacturers.",adv2_title:"Speed to Market",adv2_desc:"3-4 weeks to finished goods. From 500 units.",adv3_title:"Strategic Location",adv3_desc:"Direct logistics to Russia, China, Middle East, Europe.",adv4_title:"Quality Assurance",adv4_desc:"Triple-check QC. Defect rate below 1%.",adv5_title:"Experienced Team",adv5_desc:"Deep expertise in technical garment construction.",adv6_title:"Competitive Pricing",adv6_desc:"20-30% savings vs. European manufacturers.",proc_tag:"How We Work",proc_title:"From Concept to Delivery",proc_desc:"5-step process, transparent at every stage.",step1_title:"Brief & Consultation",step1_desc:"Discuss requirements, volumes, timelines.",step2_title:"Design & Patterns",step2_desc:"Technical drawings, material selection.",step3_title:"Sampling",step3_desc:"Iterations until perfect fit.",step4_title:"Production",step4_desc:"Full-scale manufacturing with QC.",step5_title:"QC & Delivery",step5_desc:"Final inspection, packing, logistics.",cta_title:'Ready to Manufacture<br>Your Next Collection?',cta_desc:"Get a detailed quote within 48 hours.",cta_btn:"Start Your Project",order_tag:"Place an Order",order_title:"Production Order Request",order_desc:"Fill the form, we'll prepare a proposal within 48 hours. Min: 500 units.",form_step1:"Company",form_step2:"Product",form_step3:"Specifications",form_s1_title:"Company Information",form_company:"Company Name *",form_country:"Country",form_select:"Select...",form_other:"Other",form_person:"Contact Person *",form_position:"Position",form_phone:"Phone *",form_source:"How did you find us?",src_google:"Google",src_social:"Social media",src_expo:"Exhibition",src_ref:"Recommendation",src_gov:"Procurement portal",form_next_product:"Next: Product",form_s2_title:"Product Details",form_direction:"Direction *",form_type:"Order Type",opt_tactical:"Tactical apparel",opt_workwear:"Workwear & PPE",opt_outdoor:"Outdoor clothing",opt_sport:"Sportswear",opt_corporate:"Corporate uniforms",opt_multi:"Multiple directions",opt_custom:"Custom",opt_sampling:"Sampling",form_products:"Product Types",prod_pants:"Pants",prod_jackets:"Jackets",prod_shirts:"Shirts",prod_vests:"Vests",prod_coveralls:"Coveralls",prod_softshell:"Softshell / Fleece",prod_base:"Base Layers",prod_acc:"Accessories",form_qty:"Quantity (min. 500) *",form_qty_hint:"Min: 500 units per style",form_price:"Target Price ($)",form_date:"Delivery Date",form_location:"Delivery Location",form_back:"Back",form_next_specs:"Next: Specifications",form_s3_title:"Technical Specifications",form_fabric:"Fabric Preferences",fab_cotton:"Cotton",fab_poly:"Polyester / Nylon",fab_fleece:"Fleece / Softshell",fab_membrane:"Membrane",fab_fr:"Flame Resistant",fab_hivis:"Hi-Vis",fab_other:"Other",form_sizes:"Size Range",size_custom:"Custom chart",size_tbd:"Not decided",form_branding:"Branding",brand_own:"Own labels",brand_help:"Need help",brand_white:"White label",form_reqs:"Additional Requirements",form_reqs_ph:"Special requirements: hardware, certifications, colors, references...",form_files:"Files",form_upload:"Drop files or click to upload",form_upload_hint:"PDF, JPG, PNG — max 10MB",form_summary:"Order Summary",form_summary_fill:"Fill in the form",form_submit:"Submit Order",form_success_title:"Order Submitted!",form_success_desc:"Thank you! We'll send a proposal within 48 hours.",contact_city:"Astana, Kazakhstan",contact_hours:"Mon-Fri 09:00-18:00",footer_desc:"Premium contract apparel manufacturing in Kazakhstan.",footer_services:"Services",footer_directions:"Directions",footer_company:"Company",footer_rights:"All rights reserved.",sum_company:"Company",sum_direction:"Direction",sum_qty:"Quantity",sum_price:"Price",sum_delivery:"Delivery",sum_units:"units",sum_tbd:"To be agreed",sum_quote:"To be quoted"}};
 
-// ─── NAVBAR SCROLL ───
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 50);
-});
+let currentLang=localStorage.getItem('qa-lang')||'kk';
 
-// ─── MOBILE MENU ───
-function toggleMenu() {
-  document.getElementById('mobileMenu').classList.toggle('active');
+function setLang(lang){
+  currentLang=lang;localStorage.setItem('qa-lang',lang);
+  document.documentElement.lang=lang;
+  const titles={kk:'Qazaqstan Apparel — Премиум тігін өндірісі',ru:'Qazaqstan Apparel — Премиальное швейное производство',en:'Qazaqstan Apparel — Premium Apparel Manufacturing'};
+  document.title=titles[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n'),t=T[lang];if(t&&t[k]){if(el.tagName==='INPUT'||el.tagName==='TEXTAREA')el.placeholder=t[k];else el.innerHTML=t[k];}});
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{const k=el.getAttribute('data-i18n-placeholder'),t=T[lang];if(t&&t[k])el.placeholder=t[k];});
+  document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.textContent.trim().toLowerCase()===(lang==='kk'?'qz':lang));});
 }
 
-// ─── PARTICLES ───
-const particlesContainer = document.getElementById('particles');
-for (let i = 0; i < 20; i++) {
-  const p = document.createElement('div');
-  p.className = 'particle';
-  p.style.left = Math.random() * 100 + '%';
-  p.style.top = (60 + Math.random() * 40) + '%';
-  p.style.animationDelay = Math.random() * 8 + 's';
-  p.style.animationDuration = (6 + Math.random() * 4) + 's';
-  particlesContainer.appendChild(p);
+// LOADER
+window.addEventListener('load',()=>{setTimeout(()=>{document.getElementById('loader').classList.add('hidden');},3200);setLang(currentLang);});
+
+// NAV SCROLL
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60);});
+
+function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('active');}
+
+// PARTICLES
+const p=document.getElementById('particles');
+for(let i=0;i<25;i++){const d=document.createElement('div');d.className='particle';d.style.left=Math.random()*100+'%';d.style.top=(50+Math.random()*50)+'%';d.style.animationDelay=Math.random()*10+'s';d.style.animationDuration=(8+Math.random()*6)+'s';d.style.width=d.style.height=(2+Math.random()*2)+'px';p.appendChild(d);}
+
+// SCROLL ANIMATIONS
+const ro=new IntersectionObserver((e)=>{e.forEach((en,i)=>{if(en.isIntersecting){const d=parseFloat(en.target.style.transitionDelay)||i*0.06;en.target.style.transitionDelay=d+'s';requestAnimationFrame(()=>en.target.classList.add('visible'));ro.unobserve(en.target);}});},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el=>ro.observe(el));
+
+// COUNTERS
+const co=new IntersectionObserver((e)=>{e.forEach(en=>{if(en.isIntersecting){const el=en.target,t=parseInt(el.dataset.count);if(!t)return;const s=el.innerHTML.includes('+');let c=0;const st=t/45,tm=setInterval(()=>{c+=st;if(c>=t){c=t;clearInterval(tm);}el.innerHTML=Math.floor(c).toLocaleString()+(s?'<span>+</span>':'');},28);co.unobserve(el);}});},{threshold:0.5});
+document.querySelectorAll('[data-count]').forEach(el=>co.observe(el));
+
+// SMOOTH SCROLL
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});});});
+
+// ORDER FORM
+let currentStep=1;
+function goStep(step){
+  if(step>currentStep){const panel=document.getElementById('formStep'+currentStep);for(const inp of panel.querySelectorAll('[required]')){if(!inp.value.trim()){inp.focus();inp.style.borderColor='#DC2626';inp.style.boxShadow='0 0 0 3px rgba(220,38,38,0.1)';setTimeout(()=>{inp.style.borderColor='';inp.style.boxShadow='';},2000);return;}}}
+  document.querySelectorAll('.order-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('formStep'+step).classList.add('active');
+  document.querySelectorAll('.order-step-indicator').forEach(s=>{const n=parseInt(s.dataset.step);s.classList.remove('active','done');if(n===step)s.classList.add('active');else if(n<step)s.classList.add('done');});
+  currentStep=step;if(step===3)updateSummary();
+  document.getElementById('orderForm').scrollIntoView({behavior:'smooth',block:'start'});
 }
-
-// ─── SCROLL ANIMATIONS ───
-const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry, i) => {
-    if (entry.isIntersecting) {
-      setTimeout(() => {
-        entry.target.classList.add('visible');
-      }, i * 100);
-      observer.unobserve(entry.target);
-    }
-  });
-}, observerOptions);
-
-document.querySelectorAll('.anim-item').forEach(el => observer.observe(el));
-
-// ─── COUNTER ANIMATION ───
-const counterObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const el = entry.target;
-      const target = parseInt(el.dataset.count);
-      if (!target) return;
-      const suffix = el.innerHTML.includes('+') ? '+' : '';
-      let current = 0;
-      const increment = target / 40;
-      const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-          current = target;
-          clearInterval(timer);
-        }
-        el.innerHTML = Math.floor(current).toLocaleString() + (suffix ? '<span>+</span>' : '');
-      }, 30);
-      counterObserver.unobserve(el);
-    }
-  });
-}, { threshold: 0.5 });
-
-document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
-
-// ─── SMOOTH SCROLL ───
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    e.preventDefault();
-    const target = document.querySelector(a.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
-});
-
-// ─── MULTI-STEP ORDER FORM ───
-let currentStep = 1;
-
-function goStep(step) {
-  // Validate current step before advancing
-  if (step > currentStep) {
-    const panel = document.getElementById('step' + currentStep);
-    const required = panel.querySelectorAll('[required]');
-    for (const input of required) {
-      if (!input.value.trim()) {
-        input.focus();
-        input.style.borderColor = '#DC2626';
-        setTimeout(() => input.style.borderColor = '', 2000);
-        return;
-      }
-    }
-  }
-
-  // Hide all panels
-  document.querySelectorAll('.order-panel').forEach(p => p.classList.remove('active'));
-  // Show target panel
-  document.getElementById('step' + step).classList.add('active');
-
-  // Update step indicators
-  document.querySelectorAll('.order-step').forEach(s => {
-    const n = parseInt(s.dataset.step);
-    s.classList.remove('active', 'done');
-    if (n === step) s.classList.add('active');
-    else if (n < step) s.classList.add('done');
-  });
-
-  currentStep = step;
-
-  // Update summary on step 3
-  if (step === 3) updateSummary();
-
-  // Scroll form into view
-  document.getElementById('orderForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
+function updateSummary(){
+  const t=T[currentLang]||T.kk;
+  const c=document.getElementById('companyName').value||'—',d=document.getElementById('direction').value||'—',q=document.getElementById('quantity').value||'—',pr=document.getElementById('targetPrice').value||t.sum_quote,dl=document.getElementById('deliveryDate').value||t.sum_tbd;
+  document.getElementById('summaryContent').innerHTML='<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;font-size:13px;color:var(--gray-600);"><div><strong>'+t.sum_company+':</strong> '+c+'</div><div><strong>'+t.sum_direction+':</strong> '+d+'</div><div><strong>'+t.sum_qty+':</strong> '+q+' '+t.sum_units+'</div><div><strong>'+t.sum_price+':</strong> '+pr+'</div><div><strong>'+t.sum_delivery+':</strong> '+dl+'</div></div>';
 }
+function submitOrder(){document.querySelectorAll('.order-panel').forEach(p=>p.classList.remove('active'));document.getElementById('formStepSuccess').classList.add('active');document.querySelectorAll('.order-step-indicator').forEach(s=>s.classList.add('done'));document.querySelector('.order-steps-bar').style.opacity='0.3';}
 
-function updateSummary() {
-  const company = document.getElementById('companyName').value || '—';
-  const direction = document.getElementById('direction').value || '—';
-  const qty = document.getElementById('quantity').value || '—';
-  const price = document.getElementById('targetPrice').value || 'To be quoted';
-  const delivery = document.getElementById('deliveryDate').value || 'To be agreed';
+const qi=document.getElementById('quantity');
+if(qi)qi.addEventListener('change',function(){if(this.value&&parseInt(this.value)<500){this.value=500;this.style.borderColor='var(--gold)';setTimeout(()=>this.style.borderColor='',1500);}});
 
-  document.getElementById('summaryContent').innerHTML =
-    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;">' +
-    '<div><strong>Company:</strong> ' + company + '</div>' +
-    '<div><strong>Direction:</strong> ' + direction + '</div>' +
-    '<div><strong>Quantity:</strong> ' + qty + ' units</div>' +
-    '<div><strong>Target Price:</strong> ' + price + '</div>' +
-    '<div><strong>Delivery:</strong> ' + delivery + '</div>' +
-    '</div>';
-}
-
-function submitOrder() {
-  // Hide all panels, show success
-  document.querySelectorAll('.order-panel').forEach(p => p.classList.remove('active'));
-  document.getElementById('stepSuccess').classList.add('active');
-  document.querySelectorAll('.order-step').forEach(s => s.classList.add('done'));
-  document.querySelector('.order-steps').style.opacity = '0.3';
-}
-
-// Quantity validation
-const qtyInput = document.getElementById('quantity');
-if (qtyInput) {
-  qtyInput.addEventListener('change', function() {
-    if (this.value && parseInt(this.value) < 500) {
-      this.value = 500;
-      this.style.borderColor = 'var(--gold)';
-      setTimeout(() => this.style.borderColor = '', 1500);
-    }
-  });
-}
+// PARALLAX LOGO
+window.addEventListener('scroll',()=>{const w=document.querySelector('.hero-logo-watermark');if(w){const s=window.scrollY;w.style.transform='translateY(calc(-50% + '+s*0.08+'px)) rotate('+s*0.01+'deg)';}});
 </script>
 </body>
 </html>
