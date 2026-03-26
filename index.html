@@ -405,43 +405,82 @@ section { padding: 120px 0; }
 }
 .bori-logo-container { margin: 48px 0 32px; position: relative; display: inline-block; }
 .bori-logo-link { display: block; text-decoration: none; position: relative; }
-.bori-wordmark {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 700;
-  font-size: clamp(72px, 14vw, 140px);
-  letter-spacing: 0.15em;
-  background: linear-gradient(90deg, #FF8C00 0%, #FFB347 50%, #FF8C00 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  line-height: 1;
-  filter: drop-shadow(0 0 40px rgba(255,140,0,0.2));
-  user-select: none;
-}
-.bori-wordmark-line {
-  width: 100%; height: 2px; margin-top: 8px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  opacity: 0.5;
-}
 .bori-logo-svg-wrap {
   position: relative;
-  clip-path: inset(0 100% 0 0);
-  transition: filter 0.3s ease;
+  width: clamp(260px, 50vw, 420px);
+  transition: filter 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 0 30px rgba(255,140,0,0.2));
 }
-.bori-logo-svg-wrap.revealed { clip-path: inset(0 0% 0 0); animation: boriReveal 1.6s cubic-bezier(0.76, 0, 0.24, 1) forwards; }
-@keyframes boriReveal {
-  0%   { clip-path: inset(0 100% 0 0); }
-  100% { clip-path: inset(0 0%   0 0); }
+.bori-logo-svg-wrap svg { width: 100%; height: auto; display: block; }
+.bori-logo-svg-wrap svg path {
+  fill: none;
+  stroke: url(#boriGrad);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 3000;
+  stroke-dashoffset: 3000;
+  transition: stroke-width 0.4s ease;
 }
+/* Draw animation triggered when revealed */
+.bori-logo-svg-wrap.revealed svg path {
+  animation: boriDraw 2.8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+/* Stagger each path */
+.bori-logo-svg-wrap.revealed svg path:nth-child(1)  { animation-delay: 0s; }
+.bori-logo-svg-wrap.revealed svg path:nth-child(2)  { animation-delay: 0.08s; }
+.bori-logo-svg-wrap.revealed svg path:nth-child(3)  { animation-delay: 0.16s; }
+.bori-logo-svg-wrap.revealed svg path:nth-child(4)  { animation-delay: 0.24s; }
+.bori-logo-svg-wrap.revealed svg path:nth-child(5)  { animation-delay: 0.3s; }
+.bori-logo-svg-wrap.revealed svg path:nth-child(6)  { animation-delay: 0.38s; }
+.bori-logo-svg-wrap.revealed svg path:nth-child(7)  { animation-delay: 0.46s; }
+.bori-logo-svg-wrap.revealed svg path:nth-child(8)  { animation-delay: 0.5s; }
+.bori-logo-svg-wrap.revealed svg path:nth-child(9)  { animation-delay: 0.56s; }
+.bori-logo-svg-wrap.revealed svg path:nth-child(10) { animation-delay: 0.62s; }
+.bori-logo-svg-wrap.revealed svg path:nth-child(11) { animation-delay: 0.68s; }
+.bori-logo-svg-wrap.revealed svg path:nth-child(12) { animation-delay: 0.74s; }
+.bori-logo-svg-wrap.revealed svg path:nth-child(13) { animation-delay: 0.8s; }
+.bori-logo-svg-wrap.revealed svg path:nth-child(14) { animation-delay: 0.86s; }
+.bori-logo-svg-wrap.revealed svg path:nth-child(15) { animation-delay: 0.92s; }
+.bori-logo-svg-wrap.revealed svg path:nth-child(16) { animation-delay: 0.98s; }
+.bori-logo-svg-wrap.revealed svg path:nth-child(17) { animation-delay: 1.04s; }
+.bori-logo-svg-wrap.revealed svg path:nth-child(18) { animation-delay: 1.1s; }
+.bori-logo-svg-wrap.revealed svg path:nth-child(19) { animation-delay: 1.16s; }
+.bori-logo-svg-wrap.revealed svg path:nth-child(20) { animation-delay: 1.22s; }
+.bori-logo-svg-wrap.revealed svg path:nth-child(21) { animation-delay: 1.28s; }
+@keyframes boriDraw {
+  0%   { stroke-dashoffset: 3000; opacity: 0.4; }
+  15%  { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
+}
+/* Glow pulse after draw */
+.bori-logo-svg-wrap.revealed {
+  animation: boriGlow 3s ease-in-out 3.2s infinite alternate;
+}
+@keyframes boriGlow {
+  0%   { filter: drop-shadow(0 0 25px rgba(255,140,0,0.2)); }
+  100% { filter: drop-shadow(0 0 55px rgba(255,140,0,0.45)) brightness(1.05); }
+}
+/* Shimmer overlay */
 .bori-shimmer {
   position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(105deg, transparent 30%, rgba(255,210,100,0.45) 50%, rgba(255,240,180,0.25) 53%, transparent 70%);
+  background: linear-gradient(105deg, transparent 30%, rgba(255,210,100,0.5) 50%, rgba(255,240,180,0.3) 53%, transparent 70%);
   background-size: 300% 100%; background-position: 150% 0; opacity: 0;
-  mix-blend-mode: overlay;
+  mix-blend-mode: screen; border-radius: 8px;
 }
-.bori-logo-svg-wrap.revealed .bori-shimmer { opacity: 1; animation: boriShimmer 0.8s cubic-bezier(0.4, 0, 0.2, 1) 1.7s forwards; }
+.bori-logo-svg-wrap.revealed .bori-shimmer {
+  opacity: 1;
+  animation: boriShimmer 1s cubic-bezier(0.4, 0, 0.2, 1) 3s forwards;
+}
 @keyframes boriShimmer { from { background-position: 150% 0; } to { background-position: -50% 0; } }
-.bori-logo-link:hover .bori-logo-svg-wrap { filter: drop-shadow(0 0 40px rgba(255,140,0,0.35)) brightness(1.08); }
+/* Hover effects */
+.bori-logo-link:hover .bori-logo-svg-wrap {
+  filter: drop-shadow(0 0 50px rgba(255,140,0,0.45)) brightness(1.12);
+  transform: scale(1.04);
+}
+.bori-logo-link:hover .bori-logo-svg-wrap svg path {
+  stroke-width: 5;
+}
 
 .bori-carousel {
   height: 80px; position: relative; overflow: hidden; width: 100%; max-width: 500px; margin: 24px auto;
@@ -522,20 +561,17 @@ section { padding: 120px 0; }
 .advantage-card h3 { font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
 .advantage-card p { font-size: 14px; color: var(--gray-600); line-height: 1.7; }
 
-/* ═══ GALLERY — Bento Grid ═══ */
+/* ═══ GALLERY — Minimal 3-photo ═══ */
 .gallery { background: var(--bg); padding: 120px 0; }
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 240px 240px;
-  gap: 12px;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  grid-template-rows: 200px 200px;
+  gap: 14px;
   margin-top: 64px;
 }
 .gallery-item { position: relative; border-radius: var(--radius); overflow: hidden; cursor: pointer; }
-.gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
-.gallery-item:nth-child(2) { grid-column: span 1; }
-.gallery-item:nth-child(3) { grid-column: span 1; }
-.gallery-item:nth-child(4) { grid-column: span 2; }
+.gallery-item:first-child { grid-row: 1 / 3; }
 .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s var(--smooth); }
 .gallery-item:hover img { transform: scale(1.06); }
 .gallery-caption {
@@ -546,6 +582,11 @@ section { padding: 120px 0; }
 }
 .gallery-item:hover .gallery-caption { opacity: 1; }
 .gallery-caption span { font-size: 13px; font-weight: 600; color: var(--white); letter-spacing: 0.02em; }
+@media(max-width:768px){
+  .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+  .gallery-item:first-child { grid-row: auto; }
+  .gallery-item img { height: 220px; }
+}
 
 /* ═══ PROCESS — Interactive ═══ */
 .process { background: var(--bg); }
@@ -824,9 +865,7 @@ section { padding: 120px 0; }
   .services-grid { grid-template-columns: repeat(2, 1fr); }
   .advantages-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
-  .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
-  .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
-  .gallery-item:nth-child(6) { grid-column: span 2; }
+  .gallery-grid { grid-template-columns: repeat(3, 1fr); grid-template-rows: 280px; }
 }
 @media (max-width: 768px) {
   .nav { width: calc(100% - 24px); padding: 0 20px; top: 8px; }
@@ -851,13 +890,11 @@ section { padding: 120px 0; }
   .order-panel { padding: 24px 20px; }
   .checkbox-grid { grid-template-columns: 1fr; }
   .hero-logo-watermark { width: 80vw; right: -20%; opacity: 0.03; }
-  .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
-  .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
-  .gallery-item:nth-child(6) { grid-column: span 2; }
+  .gallery-grid { grid-template-columns: 1fr; grid-template-rows: repeat(3, 220px); }
   .gallery { padding: 80px 0; }
   .modal-card { max-height: 90vh; border-radius: 20px; }
   .modal-photo { height: 180px; border-radius: 20px 20px 0 0; }
-  .bori-wordmark { font-size: clamp(56px, 12vw, 100px); }
+  .bori-logo-svg-wrap { width: clamp(200px, 70vw, 320px); }
   .bori-line-name { font-size: 24px; }
 
   /* Order modal slides up from bottom on mobile */
@@ -1025,8 +1062,45 @@ section { padding: 120px 0; }
       <div class="bori-logo-container">
         <a href="https://thebori.com" target="_blank" class="bori-logo-link">
           <div class="bori-logo-svg-wrap">
-            <div class="bori-wordmark">BӨRI</div>
-            <div class="bori-wordmark-line"></div>
+            <svg viewBox="-5 -5 405 417" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="boriGrad" x1="0" y1="0" x2="395" y2="407" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#FFD180"/>
+                  <stop offset="30%" stop-color="#FFB347"/>
+                  <stop offset="50%" stop-color="#FFCC66"/>
+                  <stop offset="70%" stop-color="#FF8C00"/>
+                  <stop offset="100%" stop-color="#FFB347"/>
+                </linearGradient>
+              </defs>
+              <!-- B letter -->
+              <path d="M2.98576 156.214L7.98576 145.714L21.4858 149.214L31.9858 145.714L42.9858 141.714H62.4858L79.4858 145.714L99.9858 156.214L109.486 170.214V184.214L104.986 199.714L95.9858 213.214L113.986 223.214L121.986 233.714L127.986 247.214V261.214V272.714L121.986 284.714L113.986 293.214L104.986 299.714L88.4858 312.214L73.9858 318.214L58.4858 323.714L42.9858 327.214H25.9858L7.98576 323.714L2.98576 312.214L15.9858 299.714L21.4858 279.214V184.214L15.9858 175.214L7.98576 166.714L2.98576 156.214Z"/>
+              <path d="M49.9858 179.714L54.4858 167.214L70.9858 169.214L77.4858 179.714V191.214L68.4858 200.714L54.4858 206.214L49.9858 179.714Z"/>
+              <path d="M54.4858 293.214V234.714H67.4858L78.9858 236.714L88.4858 244.714L93.4858 261.214L88.4858 276.714L75.9858 289.214L54.4858 293.214Z"/>
+              <path d="M37.4858 120.214V135.714L53.4858 127.714H60.9858L64.4858 115.214V101.714L68.4858 86.214L53.4858 96.714L44.4858 107.214L37.4858 120.214Z"/>
+              <!-- Ø letter -->
+              <path d="M146.486 262.214L135.486 252.714L140.986 245.214L132.986 231.714L129.486 224.214L125.486 211.214V198.214L129.486 185.714L135.486 174.714L146.486 166.214L159.486 158.714L171.486 154.714H181.986H190.986L203.486 158.714L211.486 148.714L221.486 158.714L215.986 169.714L221.486 174.714L226.986 185.714L230.486 198.214V211.214L226.986 224.214L221.486 234.214L211.486 245.214L197.986 252.714L181.986 258.214H165.986L151.486 252.714L146.486 262.214Z"/>
+              <path d="M156.986 209.214V220.714L187.986 177.714H177.986H169.986L165.986 181.714L160.986 185.214L156.986 191.214L153.486 200.214L156.986 209.214Z"/>
+              <path d="M168.486 234.214L199.986 193.214L203.486 205.714L199.986 214.214V223.714L190.986 234.214L181.986 237.714L168.486 234.214Z"/>
+              <!-- R letter -->
+              <path d="M234.986 180.714V165.214H253.986H268.486L273.486 161.214H282.486L290.986 158.214H296.986L303.986 161.214L314.486 165.214L319.486 171.714L325.486 180.714L329.986 187.714V198.714L325.486 204.214V210.714L319.486 219.714L314.486 227.214L301.986 229.714L314.486 245.214L334.986 285.714L340.986 294.214L346.486 297.214L359.486 300.214L365.986 302.714H374.486L388.986 300.214L380.986 312.214H376.486L371.986 317.714H365.986H359.486H352.986H346.486H340.986H334.986L325.486 312.214L319.486 307.214L310.986 297.214L303.986 289.714L290.986 273.214V264.714L285.486 256.214L282.486 251.714L278.986 247.714L273.486 245.714L268.486 247.714L270.486 297.214L263.486 294.214L253.986 285.714L245.486 279.214L238.986 268.714L234.986 258.714V251.714L238.986 245.214L242.486 234.714V227.214V219.714V210.714L238.986 198.714V187.714L234.986 180.714Z"/>
+              <path d="M269.986 213.714V183.214L280.986 179.714H288.986L294.486 183.214L297.986 189.714V196.214L294.486 203.714L288.986 209.214L280.986 213.714H269.986Z"/>
+              <!-- I letter -->
+              <path d="M352.486 283.214L342.486 278.214L344.986 267.714V257.214V243.214V235.214V223.214V214.214V205.214L342.486 196.214V190.214L348.986 185.714L360.486 190.214H367.486H374.986L379.486 196.214V207.714V218.214V229.214L374.986 243.214V257.214L379.486 271.714L383.986 288.214H374.986H367.486H360.486L352.486 283.214Z"/>
+              <path d="M343.986 166.214V156.714L352.486 145.714H360.986H369.486L373.986 150.714L378.986 156.714L381.986 164.214L378.986 171.714V178.214H369.486H360.986H352.486L343.986 171.714V166.214Z"/>
+              <path d="M352.486 112.714V132.714L365.486 139.214H374.486V132.714V126.214V120.714L368.986 112.714L361.486 103.714L356.486 98.714L343.986 95.214L352.486 112.714Z"/>
+              <!-- Left toe -->
+              <path d="M109.986 107.714L115.486 88.714L124.486 81.714L126.986 77.214L134.986 68.214L143.486 61.714L147.486 57.714H155.986H165.986L170.986 61.714L174.486 68.214V77.214L180.486 88.714V99.714L170.986 126.214L165.986 131.214L160.986 134.214L155.986 137.214L147.486 139.714L143.486 141.714H138.486H134.986L131.986 139.714H126.986L124.486 137.214L120.486 134.214L115.486 131.214V126.214L109.986 119.214V107.714Z"/>
+              <!-- Right toe -->
+              <path d="M226.986 125.214L221.986 113.214V101.714L226.986 89.714V80.714L230.986 68.214L235.986 62.214L243.486 58.714H250.486L260.986 62.214L269.486 68.214L274.986 80.714L278.986 89.714L283.986 97.214V107.714V117.714L278.986 125.214L274.986 136.214L269.486 142.714H260.986H250.486L239.986 136.214L235.986 131.214H230.986L226.986 125.214Z"/>
+              <!-- Left toe outline -->
+              <path d="M113.986 141.714L121.986 148.214L129.986 151.714H140.486L152.986 148.214L158.986 144.214L169.986 136.214H176.986L181.486 128.214V120.714L185.486 110.714L188.986 102.214L190.986 92.714L185.486 82.214L181.486 70.714V64.214L176.986 55.214L169.986 52.214L161.486 49.214H152.986H146.486L140.486 52.214L134.486 55.214L129.986 58.714L125.986 64.214L121.986 70.714L113.986 78.214L107.986 82.214L103.486 86.714V92.714L98.9858 99.714V105.714V114.214L103.486 120.714V128.214L107.986 136.214L113.986 141.714Z"/>
+              <path d="M155.486 39.714H144.986L150.986 27.714L155.486 19.214L161.986 13.714L169.486 10.714L176.986 5.714L173.486 19.214L169.486 27.714V43.214H164.486L155.486 39.714Z"/>
+              <!-- Right toe outline -->
+              <path d="M225.986 141.714L218.486 137.714L214.986 119.714L210.986 112.714L214.986 105.214V93.714L218.486 84.214V71.714L221.986 61.214L232.486 52.714H244.986H256.986L270.986 57.214L278.486 65.214V75.214L285.486 84.214L289.486 93.714L292.986 105.214L298.486 119.714L292.986 131.214L285.486 141.714L278.486 145.714L270.986 149.214H261.986H252.986H244.986L238.986 145.714H232.486L225.986 141.714Z"/>
+              <path d="M243.486 42.214L233.986 45.714V27.714V17.214L230.486 6.214L239.986 11.214L246.986 17.214L252.986 27.714L260.486 45.714H252.986L243.486 42.214Z"/>
+              <!-- Wolf paw pad -->
+              <path d="M80.4858 388.214L95.9858 403.714L114.986 401.214L130.986 397.714L143.486 390.714L164.486 395.714L177.486 390.714L203.486 388.214L212.986 382.714L225.486 390.714L239.486 397.714L252.986 403.714H264.486H276.486L303.486 390.714L314.486 372.214L321.986 364.214L314.486 337.714L305.986 334.714L296.986 326.214L282.986 319.214L264.486 309.214L246.486 297.214L235.986 284.714L228.986 271.214L218.486 265.214L197.486 271.214L177.486 275.214L161.986 271.214L143.486 280.214L130.986 297.214L112.486 315.214L89.4858 326.214L70.4858 337.714L62.4858 354.714L65.4858 376.214L80.4858 388.214Z"/>
+            </svg>
             <div class="bori-shimmer"></div>
           </div>
         </a>
@@ -1080,8 +1154,7 @@ section { padding: 120px 0; }
     <div class="gallery-grid">
       <div class="gallery-item reveal"><img src="images/DSC01527.jpg" alt="Factory panoramic" loading="lazy"><div class="gallery-caption"><span data-i18n="gal1_cap">Негізгі тігін цехы</span></div></div>
       <div class="gallery-item reveal" style="transition-delay:0.08s"><img src="images/DSC01513.jpg" alt="JUKI machine macro" loading="lazy"><div class="gallery-caption"><span data-i18n="gal2_cap">JUKI жабдықтары</span></div></div>
-      <div class="gallery-item reveal" style="transition-delay:0.16s"><img src="images/DSC01533.jpg" alt="Building exterior" loading="lazy"><div class="gallery-caption"><span data-i18n="gal3_cap">Өндіріс ғимараты</span></div></div>
-      <div class="gallery-item reveal" style="transition-delay:0.24s"><img src="images/DSC01543.jpg" alt="Overhead factory" loading="lazy"><div class="gallery-caption"><span data-i18n="gal4_cap">Өндіріс алаңы</span></div></div>
+      <div class="gallery-item reveal" style="transition-delay:0.16s"><img src="images/DSC01536.jpg" alt="Building golden hour" loading="lazy"><div class="gallery-caption"><span data-i18n="gal3_cap">Өндіріс ғимараты</span></div></div>
     </div>
   </div>
 </section>
