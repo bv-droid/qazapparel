@@ -64,61 +64,58 @@ body {
 ::-webkit-scrollbar-track { background: var(--navy-deep); }
 ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 3px; }
 
-/* ═══ LOADER — Sewing Needle Theme ═══ */
+/* ═══ LOADER — Q-Logo + Kazakhstan Outline ═══ */
 .loader {
   position: fixed; inset: 0; background: var(--navy-deep); z-index: 9999;
-  display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 24px;
+  display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 28px;
   transition: opacity 0.8s var(--smooth), visibility 0.8s var(--smooth);
 }
-.loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+.loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; display: none; }
 
-.loader-needle-svg { width: 400px; height: 120px; max-width: 90vw; }
-.loader-thread-path {
-  stroke: var(--gold);
-  stroke-width: 2.5;
-  fill: none;
-  stroke-dasharray: 800;
-  stroke-dashoffset: 800;
-  animation: stitchThread 2s var(--smooth) 0.2s forwards;
-  stroke-linecap: round;
+.loader-scene { position: relative; display: flex; align-items: center; justify-content: center; }
+
+.loader-kz-outline {
+  position: absolute; width: 500px; max-width: 95vw; height: auto; opacity: 0;
+  animation: kzFadeIn 2s ease 0.2s forwards;
 }
-.loader-stitch-dots {
-  fill: var(--gold);
-  opacity: 0;
-  animation: stitchDotsIn 0.6s ease 1s forwards;
+.loader-kz-outline path {
+  stroke: rgba(255,255,255,0.08); fill: none; stroke-width: 1.5;
+  stroke-dasharray: 900; stroke-dashoffset: 900;
+  animation: kzDraw 2.5s var(--smooth) 0.2s forwards;
 }
-.loader-needle-icon {
-  fill: rgba(255,255,255,0.8);
-  opacity: 0;
-  animation: needleMove 2s var(--smooth) 0.2s forwards;
+@keyframes kzFadeIn { to { opacity: 1; } }
+@keyframes kzDraw { to { stroke-dashoffset: 0; } }
+
+.loader-qlogo {
+  width: 220px; height: 210px; position: relative; z-index: 2;
 }
-@keyframes stitchThread {
-  to { stroke-dashoffset: 0; }
+.loader-qlogo .q-ring {
+  fill: none; stroke: #08004F; stroke-width: 12;
+  stroke-dasharray: 1800; stroke-dashoffset: 1800;
+  animation: qRingDraw 1.8s var(--smooth) 0.3s forwards;
 }
-@keyframes stitchDotsIn {
-  to { opacity: 1; }
+.loader-qlogo .q-ring-fill {
+  fill: #08004F; opacity: 0;
+  animation: qFillIn 0.5s ease 2s forwards;
 }
-@keyframes needleMove {
-  0% { opacity: 1; transform: translateX(-380px); }
-  90% { opacity: 1; }
-  100% { opacity: 0; transform: translateX(0px); }
+.loader-qlogo .q-tail {
+  fill: none; stroke: var(--gold); stroke-width: 12;
+  stroke-dasharray: 1200; stroke-dashoffset: 1200;
+  animation: qTailDraw 1.2s var(--smooth) 1.4s forwards;
 }
+.loader-qlogo .q-tail-fill {
+  fill: var(--gold); opacity: 0;
+  animation: qFillIn 0.5s ease 2.4s forwards;
+}
+@keyframes qRingDraw { to { stroke-dashoffset: 0; } }
+@keyframes qTailDraw { to { stroke-dashoffset: 0; } }
+@keyframes qFillIn { to { opacity: 1; } }
 
 .loader-brand-text {
   font-family: 'Cormorant Garamond', 'Georgia', serif;
   font-size: 18px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase;
   color: var(--gold); opacity: 0;
-  animation: fadeIn 0.5s ease 1.6s forwards;
-}
-
-.loader-qlogo {
-  width: 80px; height: 77px; opacity: 0;
-  animation: qlogoPulseIn 0.6s var(--spring) 1.8s forwards;
-}
-@keyframes qlogoPulseIn {
-  0% { opacity: 0; transform: scale(0.7); }
-  60% { opacity: 1; transform: scale(1.15); }
-  100% { opacity: 1; transform: scale(1); }
+  animation: fadeIn 0.5s ease 2.6s forwards;
 }
 
 .loader-bar { width: 160px; height: 2px; background: rgba(255,140,0,0.15); border-radius: 1px; overflow: hidden; }
@@ -406,21 +403,31 @@ section { padding: 120px 0; }
 .bori-brand-content {
   position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center;
 }
-.bori-logo-container { margin: 48px 0 32px; position: relative; }
+.bori-logo-container { margin: 48px 0 32px; position: relative; display: inline-block; }
+.bori-logo-link { display: block; text-decoration: none; position: relative; }
 .bori-logo-svg {
-  width: 180px; height: 173px;
-  animation: boriGlow 3s ease-in-out infinite;
-  filter: drop-shadow(0 0 20px rgba(255,140,0,0.2));
+  width: min(85vw, 700px); height: auto; display: block;
+  filter: drop-shadow(0 0 24px rgba(255,140,0,0.12));
 }
-@keyframes boriGlow {
-  0%, 100% { filter: drop-shadow(0 0 20px rgba(255,140,0,0.2)); transform: scale(1); }
-  50% { filter: drop-shadow(0 0 35px rgba(255,140,0,0.35)); transform: scale(1.03); }
+.bori-logo-svg-wrap {
+  position: relative;
+  clip-path: inset(0 100% 0 0);
+  transition: filter 0.3s ease;
 }
-.bori-logo-text {
-  font-family: 'Cormorant Garamond', 'Georgia', serif;
-  font-size: 42px; font-weight: 700; color: var(--white); letter-spacing: 0.2em;
-  margin-top: 16px; text-transform: uppercase;
+.bori-logo-svg-wrap.revealed { clip-path: inset(0 0% 0 0); animation: boriReveal 1.6s cubic-bezier(0.76, 0, 0.24, 1) forwards; }
+@keyframes boriReveal {
+  0%   { clip-path: inset(0 100% 0 0); }
+  100% { clip-path: inset(0 0%   0 0); }
 }
+.bori-shimmer {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(105deg, transparent 30%, rgba(255,210,100,0.45) 50%, rgba(255,240,180,0.25) 53%, transparent 70%);
+  background-size: 300% 100%; background-position: 150% 0; opacity: 0;
+  mix-blend-mode: overlay;
+}
+.bori-logo-svg-wrap.revealed .bori-shimmer { opacity: 1; animation: boriShimmer 0.8s cubic-bezier(0.4, 0, 0.2, 1) 1.7s forwards; }
+@keyframes boriShimmer { from { background-position: 150% 0; } to { background-position: -50% 0; } }
+.bori-logo-link:hover .bori-logo-svg-wrap { filter: drop-shadow(0 0 40px rgba(255,140,0,0.35)) brightness(1.08); }
 
 .bori-carousel {
   height: 80px; position: relative; overflow: hidden; width: 100%; max-width: 500px; margin: 24px auto;
@@ -501,12 +508,22 @@ section { padding: 120px 0; }
 .advantage-card h3 { font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
 .advantage-card p { font-size: 14px; color: var(--gray-600); line-height: 1.7; }
 
-/* ═══ GALLERY ═══ */
+/* ═══ GALLERY — Bento Grid ═══ */
 .gallery { background: var(--bg); padding: 120px 0; }
-.gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 64px; }
-.gallery-item { position: relative; border-radius: var(--radius); overflow: hidden; cursor: pointer; aspect-ratio: 4/3; }
-.gallery-item:nth-child(1) { aspect-ratio: 16/10; grid-column: span 2; }
-.gallery-item:nth-child(4) { aspect-ratio: 16/10; grid-column: span 2; }
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 240px 240px;
+  gap: 12px;
+  margin-top: 64px;
+}
+.gallery-item { position: relative; border-radius: var(--radius); overflow: hidden; cursor: pointer; }
+.gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+.gallery-item:nth-child(2) { grid-column: span 1; }
+.gallery-item:nth-child(3) { grid-column: span 1; }
+.gallery-item:nth-child(4) { grid-column: span 1; }
+.gallery-item:nth-child(5) { grid-column: span 1; }
+.gallery-item:nth-child(6) { grid-column: span 2; }
 .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s var(--smooth); }
 .gallery-item:hover img { transform: scale(1.06); }
 .gallery-caption {
@@ -531,11 +548,14 @@ section { padding: 120px 0; }
   background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
   border: 2px solid var(--gray-200); border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-family: 'Cormorant Garamond', 'Georgia', serif; font-size: 26px; font-weight: 700; color: var(--navy);
   transition: all 0.5s var(--spring); box-shadow: 0 4px 20px rgba(8,0,79,0.04);
   position: relative;
 }
-.process-step:hover .process-step-circle { border-color: var(--gold); background: var(--gold); color: var(--white); transform: scale(1.1); box-shadow: 0 12px 40px var(--gold-glow); }
+.process-step-circle svg { width: 32px; height: 32px; stroke: var(--navy); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.4s ease; }
+.process-step:hover .process-step-circle { border-color: var(--gold); background: var(--gold); transform: scale(1.1); box-shadow: 0 12px 40px var(--gold-glow); }
+.process-step:hover .process-step-circle svg { stroke: var(--white); }
+.process-step.bounce-in .process-step-circle { animation: stepBounce 0.6s var(--spring); }
+@keyframes stepBounce { 0% { transform: scale(0.7); opacity: 0; } 50% { transform: scale(1.12); } 100% { transform: scale(1); opacity: 1; } }
 .process-step h4 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
 .process-step p { font-size: 13px; color: var(--gray-600); line-height: 1.6; }
 
@@ -653,6 +673,17 @@ section { padding: 120px 0; }
 .footer-watermark { position: absolute; left: 50%; bottom: -15%; transform: translateX(-50%); width: 60vw; max-width: 600px; opacity: 0.015; }
 .footer-map { padding: 0 24px; max-width: 1200px; margin: 0 auto; }
 .footer-map iframe { border-radius: 20px; display: block; }
+.footer-map-container { position: relative; border-radius: 20px; overflow: hidden; }
+.map-2gis-btn {
+  position: absolute; top: 12px; right: 12px; z-index: 10;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 10px 18px; border-radius: 50px;
+  background: rgba(8,0,79,0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--white); font-size: 13px; font-weight: 500; text-decoration: none;
+  transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+.map-2gis-btn:hover { background: var(--gold); border-color: var(--gold); box-shadow: 0 8px 24px var(--gold-glow); }
 .footer-content { padding: 60px 0 0; }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 56px; position: relative; z-index: 1; }
 .footer-brand p { font-size: 14px; color: rgba(255,255,255,0.35); line-height: 1.7; margin-top: 20px; max-width: 300px; }
@@ -781,9 +812,9 @@ section { padding: 120px 0; }
   .services-grid { grid-template-columns: repeat(2, 1fr); }
   .advantages-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
-  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-  .gallery-item:nth-child(1) { grid-column: span 2; }
-  .gallery-item:nth-child(4) { grid-column: span 1; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+  .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+  .gallery-item:nth-child(6) { grid-column: span 2; }
 }
 @media (max-width: 768px) {
   .nav { width: calc(100% - 24px); padding: 0 20px; top: 8px; }
@@ -808,13 +839,13 @@ section { padding: 120px 0; }
   .order-panel { padding: 24px 20px; }
   .checkbox-grid { grid-template-columns: 1fr; }
   .hero-logo-watermark { width: 80vw; right: -20%; opacity: 0.03; }
-  .gallery-grid { grid-template-columns: 1fr; }
-  .gallery-item:nth-child(1), .gallery-item:nth-child(4) { grid-column: span 1; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+  .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+  .gallery-item:nth-child(6) { grid-column: span 2; }
   .gallery { padding: 80px 0; }
   .modal-card { max-height: 90vh; border-radius: 20px; }
   .modal-photo { height: 180px; border-radius: 20px 20px 0 0; }
-  .bori-logo-svg { width: 120px; height: 115px; }
-  .bori-logo-text { font-size: 28px; }
+  .bori-logo-svg { width: min(90vw, 400px); }
   .bori-line-name { font-size: 24px; }
 
   /* Order modal slides up from bottom on mobile */
@@ -836,32 +867,20 @@ section { padding: 120px 0; }
 </head>
 <body>
 
-<!-- ═══ LOADER — Sewing Needle ═══ -->
+<!-- ═══ LOADER — Q-Logo + Kazakhstan Outline ═══ -->
 <div class="loader" id="loader">
-  <svg class="loader-needle-svg" viewBox="0 0 400 120" fill="none">
-    <!-- Thread path with stitching pattern -->
-    <path class="loader-thread-path" d="M 10 60 Q 30 20, 60 60 T 110 60 T 160 60 T 210 60 T 260 60 T 310 60 T 360 60 L 390 60" />
-    <!-- Stitch dots along the path -->
-    <g class="loader-stitch-dots">
-      <circle cx="35" cy="40" r="2.5"/><circle cx="60" cy="60" r="2.5"/>
-      <circle cx="85" cy="40" r="2.5"/><circle cx="110" cy="60" r="2.5"/>
-      <circle cx="135" cy="40" r="2.5"/><circle cx="160" cy="60" r="2.5"/>
-      <circle cx="185" cy="40" r="2.5"/><circle cx="210" cy="60" r="2.5"/>
-      <circle cx="235" cy="40" r="2.5"/><circle cx="260" cy="60" r="2.5"/>
-      <circle cx="285" cy="40" r="2.5"/><circle cx="310" cy="60" r="2.5"/>
-      <circle cx="335" cy="40" r="2.5"/><circle cx="360" cy="60" r="2.5"/>
-    </g>
-    <!-- Needle icon at the end -->
-    <g class="loader-needle-icon" transform="translate(370, 45)">
-      <polygon points="0,15 20,10 20,20" fill="rgba(255,255,255,0.8)"/>
-      <ellipse cx="-4" cy="15" rx="3" ry="4" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
-    </g>
-  </svg>
+  <div class="loader-scene">
+    <svg class="loader-kz-outline" viewBox="0 0 270 90" fill="none">
+      <path d="M2 55L15 45L25 35L45 30L65 25L80 28L95 35L115 30L130 25L145 28L160 30L175 25L195 28L210 35L225 30L240 25L250 30L260 40L265 50L255 55L245 60L235 55L225 50L210 55L195 60L180 55L165 50L155 55L140 60L125 55L110 60L95 65L80 60L65 55L50 60L35 65L20 60L10 58Z"/>
+    </svg>
+    <svg class="loader-qlogo" viewBox="0 0 1054 1010" fill="none">
+      <path class="q-ring" d="M 670 891.5 L 537 746 A 285 285 0 1 1 723 595.5 L 852.5 733 A 465 465 0 1 0 670 891.5 Z"/>
+      <path class="q-ring-fill" d="M 670 891.5 L 537 746 A 285 285 0 1 1 723 595.5 L 852.5 733 A 465 465 0 1 0 670 891.5 Z"/>
+      <path class="q-tail" d="M463 704L516 662L815.5 1005H1042L516 440.5L429 510C 380 555, 325 610, 336.5 645.5C 348 681, 400 700, 463 704Z"/>
+      <path class="q-tail-fill" d="M463 704L516 662L815.5 1005H1042L516 440.5L429 510C 380 555, 325 610, 336.5 645.5C 348 681, 400 700, 463 704Z"/>
+    </svg>
+  </div>
   <div class="loader-brand-text">QAZAQSTAN APPAREL</div>
-  <svg class="loader-qlogo" viewBox="0 0 1054 1010" fill="none">
-    <path d="M 670 891.5 L 537 746 A 285 285 0 1 1 723 595.5 L 852.5 733 A 465 465 0 1 0 670 891.5 Z" fill="#08004F"/>
-    <path d="M463 704L516 662L815.5 1005H1042L516 440.5L429 510C 380 555, 325 610, 336.5 645.5C 348 681, 400 700, 463 704Z" fill="#FF8C00"/>
-  </svg>
   <div class="loader-bar"></div>
 </div>
 
@@ -992,11 +1011,34 @@ section { padding: 120px 0; }
       <div class="section-tag" data-i18n="bori_tag">Жеке бренд</div>
       <h2 class="section-title" style="color:var(--white);" data-i18n="bori_title">Bori — Біздің бренд</h2>
       <div class="bori-logo-container">
-        <svg class="bori-logo-svg" viewBox="0 0 1054 1010" fill="none">
-          <path d="M 670 891.5 L 537 746 A 285 285 0 1 1 723 595.5 L 852.5 733 A 465 465 0 1 0 670 891.5 Z" fill="var(--white)" opacity="0.95"/>
-          <path d="M463 704L516 662L815.5 1005H1042L516 440.5L429 510C 380 555, 325 610, 336.5 645.5C 348 681, 400 700, 463 704Z" fill="var(--gold)"/>
-        </svg>
-        <div class="bori-logo-text">BORI</div>
+        <a href="https://thebori.com" target="_blank" class="bori-logo-link">
+          <div class="bori-logo-svg-wrap">
+            <svg class="bori-logo-svg" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1424 751" preserveAspectRatio="xMidYMid meet">
+              <g transform="translate(0,751) scale(0.1,-0.1)" stroke="none" fill="var(--gold)">
+                <path d="M6735 7010 c-231 -79 -423 -283 -510 -541 -28 -81 -31 -109 -13 -127 21 -21 83 -13 143 18 38 20 71 30 101 30 30 0 65 -10 104 -30 72 -36 95 -37 116 -5 14 21 15 46 9 177 -8 183 5 265 66 402 21 49 38 90 36 92 -1 1 -25 -6 -52 -16z m-21 -77 c-57 -133 -68 -210 -60 -398 6 -134 5 -153 -9 -165 -14 -12 -25 -9 -77 19 -80 44 -135 45 -222 2 -67 -33 -116 -40 -116 -18 0 24 46 150 77 212 69 136 209 284 330 348 89 47 98 47 77 0z"/>
+                <path d="M7625 6953 c31 -88 65 -258 65 -320 0 -26 -7 -88 -15 -138 -19 -119 -19 -141 5 -165 28 -28 57 -25 110 11 62 43 126 38 202 -14 82 -57 145 -66 161 -24 7 19 -17 125 -45 197 -91 235 -202 363 -410 475 -46 25 -86 45 -89 45 -4 0 4 -30 16 -67z m142 -54 c131 -88 194 -160 262 -301 56 -115 91 -218 91 -267 0 -35 -48 -27 -108 19 -82 61 -181 68 -242 16 -36 -30 -52 -32 -70 -11 -10 12 -9 37 5 126 24 147 11 294 -41 463 -8 26 8 19 103 -45z"/>
+                <path d="M6375 6299 c-122 -28 -230 -74 -327 -141 -48 -32 -73 -61 -142 -166 -92 -140 -101 -149 -199 -211 -98 -63 -112 -83 -132 -193 -9 -51 -28 -136 -42 -188 -20 -76 -24 -107 -19 -155 4 -33 11 -98 16 -145 7 -75 15 -100 65 -200 37 -77 72 -131 103 -163 102 -105 292 -194 433 -204 74 -6 76 -5 154 37 43 24 97 58 120 75 23 18 59 38 81 45 21 7 64 37 94 65 70 66 87 75 149 75 68 0 95 12 114 52 21 44 74 277 82 358 3 36 13 118 22 182 l16 118 -36 70 c-30 56 -42 97 -62 212 -14 78 -25 159 -25 180 0 117 -47 196 -130 218 -25 6 -65 24 -90 38 -91 54 -147 63 -245 41z m220 -62 c33 -21 77 -40 98 -44 73 -11 117 -87 117 -201 0 -20 11 -100 25 -177 19 -106 34 -157 60 -211 l36 -72 -15 -103 c-8 -57 -17 -135 -21 -174 -6 -71 -56 -297 -76 -348 -15 -37 -37 -47 -101 -47 -61 0 -107 -24 -157 -82 -19 -21 -51 -44 -79 -54 -26 -9 -63 -29 -82 -44 -19 -15 -73 -48 -118 -75 -82 -47 -85 -48 -150 -42 -133 11 -311 95 -407 192 -58 58 -153 241 -160 309 -2 23 -9 84 -16 136 -10 90 -9 101 15 198 15 57 34 140 42 185 9 45 20 89 24 98 5 9 55 46 111 83 95 64 104 73 157 158 87 139 131 188 208 236 117 72 282 124 374 119 42 -3 69 -12 115 -40z"/>
+                <path d="M6365 6185 c-205 -55 -298 -126 -396 -300 -41 -74 -92 -125 -194 -195 l-79 -55 -13 -65 c-7 -36 -24 -113 -39 -172 -26 -107 -26 -107 -11 -236 14 -119 19 -136 61 -220 25 -50 59 -107 76 -126 66 -75 232 -156 349 -172 41 -5 57 -1 111 26 35 18 95 54 134 81 38 27 74 49 81 49 6 0 35 20 65 46 64 54 114 81 170 90 22 4 50 14 61 23 24 20 66 201 79 346 6 57 15 127 20 155 9 47 7 56 -19 108 -15 31 -31 70 -35 87 -20 82 -56 306 -56 350 0 70 -16 96 -71 116 -26 9 -71 30 -102 48 -61 35 -108 39 -192 16z m200 -55 c42 -22 82 -40 90 -40 29 0 45 -31 45 -88 0 -59 42 -311 61 -372 7 -19 22 -55 35 -80 20 -38 22 -51 14 -87 -6 -23 -14 -90 -19 -150 -6 -59 -22 -158 -36 -220 l-26 -111 -52 -13 c-70 -16 -120 -42 -192 -100 -33 -27 -65 -49 -71 -49 -6 0 -40 -21 -76 -47 -35 -27 -92 -61 -127 -78 l-62 -29 -72 18 c-173 44 -278 123 -352 268 -44 85 -49 101 -62 215 l-14 123 29 117 c17 65 33 139 37 164 6 43 10 48 85 98 99 67 145 116 210 221 60 98 88 130 148 172 73 50 227 106 299 107 19 1 63 -15 108 -39z"/>
+                <path d="M7732 6264 c-134 -32 -182 -55 -237 -116 -57 -64 -72 -115 -85 -287 -6 -75 -22 -185 -36 -246 -68 -297 -73 -384 -29 -550 35 -135 75 -216 130 -261 51 -41 353 -193 439 -220 51 -16 67 -17 154 -6 53 7 113 12 132 12 59 0 216 37 277 65 82 37 96 54 144 169 46 111 81 176 115 218 42 52 43 44 -34 268 -22 63 -47 160 -57 214 l-17 100 -64 60 -63 61 -26 110 c-37 152 -54 187 -100 209 -21 10 -85 49 -141 86 -219 145 -297 162 -502 114z m332 -52 c46 -22 117 -63 158 -90 40 -27 96 -61 124 -75 49 -25 51 -28 72 -99 12 -40 29 -107 38 -148 16 -72 20 -78 80 -135 l64 -60 19 -105 c11 -58 42 -170 70 -249 54 -152 54 -157 11 -206 -22 -25 -78 -135 -120 -238 -24 -59 -41 -84 -64 -98 -51 -31 -205 -76 -286 -83 -41 -4 -114 -12 -162 -18 -110 -15 -137 -7 -366 105 -199 97 -265 153 -294 247 -42 135 -58 218 -58 305 0 85 6 120 64 390 8 39 20 131 26 205 12 152 21 187 62 247 39 58 101 92 232 125 153 39 216 35 330 -20z"/>
+                <path d="M7840 6173 c-14 -2 -65 -13 -113 -25 -148 -35 -175 -72 -202 -283 -9 -71 -26 -177 -37 -235 -50 -251 -57 -299 -57 -370 -1 -128 51 -310 101 -359 17 -17 114 -72 216 -123 210 -104 202 -102 412 -81 122 13 283 54 312 80 10 9 34 57 53 108 20 51 56 125 80 164 l44 72 -49 142 c-27 78 -54 173 -60 211 -13 84 -19 96 -69 135 -55 43 -78 85 -96 171 -37 178 -28 165 -183 265 -175 114 -255 144 -352 128z m138 -44 c34 -11 120 -59 195 -109 l135 -88 27 -113 c33 -140 50 -175 114 -230 49 -43 51 -47 62 -119 6 -41 31 -131 55 -200 24 -68 44 -130 44 -138 0 -7 -18 -44 -40 -80 -21 -37 -53 -104 -70 -150 -18 -45 -38 -89 -46 -97 -31 -31 -182 -66 -365 -85 -89 -9 -114 -8 -150 4 -66 23 -359 173 -385 197 -40 38 -94 230 -94 335 0 66 20 190 54 334 8 36 25 142 36 235 22 175 37 225 74 251 37 26 195 68 272 73 11 0 48 -8 82 -20z"/>
+                <path d="M4899 5626 c-160 -65 -293 -185 -399 -360 -50 -82 -82 -163 -105 -267 -23 -104 -18 -151 16 -163 21 -7 37 -4 75 17 186 99 194 101 240 89 68 -18 121 -16 134 7 6 11 9 86 7 183 -2 181 9 241 79 422 19 48 34 90 34 92 0 9 -28 2 -81 -20z m6 -90 c-58 -155 -70 -220 -70 -401 0 -194 4 -187 -91 -165 -68 17 -121 3 -213 -56 -37 -24 -78 -45 -92 -46 -23 -3 -24 -1 -22 51 11 238 200 522 436 652 76 42 80 39 52 -35z"/>
+                <path d="M9500 5567 c0 -3 18 -49 39 -103 22 -55 52 -139 66 -189 25 -85 26 -98 20 -225 -8 -160 -6 -165 95 -181 80 -13 110 -26 192 -82 81 -55 119 -65 155 -42 25 17 25 20 19 85 -28 307 -194 559 -451 684 -89 44 -135 62 -135 53z m292 -196 c149 -138 225 -285 258 -506 18 -121 -9 -129 -139 -40 -70 48 -141 75 -197 75 -60 0 -66 17 -58 154 6 107 4 132 -16 211 -12 50 -35 123 -51 163 -16 40 -29 77 -29 83 0 21 165 -78 232 -140z"/>
+                <path d="M4500 4776 c-19 -7 -63 -31 -98 -54 -61 -39 -164 -72 -227 -72 -15 0 -67 14 -117 30 -49 17 -97 30 -108 30 -25 0 -68 -53 -76 -96 -16 -86 46 -249 117 -305 103 -82 137 -138 159 -267 22 -130 33 -652 21 -1064 -14 -512 -29 -682 -72 -807 -24 -67 -37 -83 -119 -136 -77 -50 -97 -71 -111 -116 -8 -30 -5 -43 27 -106 46 -92 65 -108 144 -123 102 -18 421 -24 567 -11 346 33 675 134 895 276 156 101 341 298 413 440 153 304 87 717 -155 965 -96 98 -182 161 -270 197 -38 15 -70 31 -70 34 0 3 18 20 39 37 50 40 126 154 151 227 46 133 46 326 -1 450 -43 116 -196 282 -313 339 -95 46 -274 94 -421 111 -66 8 -154 19 -195 24 -98 14 -138 13 -180 -3z m235 -36 c28 -5 86 -12 130 -15 101 -8 330 -67 413 -106 123 -59 282 -242 318 -366 20 -69 22 -246 4 -323 -27 -115 -104 -236 -194 -307 -25 -20 -46 -39 -46 -42 0 -4 34 -19 75 -34 105 -40 208 -112 307 -216 67 -70 95 -109 131 -183 90 -183 116 -367 78 -547 -26 -121 -45 -168 -106 -263 -55 -83 -214 -251 -305 -319 -84 -63 -279 -160 -400 -200 -124 -40 -267 -73 -410 -96 -144 -22 -585 -24 -689 -2 -63 14 -63 14 -102 78 -39 65 -48 106 -29 141 6 11 46 42 89 70 44 28 87 62 96 76 79 122 108 443 109 1219 0 789 -18 895 -172 1009 -60 43 -104 123 -124 223 -10 55 -10 67 5 98 9 20 23 38 31 41 8 3 56 -9 107 -26 83 -29 102 -32 161 -26 83 8 155 34 226 83 29 20 70 39 90 43 40 8 128 3 207 -10z"/>
+                <path d="M4752 4360 c-50 -12 -68 -35 -82 -103 -24 -121 -28 -226 -14 -356 7 -69 14 -145 14 -169 0 -55 23 -65 110 -51 234 37 382 198 368 398 -12 160 -126 260 -323 284 -22 2 -55 1 -73 -3z m173 -51 c74 -28 134 -75 165 -129 21 -38 25 -58 25 -125 0 -69 -4 -88 -29 -138 -57 -112 -181 -193 -313 -204 l-69 -6 -12 124 c-22 230 -6 456 35 487 27 19 135 15 198 -9z"/>
+                <path d="M4780 3241 c-19 -4 -45 -13 -57 -20 l-23 -12 0 -373 c0 -205 3 -435 7 -511 l6 -138 66 7 c160 15 348 99 461 207 83 79 153 221 158 322 5 84 -12 174 -45 246 -32 67 -141 180 -203 209 -100 48 -291 80 -370 63z m238 -52 c107 -27 155 -53 219 -118 70 -71 98 -120 117 -201 30 -126 21 -188 -45 -323 -76 -157 -291 -289 -520 -322 l-47 -7 -7 164 c-3 89 -5 309 -3 488 l3 325 45 12 c54 15 134 9 238 -18z"/>
+                <path d="M9702 4705 c-49 -21 -104 -68 -136 -114 -27 -39 -76 -211 -76 -268 0 -91 142 -199 322 -244 98 -24 165 -26 206 -5 41 21 107 98 138 163 23 46 26 63 22 121 -6 79 -30 131 -101 219 -56 70 -102 105 -166 128 -54 19 -165 19 -209 0z m204 -32 c36 -12 67 -34 117 -85 156 -158 167 -299 34 -441 -58 -62 -93 -70 -202 -46 -47 10 -107 28 -133 39 -99 44 -187 116 -197 161 -8 36 31 213 57 256 24 40 91 101 132 119 43 18 132 17 192 -3z"/>
+                <path d="M7253 4555 l-62 -84 -53 24 c-152 70 -377 89 -538 46 -113 -30 -212 -81 -356 -182 -203 -143 -242 -195 -316 -424 -86 -269 -74 -381 71 -629 32 -55 75 -133 94 -173 35 -69 36 -72 19 -95 -10 -12 -35 -46 -55 -75 l-38 -52 116 -87 c128 -96 120 -96 176 -14 19 27 40 50 47 50 7 0 40 -11 73 -25 35 -15 108 -33 176 -42 109 -16 124 -16 233 0 264 39 443 131 596 305 131 150 172 238 198 430 16 115 11 239 -15 334 -20 75 -99 252 -149 333 l-51 84 66 89 c36 49 65 93 65 98 -1 7 -208 162 -229 171 -4 2 -34 -35 -68 -82z m171 -31 l87 -65 -23 -32 c-70 -95 -98 -136 -98 -146 0 -6 20 -44 44 -84 82 -135 147 -291 166 -399 24 -132 6 -342 -40 -458 -28 -71 -90 -159 -174 -248 -147 -155 -299 -229 -550 -268 -104 -16 -116 -16 -225 0 -73 11 -141 28 -184 47 -38 16 -73 29 -78 29 -6 0 -65 -73 -96 -119 -4 -6 -183 130 -183 140 0 5 20 37 45 70 34 46 44 67 39 83 -11 35 -79 165 -138 266 -129 217 -140 332 -60 584 45 139 92 230 147 284 56 55 236 183 320 227 153 82 315 115 462 96 93 -13 198 -42 257 -72 21 -11 44 -19 52 -19 8 0 38 34 68 75 29 41 58 75 64 75 6 0 50 -30 98 -66z"/>
+                <path d="M6671 4155 c-141 -44 -276 -217 -303 -389 -9 -58 -9 -99 0 -176 11 -95 36 -180 52 -180 12 0 540 698 540 714 0 39 -195 60 -289 31z m212 -26 c20 -5 37 -12 37 -14 0 -3 -102 -139 -227 -303 -126 -165 -238 -312 -249 -328 l-21 -29 -13 60 c-20 93 -18 249 5 319 39 121 165 259 265 291 54 16 151 19 203 4z"/>
+                <path d="M6860 3593 c-145 -191 -265 -355 -268 -365 -6 -26 70 -58 156 -65 163 -14 304 73 386 235 45 89 60 178 53 311 -5 100 -33 211 -57 226 -4 3 -126 -151 -270 -342z m282 245 c7 -26 12 -98 12 -178 0 -152 -13 -199 -83 -306 -68 -106 -202 -173 -320 -161 -76 8 -124 26 -117 43 3 8 104 144 225 304 121 159 227 301 237 315 23 35 31 32 46 -17z"/>
+                <path d="M8465 4444 c-49 -13 -124 -29 -165 -34 -41 -6 -111 -15 -155 -22 -143 -20 -206 -21 -283 -3 -125 30 -174 8 -188 -81 -5 -34 -1 -60 16 -107 12 -34 40 -123 61 -197 66 -232 81 -518 40 -760 -16 -95 -68 -258 -100 -315 -36 -63 -41 -126 -15 -178 9 -18 42 -68 74 -112 31 -44 66 -101 77 -126 21 -47 30 -55 116 -111 26 -17 73 -59 104 -94 67 -76 130 -119 197 -134 68 -15 75 -6 62 72 -6 37 -10 204 -9 397 1 320 2 334 21 353 16 16 28 19 56 14 77 -15 153 -124 262 -374 93 -215 227 -446 323 -556 55 -63 187 -177 245 -211 70 -41 223 -92 315 -106 108 -15 285 -7 373 19 95 27 170 75 264 167 56 55 89 98 108 138 39 84 32 93 -51 61 -115 -46 -193 -63 -283 -63 -171 -1 -299 45 -412 149 -123 112 -309 420 -387 639 -22 62 -56 141 -75 175 -37 66 -115 162 -173 212 l-36 31 64 22 c93 31 240 131 294 199 95 121 124 269 91 461 -21 120 -39 161 -115 254 -88 108 -177 163 -359 221 -111 35 -230 35 -357 0z m331 -25 c131 -34 238 -92 320 -174 117 -118 149 -195 161 -380 9 -152 -30 -270 -118 -364 -52 -54 -187 -136 -274 -167 -44 -15 -82 -29 -84 -30 -2 -2 39 -48 92 -103 110 -115 150 -181 211 -349 118 -324 352 -653 525 -740 142 -71 360 -83 511 -28 124 45 117 45 90 0 -60 -101 -180 -209 -280 -253 -165 -72 -428 -66 -631 15 -256 103 -465 360 -663 818 -125 289 -223 399 -331 372 -52 -13 -56 -40 -58 -374 -1 -169 2 -342 6 -384 8 -75 7 -78 -13 -78 -45 0 -96 34 -193 128 -56 54 -122 109 -146 123 -35 19 -49 35 -68 77 -12 29 -47 85 -77 125 -99 133 -106 169 -52 269 94 174 139 495 112 788 -14 153 -53 316 -116 494 -24 68 -20 124 11 152 18 16 26 17 87 5 173 -33 168 -32 271 -11 55 11 121 20 148 21 60 0 112 10 233 42 119 33 218 34 326 6z"/>
+                <path d="M8395 4091 c-84 -20 -91 -24 -109 -59 -15 -31 -32 -479 -19 -499 24 -34 143 -44 230 -18 64 19 192 102 226 147 50 65 71 127 71 208 0 57 -5 85 -21 116 -58 109 -200 149 -378 105z m228 -22 c44 -12 101 -59 124 -103 27 -50 22 -150 -10 -217 -64 -132 -235 -230 -379 -217 -27 3 -54 10 -59 15 -7 7 -7 89 -2 236 10 263 7 256 113 280 78 18 161 21 213 6z"/>
+                <path d="M9556 4000 c-51 -16 -74 -46 -81 -110 -5 -47 -3 -65 13 -96 40 -79 47 -167 47 -574 -1 -411 -8 -492 -56 -630 -19 -56 -20 -63 -5 -85 22 -34 88 -69 175 -95 63 -19 84 -31 134 -78 l59 -57 146 -3 c162 -3 195 5 200 48 2 14 -17 81 -41 150 -64 178 -77 271 -77 524 0 116 5 229 11 251 6 22 14 114 19 205 5 100 15 187 25 220 45 147 47 161 34 191 -13 33 -41 51 -108 69 -37 10 -51 9 -88 -5 -56 -22 -80 -17 -197 40 -97 46 -144 54 -210 35z m202 -66 c113 -55 156 -63 213 -40 38 16 45 16 91 0 27 -9 55 -26 64 -39 16 -25 16 -24 -31 -190 -20 -73 -25 -113 -25 -210 -1 -69 -7 -145 -15 -180 -20 -83 -20 -466 -1 -589 8 -48 36 -151 63 -227 41 -120 46 -141 33 -150 -9 -6 -73 -9 -159 -7 l-143 3 -42 47 c-46 52 -74 68 -161 93 -76 21 -145 61 -145 83 0 9 11 59 25 111 38 143 48 320 42 686 -6 327 -15 416 -51 483 -12 24 -15 45 -10 82 7 54 13 62 59 78 57 20 95 13 193 -34z"/>
+                <path d="M7320 2696 c-30 -7 -111 -33 -180 -58 -239 -87 -276 -92 -466 -59 -60 11 -130 22 -156 26 -60 8 -159 -10 -218 -40 -63 -32 -157 -135 -203 -223 -100 -190 -366 -449 -579 -566 -99 -54 -341 -157 -419 -180 -100 -28 -160 -112 -230 -317 -36 -108 -38 -199 -8 -308 38 -134 74 -183 204 -271 73 -49 132 -108 200 -198 21 -29 57 -65 79 -80 36 -25 47 -27 130 -26 58 0 120 8 171 22 63 16 106 21 200 19 113 -1 124 0 177 26 31 15 91 55 134 88 42 33 80 58 83 56 152 -83 224 -93 364 -48 198 63 296 81 451 81 133 0 145 2 194 26 l52 26 39 -31 c51 -41 138 -81 176 -81 58 0 111 -22 180 -75 98 -73 109 -78 210 -85 61 -5 104 -14 132 -28 96 -49 175 -48 358 5 140 40 386 140 416 169 14 14 50 71 79 127 83 160 93 172 160 208 112 59 132 127 86 287 -14 50 -33 123 -41 163 -9 40 -24 87 -35 104 -21 34 -89 75 -157 96 -30 8 -49 22 -67 49 -19 29 -55 53 -182 119 -525 275 -639 346 -779 486 -70 70 -109 120 -175 229 -93 153 -152 225 -202 249 -49 23 -116 28 -178 13z m169 -46 c51 -26 71 -51 187 -237 112 -180 181 -254 334 -363 138 -98 204 -137 494 -288 210 -109 270 -144 306 -182 35 -37 60 -52 112 -69 78 -26 124 -70 133 -128 4 -21 22 -95 41 -164 19 -70 34 -142 34 -161 0 -51 -36 -96 -109 -137 -63 -36 -65 -37 -133 -166 -38 -71 -84 -144 -101 -162 -22 -22 -73 -47 -167 -84 -212 -82 -314 -110 -415 -116 -85 -5 -94 -4 -145 22 -40 20 -76 29 -146 35 -103 9 -114 13 -202 82 -63 50 -129 78 -186 78 -41 1 -108 32 -173 80 l-52 40 -56 -30 c-56 -29 -60 -30 -207 -30 -132 0 -162 -3 -266 -30 -64 -16 -150 -41 -191 -55 -105 -35 -146 -33 -248 15 -47 22 -92 40 -99 40 -8 0 -51 -28 -97 -63 -126 -96 -138 -100 -312 -108 -88 -4 -173 -14 -205 -23 -30 -9 -89 -19 -130 -22 -101 -7 -125 7 -225 131 -59 74 -101 114 -160 155 -135 93 -169 133 -204 244 -46 142 -42 213 19 373 60 156 113 220 204 244 57 15 283 112 390 167 94 48 205 126 295 208 106 95 258 275 300 353 137 253 250 305 551 250 196 -35 227 -32 462 49 229 80 295 89 367 52z"/>
+              </g>
+            </svg>
+            <div class="bori-shimmer"></div>
+          </div>
+        </a>
       </div>
       <div class="bori-carousel" id="boriCarousel">
         <div class="bori-line active" data-line="0">
@@ -1060,11 +1102,11 @@ section { padding: 120px 0; }
   <div class="container">
     <div class="reveal"><div class="section-tag" data-i18n="proc_tag">Жұмыс тәртібі</div><h2 class="section-title" data-i18n="proc_title">Концепциядан жеткізуге дейін</h2><p class="section-desc" data-i18n="proc_desc">Оңтайландырылған 5 қадамдық процесс әрбір кезеңде ашықтық пен сапаны қамтамасыз етеді.</p></div>
     <div class="process-timeline" id="processTimeline">
-      <div class="process-step reveal" onclick="openProcessPopup(1)"><div class="process-step-circle">01</div><h4 data-i18n="step1_title">Бриф және консультация</h4><p data-i18n="step1_desc">Талаптарыңызды, көлемдерді, мерзімдерді және сипаттамаларды талқылаймыз.</p></div>
-      <div class="process-step reveal" style="transition-delay:0.15s" onclick="openProcessPopup(2)"><div class="process-step-circle">02</div><h4 data-i18n="step2_title">Дизайн және лекалдар</h4><p data-i18n="step2_desc">Техникалық сызбалар, лекал инженериясы, материалдарды таңдау және бекіту.</p></div>
-      <div class="process-step reveal" style="transition-delay:0.3s" onclick="openProcessPopup(3)"><div class="process-step-circle">03</div><h4 data-i18n="step3_title">Үлгілер</h4><p data-i18n="step3_desc">Сіздің қарауыңыз үшін үлгілер дайындау. Мінсіз қалыпқа дейін итерация.</p></div>
-      <div class="process-step reveal" style="transition-delay:0.45s" onclick="openProcessPopup(4)"><div class="process-step-circle">04</div><h4 data-i18n="step4_title">Өндіріс</h4><p data-i18n="step4_desc">Әрбір кезеңде сапа бақылауымен толық масштабты өндіріс.</p></div>
-      <div class="process-step reveal" style="transition-delay:0.6s" onclick="openProcessPopup(5)"><div class="process-step-circle">05</div><h4 data-i18n="step5_title">ТС және жеткізу</h4><p data-i18n="step5_desc">Соңғы тексеру, сипаттама бойынша орау және дүниежүзілік тағайындау орнына логистика.</p></div>
+      <div class="process-step reveal" onclick="openProcessPopup(1)"><div class="process-step-circle"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></div><h4 data-i18n="step1_title">Бриф және консультация</h4><p data-i18n="step1_desc">Талаптарыңызды, көлемдерді, мерзімдерді және сипаттамаларды талқылаймыз.</p></div>
+      <div class="process-step reveal" style="transition-delay:0.15s" onclick="openProcessPopup(2)"><div class="process-step-circle"><svg viewBox="0 0 24 24"><path d="M17 3a2.83 2.83 0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"/><path d="M15 5l4 4"/></svg></div><h4 data-i18n="step2_title">Дизайн және лекалдар</h4><p data-i18n="step2_desc">Техникалық сызбалар, лекал инженериясы, материалдарды таңдау және бекіту.</p></div>
+      <div class="process-step reveal" style="transition-delay:0.3s" onclick="openProcessPopup(3)"><div class="process-step-circle"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"/></svg></div><h4 data-i18n="step3_title">Үлгілер</h4><p data-i18n="step3_desc">Сіздің қарауыңыз үшін үлгілер дайындау. Мінсіз қалыпқа дейін итерация.</p></div>
+      <div class="process-step reveal" style="transition-delay:0.45s" onclick="openProcessPopup(4)"><div class="process-step-circle"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><h4 data-i18n="step4_title">Өндіріс</h4><p data-i18n="step4_desc">Әрбір кезеңде сапа бақылауымен толық масштабты өндіріс.</p></div>
+      <div class="process-step reveal" style="transition-delay:0.6s" onclick="openProcessPopup(5)"><div class="process-step-circle"><svg viewBox="0 0 24 24"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><h4 data-i18n="step5_title">ТС және жеткізу</h4><p data-i18n="step5_desc">Соңғы тексеру, сипаттама бойынша орау және дүниежүзілік тағайындау орнына логистика.</p></div>
     </div>
   </div>
 </section>
@@ -1084,7 +1126,13 @@ section { padding: 120px 0; }
 <footer class="footer">
   <svg class="footer-watermark" viewBox="0 0 1054 1010" fill="none"><path d="M 670 891.5 L 537 746 A 285 285 0 1 1 723 595.5 L 852.5 733 A 465 465 0 1 0 670 891.5 Z" fill="white"/><path d="M463 704L516 662L815.5 1005H1042L516 440.5L429 510C 380 555, 325 610, 336.5 645.5C 348 681, 400 700, 463 704Z" fill="#FF8C00"/></svg>
   <div class="footer-map" style="padding-top:80px;">
-    <iframe src="https://widgets.2gis.com/widget?type=firmsonmap&options=%7B%22pos%22%3A%7B%22lat%22%3A51.171185%2C%22lon%22%3A71.501286%2C%22zoom%22%3A16%7D%2C%22firmId%22%3A%2270000001082634733%22%2C%22color%22%3A%22%2308004F%22%7D" width="100%" height="300" frameborder="0" style="border-radius:20px;"></iframe>
+    <div class="footer-map-container">
+      <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=71.49%2C51.165%2C71.51%2C51.178&layer=mapnik&marker=51.171185%2C71.501286" width="100%" height="300" frameborder="0" style="border-radius:20px;border:1px solid rgba(255,255,255,0.08);"></iframe>
+      <a href="https://go.2gis.com/mUG1B" target="_blank" class="map-2gis-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Открыть в 2GIS
+      </a>
+    </div>
   </div>
   <div class="container">
     <div class="footer-content">
@@ -1356,6 +1404,10 @@ for(let i=0;i<25;i++){const d=document.createElement('div');d.className='particl
 // SCROLL ANIMATIONS
 const ro=new IntersectionObserver((e)=>{e.forEach((en,i)=>{if(en.isIntersecting){const d=parseFloat(en.target.style.transitionDelay)||i*0.06;en.target.style.transitionDelay=d+'s';requestAnimationFrame(()=>en.target.classList.add('visible'));ro.unobserve(en.target);}});},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el=>ro.observe(el));
+
+// BORI LOGO REVEAL
+const boriWrap=document.querySelector('.bori-logo-svg-wrap');
+if(boriWrap){const bo=new IntersectionObserver((e)=>{e.forEach(en=>{if(en.isIntersecting){boriWrap.classList.add('revealed');bo.unobserve(en.target);}});},{threshold:0.3});bo.observe(boriWrap);}
 
 // COUNTERS
 const co=new IntersectionObserver((e)=>{e.forEach(en=>{if(en.isIntersecting){const el=en.target,t=parseInt(el.dataset.count);if(!t)return;const s=el.innerHTML.includes('+');let c=0;const st=t/45,tm=setInterval(()=>{c+=st;if(c>=t){c=t;clearInterval(tm);}el.innerHTML=Math.floor(c).toLocaleString()+(s?'<span>+</span>':'');},28);co.unobserve(el);}});},{threshold:0.5});
